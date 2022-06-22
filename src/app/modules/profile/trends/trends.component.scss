@@ -1,0 +1,56 @@
+.container{
+    border-radius: 5px;
+    // padding-top: 15px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 325px;
+    margin-left: 25px;
+    mat-icon{
+        color: gray;
+    }
+    .header{
+        width: 100%; padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgb(180, 180, 180);
+        mat-icon{
+            position: absolute;
+            right: 10px;
+        }
+        span{
+            position: relative;
+            left: 10px;
+        }
+    }
+    .trend{
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        .content{
+            position: relative;
+            text-align: left;
+            left: -60px;
+            margin: 8px;
+            p{
+                padding: 0;
+                margin: 0;
+                color: grey;
+            }
+            h4{
+                padding: 0;
+                margin: 0;
+            }
+        }
+        mat-icon{
+            position: absolute;
+            right: 10px;
+        }
+    }
+    p{
+
+        margin-top: 10px;
+    }
+}

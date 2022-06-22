@@ -1,0 +1,36 @@
+app-nav-bar{
+    position: fixed;
+    top: 60px; left: 0;
+    width: 250px; height: calc(100vh - 50px);
+    display: flex; flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    transition: left .4s;
+}
+app-header{
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.body{
+    position: fixed;
+    top: 60px; bottom: 0;
+    left: 250px; right: 0;
+    transition: all .4s;
+
+}
+
+.fullscreen{
+    .body{
+        left: 0 !important;
+    }
+    app-nav-bar{
+        left: -250px;
+    }
+}
+
+.hideInfo{
+    width: 100% !important;
+}

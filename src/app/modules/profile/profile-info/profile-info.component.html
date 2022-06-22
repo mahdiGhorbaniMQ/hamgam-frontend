@@ -1,0 +1,26 @@
+<div class="container">
+    <img class="img" [src]="auth.userInfo.image" alt="profile">
+    <h3>{{auth.userInfo.name}} {{auth.userInfo.family}}</h3>
+    <p style="position: relative;top: -5px;color: gray;">@{{auth.userInfo.username}}</p>
+    <div class="location">
+        <mat-icon>place</mat-icon>
+        <span>{{auth.userInfo.location}}</span>
+    </div>
+    <div class="bio">
+        <p>{{auth.userInfo.bio}}</p>
+    </div>
+    <div class="numbers">
+        <div>
+            <p>Tweets</p>
+            {{auth.userInfo.tweets}}
+        </div>
+        <div>
+            <p>Followers</p>
+            {{auth.userInfo.followers}}
+        </div>
+        <div>
+            <p>Followings</p>
+            {{auth.userInfo.followings}}
+        </div>
+    </div>
+</div>

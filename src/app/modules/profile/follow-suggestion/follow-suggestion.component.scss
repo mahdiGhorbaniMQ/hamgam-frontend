@@ -1,0 +1,23 @@
+.container{
+    padding: 8px;
+    display: flex;
+    img{
+        position: relative;
+        left: -10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .info{
+        text-align: left;
+        .username{
+            color: gray;
+        }
+    }
+    button{
+        position: relative;
+        left: 10px;
+        background-color: rgb(187, 223, 238);
+        border-radius: 25px;
+    }
+}

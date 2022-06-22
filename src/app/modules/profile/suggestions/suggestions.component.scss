@@ -1,0 +1,30 @@
+.container{
+    border-radius: 5px;
+    padding-top: 15px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+    margin-left: 25px;
+    margin-top: 10px;
+    mat-icon{
+        color: gray;
+    }
+    .header{
+        width: 100%;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgb(180, 180, 180);
+        mat-icon{
+            position: absolute;
+            right: 10px;
+            transform: rotateY(180deg) rotate(-40deg);
+        }
+        span{
+            position: relative;
+            left: 10px;
+        }
+    }
+}

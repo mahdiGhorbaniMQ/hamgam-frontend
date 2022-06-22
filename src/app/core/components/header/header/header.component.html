@@ -1,0 +1,31 @@
+<div routerLink="home" matRipple class="logo">
+    <img src="../../../../../assets/logo.png" width="35px" height="auto" alt="logo" title="logo">
+</div>
+
+<div class="search" *ngIf="screenWidth>700">
+    <mat-form-field appearance="outline">
+        <mat-label>Search on twitter</mat-label>
+        <input [formControl]="myControl"
+               [matAutocomplete]="auto"
+               matInput
+               placeholder="Search">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix>search</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+</div>
+
+<div class="info">
+    <span>Hey {{auth.userInfo.name}} !</span>
+    <img [src]="auth.userInfo.image" alt="profile" height="35px" width="auto">
+</div>
+
+<div class="links">
+    <button (click)="screen.showMenu = !screen.showMenu" mat-button *ngIf="screenWidth<=700"><mat-icon>menu</mat-icon></button>
+    <button *ngIf="screenWidth>=460" mat-button>About</button>
+    <button *ngIf="screenWidth>=460" mat-button>Help</button>
+</div>
