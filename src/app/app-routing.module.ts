@@ -1,23 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookmarksComponent } from './modules/bookmarks/bookmarks/bookmarks.component';
-import { ExploreComponent } from './modules/explore/explore/explore.component';
-import { HomeComponent } from './modules/home/home/home.component';
-import { ListsComponent } from './modules/lists/lists/lists.component';
-import { MessagesComponent } from './modules/messages/messages/messages.component';
 import { NotFoundComponent } from './modules/not-found/not-found/not-found.component';
-import { NotificationsComponent } from './modules/notifications/notifications/notifications.component';
+import { HomeComponent } from './modules/home/home/home.component';
 import { ProfileComponent } from './modules/profile/profile/profile.component';
-import { SomethingElseComponent } from './modules/something-else/something-else/something-else.component';
+import { CreateIdeaComponent } from './modules/create-idea/create-idea/create-idea.component';
+import { LoginComponent } from './modules/authentication/login/login.component';
+import { RegisterComponent } from './modules/authentication/register/register.component';
+import { SkillsComponent } from './modules/skills/skills/skills.component';
+import { CommunityComponent } from './modules/community/community/community.component';
+import { IdeaComponent } from './modules/idea/idea/idea.component';
 
 const routes: Routes = [
   {
     path:"",
-    redirectTo:"/profile",
+    redirectTo:"/home",
     pathMatch:"full"
   },
   {
     path:"profile",
+    component:ProfileComponent,
+    loadChildren: ()=> import("src/app/modules/profile/profile.module").then(m => m.ProfileModule)
+  },
+  {
+    path:"profile/:username",
     component:ProfileComponent,
     loadChildren: ()=> import("src/app/modules/profile/profile.module").then(m => m.ProfileModule)
   },
@@ -27,39 +32,34 @@ const routes: Routes = [
     loadChildren: ()=> import("src/app/modules/home/home.module").then(m => m.HomeModule)
   },
   {
-    path:"explore",
-    component:ExploreComponent,
-    loadChildren: ()=> import("src/app/modules/explore/explore.module").then(m => m.ExploreModule)
+    path:"idea",
+    component:CreateIdeaComponent,
+    loadChildren: ()=> import("src/app/modules/create-idea/create-idea.module").then(m => m.CreateIdeaModule)
   },
   {
-    path:"bookmarks",
-    component:BookmarksComponent,
-    loadChildren: ()=> import("src/app/modules/bookmarks/bookmarks.module").then(m => m.BookmarksModule)
+    path:"idea/:id",
+    component:IdeaComponent,
+    loadChildren: ()=> import("src/app/modules/idea/idea.module").then(m => m.IdeaModule)
   },
   {
-    path:"lists",
-    component:ListsComponent,
-    loadChildren: ()=> import("src/app/modules/lists/lists.module").then(m => m.ListsModule)
+    path:"login",
+    component:LoginComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
   },
   {
-    path:"messages",
-    component:MessagesComponent,
-    loadChildren: ()=> import("src/app/modules/messages/messages.module").then(m => m.MessagesModule)
+    path:"register",
+    component:RegisterComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
   },
   {
-    path:"notifications",
-    component:NotificationsComponent,
-    loadChildren: ()=> import("src/app/modules/notifications/notifications.module").then(m => m.NotificationsModule)
+    path:"skills",
+    component:SkillsComponent,
+    loadChildren: ()=> import("src/app/modules/skills/skills.module").then(m => m.SkillsModule)
   },
   {
-    path:"lists",
-    component:ListsComponent,
-    loadChildren: ()=> import("src/app/modules/lists/lists.module").then(m => m.ListsModule)
-  },
-  {
-    path:"other",
-    component:SomethingElseComponent,
-    loadChildren: ()=> import("src/app/modules/something-else/something-else.module").then(m => m.SomethingElseModule)
+    path:"community",
+    component:CommunityComponent,
+    loadChildren: ()=> import("src/app/modules/community/community.module").then(m => m.CommunityModule)
   },
   {
     path:"**",

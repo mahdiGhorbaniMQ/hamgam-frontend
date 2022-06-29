@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="header">
+        <span><b>Community</b></span>
+        <mat-icon>replay</mat-icon>
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Spring
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Angular
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                React JS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Node JS
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Linux
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Java
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div class="footer">
+        <button mat-button> SEE MORE </button>
+    </div>
+</div>

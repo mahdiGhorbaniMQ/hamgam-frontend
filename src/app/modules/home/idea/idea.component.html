@@ -1,0 +1,33 @@
+<!-- <img *ngIf="screen.innerWidth>550" class="profile-image" [src]="tweet.profileImage" alt="profile"> -->
+<div class="container" (click)="showToastMessage()">
+    <div class="name">
+        <span>{{idea.name}}</span>
+        <span> {{idea.family}}</span>
+        <span *ngIf="screen.innerWidth>550" class="username">@{{idea.username}}</span>
+        <span class="time">{{idea.time.hours}}:{{idea.time.minutes}}</span>
+    </div>
+    <div [ngClass]="{'rtl':idea.dir=='rtl'}" [dir]="idea.dir || 'ltr'" class="content">
+        <span>{{idea.content}}</span>
+    </div>
+    <div class="images" *ngIf="idea.images!=null">
+        <img *ngFor="let image of idea.images" [src]="image" alt="image">
+    </div>
+    <div class="numbers">
+        <div>
+            <mat-icon matRipple>chat_bubble_outline</mat-icon>
+            <span>{{idea.comments}}</span>
+        </div>
+        <div>
+            <mat-icon matRipple>autorenew</mat-icon>
+            <span>{{idea.reTweets}}</span>
+        </div>
+        <div>
+            <mat-icon (click)="isLiked = false" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
+            <mat-icon (click)="isLiked = true" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
+            <span>{{idea.likes + (isLiked?1:0)}}</span>
+        </div>
+        <div>
+            <mat-icon matRipple style="transform: rotateY(180deg);">reply</mat-icon>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.container{
+    position: relative;
+    width: 100%; border-radius: 4px;
+    display: flex;
+    img{
+        position: relative;
+        left: 0px;
+        margin: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .info{
+        margin: 10px;
+        text-align: left;
+        .username{
+            color: gray;
+        }
+        .username:hover{
+            color: rgb(66, 66, 66);
+        }
+    }
+    button{
+        position: relative;
+        left: 10px;
+        background-color: rgb(187, 223, 238);
+        border-radius: 25px;
+    }
+}

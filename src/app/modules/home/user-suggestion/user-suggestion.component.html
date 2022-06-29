@@ -1,0 +1,12 @@
+<div class="container" mat-ripple [routerLink]="'/profile/'+user.username">
+    <img [src]="user.image" alt="profile">
+    <div class="info">
+        <div class="name">
+            <span>{{user.name}}</span>
+            <span> {{user.family}}</span>
+        </div>
+        <div class="username">
+            <span>@{{user.username}}</span>
+        </div>
+    </div>
+</div>

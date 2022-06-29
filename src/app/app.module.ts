@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderModule } from './core/components/header/header.module';
 import { NavBarModule } from './core/components/nav-bar/nav-bar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     NavBarModule,
     HeaderModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [],

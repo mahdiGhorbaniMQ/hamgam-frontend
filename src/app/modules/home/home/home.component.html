@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div class="container">
+    <div class="home" [ngClass]="{'hideInfo':screen.innerWidth<=1150}">
+        <div class="ideas-container" (scroll)="onscroll($event,container.scrollTop)" #container>
+           <div class="ideas">
+            <div class="header" [style.top]="scroll">
+                <button mat-button (click)="selectTab('ideas')" [ngClass]="{'selected':selected=='ideas'}">Ideas</button>
+                <button mat-button (click)="selectTab('your_ideas')" [ngClass]="{'selected':selected=='your_ideas'}">Your Ideas</button>
+                <button mat-button (click)="selectTab('your_requests')" [ngClass]="{'selected':selected=='your_requests'}">Your Requests</button>
+            </div>
+            <app-idea *ngFor="let idea of ideas" [idea]="idea"></app-idea>
+           </div>
+        </div>
+        <div class="suggestions" *ngIf="screen.innerWidth>1000">
+            <app-community></app-community>
+            <app-suggestions></app-suggestions>
+        </div>
+    </div>
+</div>

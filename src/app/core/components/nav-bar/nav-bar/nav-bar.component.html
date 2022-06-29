@@ -5,7 +5,7 @@
             <span>{{item.title}}</span>
         </router-link>
     </div>
-    <div *ngIf="size<10" class="item" matRipple [matMenuTriggerFor]="more" [ngClass]="{'selected':moreCondition}">
+    <div *ngIf="size<6" class="item" matRipple [matMenuTriggerFor]="more" [ngClass]="{'selected':moreCondition}">
         <div class="more">
             <mat-icon style="transform: rotate(90deg);">more_vert</mat-icon>
             <span>More</span>
@@ -20,6 +20,6 @@
         </button>
     </mat-menu>
 </div>
-<div class="tweet">
-    <button mat-button>Tweet</button>
+<div class="idea">
+    <button mat-button>Create Idea</button>
 </div>

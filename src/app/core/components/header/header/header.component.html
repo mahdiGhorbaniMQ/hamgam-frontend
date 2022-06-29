@@ -1,10 +1,10 @@
 <div routerLink="home" matRipple class="logo">
-    <img src="../../../../../assets/logo.png" width="35px" height="auto" alt="logo" title="logo">
+    <img src="../../../../../assets/logo3.png" width="35px" height="auto" alt="logo" title="logo">
 </div>
 
 <div class="search" *ngIf="screenWidth>700">
     <mat-form-field appearance="outline">
-        <mat-label>Search on twitter</mat-label>
+        <mat-label>Search on skills</mat-label>
         <input [formControl]="myControl"
                [matAutocomplete]="auto"
                matInput
@@ -19,7 +19,7 @@
       </mat-form-field>
 </div>
 
-<div class="info">
+<div mat-ripple class="info" routerLink="/profile">
     <span>Hey {{auth.userInfo.name}} !</span>
     <img [src]="auth.userInfo.image" alt="profile" height="35px" width="auto">
 </div>

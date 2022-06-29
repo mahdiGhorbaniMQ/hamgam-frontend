@@ -9,61 +9,37 @@ export class NavInformationService {
       {
           "title":"Home",
           "icon":"home",
-          "endponint":"home",
-          "isSelected":false
-      },
-      {
-          "title":"Explore",
-          "icon":"explore",
-          "endponint":"explore",
-          "isSelected":false
-      },
-      {
-          "title":"Notifications",
-          "icon":"notifications",
-          "endponint":"notifications",
-          "isSelected":false
-      },
-      {
-          "title":"Messages",
-          "icon":"message",
-          "endponint":"messages",
-          "isSelected":false
-      },
-      {
-          "title":"Bookmarks",
-          "icon":"bookmark",
-          "endponint":"bookmarks",
-          "isSelected":false
-      },
-      {
-          "title":"Lists",
-          "icon":"list",
-          "endponint":"lists",
+          "endponint":"/home",
           "isSelected":false
       },
       {
           "title":"Profile",
           "icon":"person",
-          "endponint":"profile",
+          "endponint":"/profile",
           "isSelected":false
       },
       {
-          "title":"Other 1",
-          "icon":"block",
-          "endponint":"other",
+          "title":"Comunnity",
+          "icon":"group",
+          "endponint":"/community",
           "isSelected":false
       },
       {
-          "title":"Other 2",
-          "icon":"block",
-          "endponint":"other",
+          "title":"Create Idea",
+          "icon":"create",
+          "endponint":"/idea",
           "isSelected":false
       },
       {
-          "title":"Other 3",
-          "icon":"block",
-          "endponint":"other",
+          "title":"Skills",
+          "icon":"list",
+          "endponint":"/skills",
+          "isSelected":false
+      },
+      {
+          "title":"Login",
+          "icon":"login",
+          "endponint":"/login",
           "isSelected":false
       }
     ]

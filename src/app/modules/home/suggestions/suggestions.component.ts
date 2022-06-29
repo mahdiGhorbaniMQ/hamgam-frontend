@@ -1,14 +1,20 @@
 import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
-import { ScreenService } from 'src/app/core/services/screen.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-suggestions',
+  templateUrl: './suggestions.component.html',
+  styleUrls: ['./suggestions.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class SuggestionsComponent implements OnInit {
+
+
+  users!:{
+    name:string,
+    family:string,
+    image:string,
+    username:string
+  }[]
 
   ideas!: {
     name:string
@@ -23,19 +29,9 @@ export class HomeComponent implements OnInit {
     reTweets:number
     dir?:"rtl"|"ltr"
   }[]
-
-  scroll="0px"
-  selected="ideas"
-
-  constructor(
-    private navInfo:NavInformationService,
-    public screen:ScreenService) {}
+  constructor() { }
 
   ngOnInit(): void {
-    this.navInfo.informations.map(item=>{
-      if(item.title == "Home") item.isSelected = true
-      else { item.isSelected = false}
-    })
 
     this.ideas = [
       {
@@ -108,18 +104,28 @@ export class HomeComponent implements OnInit {
         reTweets:49,
       }
     ]
+
+    this.users = [
+      {
+        name:"Sara",
+        family:"Starck",
+        image:"../../../../assets/profile.jpeg",
+        username:"sara_123"
+      },
+      {
+        name:"Kate",
+        family:"Lingard",
+        image:"../../../../assets/profile3.jpg",
+        username:"hello1010"
+      },
+      {
+        name:"Jon",
+        family:"Doe",
+        image:"../../../../assets/profile2.jpg",
+        username:"JonDoeJon"
+      }
+    ]
   }
 
-  onscroll(e:any,scrollTop:number){
-    this.scroll = (scrollTop-8)+"px"
-  }
 
-  selectTab(tab:string){
-    this.selected = tab
-    let tmp = [...this.ideas]
-    this.ideas = []
-    setTimeout(() => {
-      this.ideas = [...tmp]
-    }, 600);
-  }
 }
