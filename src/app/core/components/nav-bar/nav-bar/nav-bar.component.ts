@@ -13,8 +13,7 @@ export class NavBarComponent implements OnInit {
 
   }
   
-  size!:number
-  moreCondition!:boolean
+  
 
   ngOnInit():void{}
 
@@ -24,28 +23,15 @@ export class NavBarComponent implements OnInit {
 
   @HostListener('window:resize')
   async checkSize(){
-    this.size = Number((((window.innerHeight-50)/60) - 3).toFixed())
-    this.moreCondition = false
-    this.informations.informations.slice(this.size).forEach(item=>{
+    this.informations.size = Number((((window.innerHeight-50)/60) - 3).toFixed())
+    this.informations.moreCondition = false
+    this.informations.informations.slice(this.informations.size).forEach(item=>{
       if(item.isSelected){
-        this.moreCondition = true
+        this.informations.moreCondition = true
         return
       }
     })
   }
 
-  select(i:number){
-    this.informations.informations.forEach((item,index)=>{
-      if (index == i ) item.isSelected = true
-      else item.isSelected = false
-    })
-    this.moreCondition = false
-    this.informations.informations.slice(this.size).forEach(item=>{
-      if(item.isSelected){
-        this.moreCondition = true
-        return
-      }
-    })
-  }
 
 }

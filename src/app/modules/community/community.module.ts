@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { CommunityRoutingModule } from './community-routing.module';
 import { CommunityComponent } from './community/community.component';
+import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
+import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/user-suggestion.module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { CommunityComponent } from './community/community.component';
   ],
   imports: [
     CommonModule,
-    CommunityRoutingModule
+    CommunityRoutingModule,
+    AngularMaterialModule,
+    UserSuggestionModule
   ],
   exports:[
     CommunityComponent

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TweetComponent } from './tweet.component';
+import { IdeaComponent } from './idea.component';
 
 describe('IdeaComponent', () => {
   let component: IdeaComponent;

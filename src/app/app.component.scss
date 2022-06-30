@@ -6,6 +6,8 @@ app-nav-bar{
     justify-content: center;
     align-items: center;
     transition: left .4s;
+    box-shadow: 2px 7px 10px rgb(112, 112, 112);
+    z-index: 2;
 }
 app-header{
     position: fixed;
@@ -28,6 +30,7 @@ app-header{
     }
     app-nav-bar{
         left: -250px;
+        box-shadow: none !important;    
     }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-community',
@@ -74,5 +74,10 @@ export class CommunityComponent implements OnInit {
       },
     ]
   }
-
+  reload(el:ElementRef){
+    el.nativeElement.classList.add("rotate")
+    setTimeout(() => {
+      el.nativeElement.classList.remove("rotate")
+    }, 600);
+  }
 }

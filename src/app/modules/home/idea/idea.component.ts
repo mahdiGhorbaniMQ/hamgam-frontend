@@ -1,6 +1,7 @@
 import { Time } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ScreenService } from 'src/app/core/services/screen.service';
 
 @Component({
@@ -28,14 +29,14 @@ export class IdeaComponent implements OnInit {
 
   constructor(
     public screen:ScreenService,
-    private toaster:MatSnackBar) { }
+    private router:Router) { }
 
   ngOnInit(): void { }
 
-  showToastMessage(){
-    this.toaster.open("@"+this.idea.username,"Got it!",{
-      duration:1500
-    })
+  showIdea(){
+    setTimeout(() => {
+      this.router.navigate(["/idea",this.idea.username])      
+    }, 250);
   }
-
+  
 }

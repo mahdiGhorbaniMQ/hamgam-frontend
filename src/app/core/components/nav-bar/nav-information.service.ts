@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { ScreenService } from '../../services/screen.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavInformationService {
+
+  moreCondition!:boolean
+  size!:number
 
   public informations = [
       {
@@ -13,15 +17,15 @@ export class NavInformationService {
           "isSelected":false
       },
       {
+        "title":"Comunnity",
+        "icon":"group",
+        "endponint":"/community",
+        "isSelected":false
+      },
+      {
           "title":"Profile",
           "icon":"person",
           "endponint":"/profile",
-          "isSelected":false
-      },
-      {
-          "title":"Comunnity",
-          "icon":"group",
-          "endponint":"/community",
           "isSelected":false
       },
       {
@@ -43,6 +47,19 @@ export class NavInformationService {
           "isSelected":false
       }
     ]
-  constructor() {}
-
+  constructor(private screen:ScreenService) {}
+  select(i:number){
+    if(window.innerWidth<=700) this.screen.showMenu = false;
+    this.informations.forEach((item,index)=>{
+      if (index == i ) item.isSelected = true
+      else item.isSelected = false
+    })
+    this.moreCondition = false
+    this.informations.slice(this.size).forEach(item=>{
+      if(item.isSelected){
+        this.moreCondition = true
+        return
+      }
+    })
+  }
 }

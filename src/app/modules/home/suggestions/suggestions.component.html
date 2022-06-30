@@ -1,7 +1,7 @@
 <div class="container">
     <div class="header">
         <span><b>You should see</b></span>
-        <mat-icon>replay</mat-icon>
+        <mat-icon mat-ripple (click)="reload(icon._elementRef)" #icon>replay</mat-icon>
     </div>
     <div class="idea" *ngFor="let idea of ideas">
         <div class="name">{{idea.username}}</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 
 @Component({
   selector: 'app-idea',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IdeaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navInfo:NavInformationService) { }
 
   ngOnInit(): void {
+    this.navInfo.select(0)
   }
-
 }

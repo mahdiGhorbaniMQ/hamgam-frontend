@@ -26,6 +26,6 @@
 
 <div class="links">
     <button (click)="screen.showMenu = !screen.showMenu" mat-button *ngIf="screenWidth<=700"><mat-icon>menu</mat-icon></button>
-    <button *ngIf="screenWidth>=460" mat-button>About</button>
-    <button *ngIf="screenWidth>=460" mat-button>Help</button>
+    <button *ngIf="screenWidth>=460" mat-button routerLink="/community">Community</button>
+    <!-- <button *ngIf="screenWidth>=460" mat-button>Help</button> -->
 </div>

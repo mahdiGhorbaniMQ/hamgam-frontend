@@ -1,7 +1,7 @@
 <div class="container">
     <div class="header">
         <span><b>Community</b></span>
-        <mat-icon>replay</mat-icon>
+        <mat-icon mat-ripple (click)="reload(icon._elementRef)" #icon>replay</mat-icon>
     </div>
     <mat-accordion>
         <mat-expansion-panel>
@@ -54,6 +54,6 @@
         </mat-expansion-panel>
     </mat-accordion>
     <div class="footer">
-        <button mat-button> SEE MORE </button>
+        <button mat-button routerLink="/community"> SEE MORE </button>
     </div>
 </div>

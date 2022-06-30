@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     dir?:"rtl"|"ltr"
   }[]
 
-  scroll="0px"
+  scroll=0
   selected="ideas"
 
   constructor(
@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     public screen:ScreenService) {}
 
   ngOnInit(): void {
+    this.navInfo.select(0)
     this.navInfo.informations.map(item=>{
       if(item.title == "Home") item.isSelected = true
       else { item.isSelected = false}
@@ -111,7 +112,7 @@ export class HomeComponent implements OnInit {
   }
 
   onscroll(e:any,scrollTop:number){
-    this.scroll = (scrollTop-8)+"px"
+    this.scroll = scrollTop
   }
 
   selectTab(tab:string){
@@ -122,4 +123,5 @@ export class HomeComponent implements OnInit {
       this.ideas = [...tmp]
     }, 600);
   }
+
 }

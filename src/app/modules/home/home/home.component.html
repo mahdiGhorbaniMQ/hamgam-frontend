@@ -2,7 +2,8 @@
     <div class="home" [ngClass]="{'hideInfo':screen.innerWidth<=1150}">
         <div class="ideas-container" (scroll)="onscroll($event,container.scrollTop)" #container>
            <div class="ideas">
-            <div class="header" [style.top]="scroll">
+            <div class="bg" [style.top]="scroll-10+'px'"></div>
+            <div class="header" [style.top]="scroll+'px'">
                 <button mat-button (click)="selectTab('ideas')" [ngClass]="{'selected':selected=='ideas'}">Ideas</button>
                 <button mat-button (click)="selectTab('your_ideas')" [ngClass]="{'selected':selected=='your_ideas'}">Your Ideas</button>
                 <button mat-button (click)="selectTab('your_requests')" [ngClass]="{'selected':selected=='your_requests'}">Your Requests</button>

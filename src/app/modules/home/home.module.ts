@@ -4,10 +4,10 @@ import { HomeComponent } from './home/home.component';
 import { IdeaComponent } from './idea/idea.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { CommunityComponent } from './community/community.component';
-import { UserSuggestionComponent } from './user-suggestion/user-suggestion.component';
 import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
 import { IdeaSuggestionComponent } from './idea-suggestion/idea-suggestion.component';
 import { RouterModule } from '@angular/router';
+import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/user-suggestion.module';
 
 
 @NgModule({
@@ -16,13 +16,13 @@ import { RouterModule } from '@angular/router';
     IdeaComponent,
     SuggestionsComponent,
     CommunityComponent,
-    UserSuggestionComponent,
     IdeaSuggestionComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
-    RouterModule
+    RouterModule,
+    UserSuggestionModule
   ],
   exports:[
     HomeComponent,

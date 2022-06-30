@@ -1,19 +1,19 @@
 <div class="items">
-    <div [routerLink]="item.endponint" (click)="select(i)" *ngFor="let item of informations.informations.slice(0,size);let i = index" class="item" matRipple [ngClass]="{'selected':item.isSelected}">
+    <div [routerLink]="item.endponint" (click)="informations.select(i)" *ngFor="let item of informations.informations.slice(0,informations.size);let i = index" class="item" matRipple [ngClass]="{'selected':item.isSelected}">
         <router-link [routerLink]="item.endponint">
             <mat-icon>{{item.icon}}</mat-icon>
             <span>{{item.title}}</span>
         </router-link>
     </div>
-    <div *ngIf="size<6" class="item" matRipple [matMenuTriggerFor]="more" [ngClass]="{'selected':moreCondition}">
+    <div *ngIf="informations.size<6" class="item" matRipple [matMenuTriggerFor]="more" [ngClass]="{'selected':informations.moreCondition}">
         <div class="more">
             <mat-icon style="transform: rotate(90deg);">more_vert</mat-icon>
             <span>More</span>
         </div>
     </div>
     <mat-menu #more class="more-menu">
-        <button [routerLink]="item.endponint" (click)="select(i+size)" mat-menu-item *ngFor="let item of informations.informations.slice(size);let i = index">
-            <router-link [routerLink]="item.endponint" (click)="select(i)">
+        <button [routerLink]="item.endponint" (click)="informations.select(i+informations.size)" mat-menu-item *ngFor="let item of informations.informations.slice(informations.size);let i = index">
+            <router-link [routerLink]="item.endponint" (click)="informations.select(i)">
                 <mat-icon>{{item.icon}}</mat-icon>
                 <span>{{item.title}}</span>
             </router-link>
@@ -21,5 +21,5 @@
     </mat-menu>
 </div>
 <div class="idea">
-    <button mat-button>Create Idea</button>
+    <button mat-button routerLink="/idea">Create Idea</button>
 </div>
