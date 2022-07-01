@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     CommonModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    AngularMaterialModule,
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports:[
     LoginComponent,
