@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private navInfo:NavInformationService,
-    private screen:ScreenService) { }
+    private navInfo:NavInformationService) { }
 
   ngOnInit(): void {
     this.navInfo.select(4)

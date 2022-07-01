@@ -12,7 +12,11 @@
     justify-content: center;
     height: 92%; width: 92%;
     border-radius: 8px;
-
+    form{
+        position: relative;
+        width: 85%;
+        height: 75%;
+    }
     mat-form-field{
         position: relative;
         width: 100%;

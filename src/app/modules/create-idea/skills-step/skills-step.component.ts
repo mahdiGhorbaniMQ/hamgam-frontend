@@ -26,7 +26,6 @@ export class SkillsStepComponent implements OnInit {
   filteredSkills!: Observable<SkillModel[]>;  
   @Input("skills") selectedSkills!: Set<SkillModel>
 
-
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
 

@@ -1,1 +1,95 @@
-<p>register works!</p>
+<div class="container">
+    <form [formGroup]="formGroup">
+        <h1>Register</h1>
+        <mat-stepper>
+            <mat-step label="Info">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your name</mat-label>
+                        <input matInput placeholder="Jon Doe" [formControl]="name" required>
+                        <mat-error *ngIf="name.invalid">{{getEmailError()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your email</mat-label>
+                        <input matInput placeholder="example@example.com" [formControl]="email" required>
+                        <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter a password</mat-label>
+                        <input required matInput [formControl]="password" [type]="hidePass ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+                          <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="password.invalid">{{getPassError()}}</mat-error>
+                      </mat-form-field>
+                </div>
+                <div class="acts">
+                  <button mat-button routerLink="/login">Already have an account?</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step label="About">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your name</mat-label>
+                        <input matInput placeholder="Jon Doe" [formControl]="name" required>
+                        <mat-error *ngIf="name.invalid">{{getEmailError()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your name</mat-label>
+                        <input matInput placeholder="Jon Doe" [formControl]="name" required>
+                        <mat-error *ngIf="name.invalid">{{getEmailError()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div class="acts">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step label="Skills">
+                <mat-form-field class="chips" appearance="outline">
+                    <mat-label>Skills</mat-label>
+                    <mat-chip-list #chipList aria-label="Skill selection">
+                      <mat-chip
+                        *ngFor="let skill of selectedSkills"
+                        (removed)="removeSkill(skill)">
+                        {{skill.name}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="New skill..."
+                        #skillInput
+                        [formControl]="skillCtrl"
+                        [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                        {{skill.name}} ({{skill.users.length}} person)
+                      </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <br>
+                <div class="acts">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="register()">Signup</button>
+                    <button mat-button class="right" (click)="openDialog()">Add more skill</button>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </form>
+
+    <!-- (click)="register()" -->
+</div>
