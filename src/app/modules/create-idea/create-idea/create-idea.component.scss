@@ -9,15 +9,6 @@
     height: 92%; width: 92%;
     background-color: #fff;
     border-radius: 8px;
-    form, mat-form-field{
-        position: relative;
-        width: 100%;
-        text-align: right;
-        line-height: 25px;
-    }
-    .chips{
-        text-align: left !important;
-    }
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */

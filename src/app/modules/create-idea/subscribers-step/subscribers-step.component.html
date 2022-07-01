@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup">
+    <mat-form-field class="chips" appearance="outline">
+      <mat-label>Subescriber</mat-label>
+      <mat-chip-list #userList aria-label="User selection">
+        <mat-chip
+          *ngFor="let user of selectedUsers"
+          (removed)="removeUser(user)">
+          {{user.name}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="New Subescriber..."
+          #userInput
+          [formControl]="userCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="userList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="addUser($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedUser($event)">
+        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+          {{user.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div>
+      <button mat-button (click)="submit()">ثبت</button>
+      <button mat-button matStepperPrevious>قبلی</button>
+    </div>
+</form>

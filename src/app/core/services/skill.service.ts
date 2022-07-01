@@ -27,7 +27,7 @@ export class SkillService {
     return this.allSkills.filter(skill=>ids.includes(skill.id!))
   }
   getByCategory(category:string):SkillModel[]{
-    return this.allSkills.filter(skill=>skill.categories.includes(category))
+    return this.allSkills.filter(skill=>skill.categories.map(category=>category.name).includes(category))
   }
   getByCategories(categories:string[]):SkillModel[]{
     return this.allSkills.filter(skill=>this.has(skill.categories,categories))

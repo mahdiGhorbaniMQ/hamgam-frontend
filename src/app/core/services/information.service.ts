@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestModel } from '../models/request-model';
+import { CategoryService } from './category.service';
 import { IdeaService } from './idea.service';
 import { SkillService } from './skill.service';
 import { UserService } from './user.service';
@@ -15,7 +16,8 @@ export class InformationService {
   constructor(
     private users:UserService,
     private skills:SkillService,
-    private ideas:IdeaService
+    private ideas:IdeaService,
+    private categories:CategoryService
   ) {
 
 
@@ -104,61 +106,61 @@ export class InformationService {
       {
         id:"0",
         name:"Java",
-        categories:["Backend"],
+        categories:[],
         users:[]
       },
       {
         id:"1",
         name:"Spring",
-        categories:["Backend"],
+        categories:[],
         users:[]
       },
       {
         id:"2",
         name:"Python",
-        categories:["Backend"],
+        categories:[],
         users:[]
       },
       {
         id:"3",
         name:"Django",
-        categories:["Backend"],
+        categories:[],
         users:[]
       },
       {
         id:"4",
         name:"Angular",
-        categories:["Frontetned"],
+        categories:[],
         users:[]
       },
       {
         id:"5",
         name:"Node",
-        categories:["Backend","Frontent"],
+        categories:[],
         users:[]
       },
       {
         id:"6",
-        name:"Javascrpt",
-        categories:["Backend","Frontent"],
+        name:"Javascript",
+        categories:[],
         users:[]
       },
       {
         id:"7",
         name:"React",
-        categories:["Frontent"],
+        categories:[],
         users:[]
       },
       {
         id:"8",
         name:"Linux",
-        categories:["Devops"],
+        categories:[],
         users:[]
       },
     ]
 
 
-    users.allUsers[0].skills = skills.getByNames(["Java","Spring","Node","Javascript","React","Angular","Linux"])
+    users.allUsers[0].skills = skills.getByNames(["Java","Spring","Angular","Linux"])
     users.allUsers[1].skills = skills.getByNames(["Python","Django","Java","Linux"])
     users.allUsers[2].skills = skills.getByNames(["Python","Django","Java","Linux"])
     users.allUsers[3].skills = skills.getByNames(["Python","Django","Java"])
@@ -169,6 +171,36 @@ export class InformationService {
     skills.allSkills.forEach(skill=>{
       skill.users = users.getUsersBySkill(skill.name)
     })
+
+
+    categories.allCategories = [
+      {
+        id:"1",
+        name:"Backend",
+        skills:[]
+      },
+      {
+        id:"2",
+        name:"Frontend",
+        skills:[]
+      },
+      {
+        id:"3",
+        name:"Devops",
+        skills:[]
+      },
+    ]
+
+
+    skills.allSkills[0].categories = categories.getByNames(["Backend"])
+    skills.allSkills[1].categories = categories.getByNames(["Backend"])
+    skills.allSkills[2].categories = categories.getByNames(["Backend"])
+    skills.allSkills[3].categories = categories.getByNames(["Backend"])
+    skills.allSkills[4].categories = categories.getByNames(["Frontend"])
+    skills.allSkills[5].categories = categories.getByNames(["Frontend","Backend"])
+    skills.allSkills[6].categories = categories.getByNames(["Frontend","Backend"])
+    skills.allSkills[7].categories = categories.getByNames(["Frontend"])
+    skills.allSkills[8].categories = categories.getByNames(["Devops"])
 
 
     ideas.allIdeas = [
