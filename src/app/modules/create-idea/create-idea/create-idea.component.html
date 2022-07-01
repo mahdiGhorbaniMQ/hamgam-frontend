@@ -1,1 +1,99 @@
-<p>create-idea works!</p>
+<div class="container">
+    <mat-vertical-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup" label="Fill content">
+          <form [formGroup]="firstFormGroup">
+            <div>
+              <mat-form-field appearance="outline" >
+                <!-- <mat-label>عنوان ایده</mat-label> -->
+                <input
+                  dir="rtl"
+                  matInput
+                  placeholder="عنوان ایده"
+                  formControlName="firstCtrl"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <!-- <mat-label>متن ایده</mat-label> -->
+                    <textarea placeholder="متن ایده" dir="rtl" rows="10" matInput ></textarea>
+                </mat-form-field>
+            </div>
+            <div>
+              <button mat-button matStepperNext>بعدی</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" label="Choose skills">
+          <form [formGroup]="secondFormGroup">
+            <mat-form-field class="chips" appearance="outline">
+              <mat-label>Skills</mat-label>
+              <mat-chip-list #chipList aria-label="Skill selection">
+                <mat-chip
+                  *ngFor="let skill of skills"
+                  (removed)="removeSkill(skill)">
+                  {{skill}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input
+                  placeholder="New skill..."
+                  #skillInput
+                  [formControl]="skillCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                  {{skill}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext>بعدی</button>
+              <button mat-button matStepperPrevious>قبلی</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step label="Select subscribers">
+          <form [formGroup]="thertFormGroup">
+            <mat-form-field class="chips" appearance="outline">
+              <mat-label>Subescriber</mat-label>
+              <mat-chip-list #userList aria-label="User selection">
+                <mat-chip
+                  *ngFor="let user of users"
+                  (removed)="removeUser(user)">
+                  {{user}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input
+                  placeholder="New Subescriber..."
+                  #userInput
+                  [formControl]="userCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="userList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addUser($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedUser($event)">
+                <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+                  {{user}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div>
+              <button mat-button>ثبت</button>
+              <button mat-button matStepperPrevious>قبلی</button>
+            </div>
+          </form>
+          <div>
+          </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>

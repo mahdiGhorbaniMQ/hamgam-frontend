@@ -9,9 +9,12 @@
 .search{
     mat-form-field{
         // background-color: rgb(194, 188, 188);
-        height: 60px;
         width: 100%;
+        input{
+            height: 16px;
+        }
     }
+    top: 9px;
     position: relative;
     left: 30%; 
     width: 30%;

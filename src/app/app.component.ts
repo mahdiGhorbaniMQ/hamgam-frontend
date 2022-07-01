@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { InformationService } from './core/services/information.service';
 import { ScreenService } from './core/services/screen.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ScreenService } from './core/services/screen.service';
 })
 export class AppComponent {
   title = 'twitter';
-  constructor(public screen:ScreenService){}
+  constructor(public screen:ScreenService,private info:InformationService){}
 
   ngOnInit() {
     this.checkScreen()

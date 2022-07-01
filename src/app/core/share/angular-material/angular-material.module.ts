@@ -18,6 +18,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatRippleModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatStepperModule} from '@angular/material/stepper'; 
+import {MatChipsModule} from '@angular/material/chips';
+
+
 
 @NgModule({
   declarations: [],
@@ -41,7 +45,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatRippleModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule,
+    MatChipsModule
   ],
   exports:[
     MatToolbarModule,
@@ -62,7 +68,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatRippleModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule,
+    MatChipsModule
   ]
 })
 export class AngularMaterialModule { }

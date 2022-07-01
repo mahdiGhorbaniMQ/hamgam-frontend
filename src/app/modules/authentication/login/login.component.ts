@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   constructor(private navInfo:NavInformationService) { }
 
   ngOnInit(): void {
-    this.navInfo.select(5)
+    this.navInfo.select(4)
   }
 
 }

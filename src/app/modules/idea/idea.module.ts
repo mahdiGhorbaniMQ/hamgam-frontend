@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { IdeaRoutingModule } from './idea-routing.module';
 import { IdeaComponent } from './idea/idea.component';
+import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
+import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/user-suggestion.module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { IdeaComponent } from './idea/idea.component';
   ],
   imports: [
     CommonModule,
-    IdeaRoutingModule
+    IdeaRoutingModule,
+    AngularMaterialModule,
+    UserSuggestionModule
   ],
   exports:[
     IdeaComponent

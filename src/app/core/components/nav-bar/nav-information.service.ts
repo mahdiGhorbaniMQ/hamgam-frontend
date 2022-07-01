@@ -35,12 +35,6 @@ export class NavInformationService {
           "isSelected":false
       },
       {
-          "title":"Skills",
-          "icon":"list",
-          "endponint":"/skills",
-          "isSelected":false
-      },
-      {
           "title":"Login",
           "icon":"login",
           "endponint":"/login",

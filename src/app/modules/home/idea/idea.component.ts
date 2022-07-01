@@ -31,7 +31,8 @@ export class IdeaComponent implements OnInit {
     public screen:ScreenService,
     private router:Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   showIdea(){
     setTimeout(() => {

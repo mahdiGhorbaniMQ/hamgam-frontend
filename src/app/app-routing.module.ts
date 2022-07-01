@@ -6,7 +6,6 @@ import { ProfileComponent } from './modules/profile/profile/profile.component';
 import { CreateIdeaComponent } from './modules/create-idea/create-idea/create-idea.component';
 import { LoginComponent } from './modules/authentication/login/login.component';
 import { RegisterComponent } from './modules/authentication/register/register.component';
-import { SkillsComponent } from './modules/skills/skills/skills.component';
 import { CommunityComponent } from './modules/community/community/community.component';
 import { IdeaComponent } from './modules/idea/idea/idea.component';
 
@@ -50,11 +49,6 @@ const routes: Routes = [
     path:"register",
     component:RegisterComponent,
     loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
-  },
-  {
-    path:"skills",
-    component:SkillsComponent,
-    loadChildren: ()=> import("src/app/modules/skills/skills.module").then(m => m.SkillsModule)
   },
   {
     path:"community",

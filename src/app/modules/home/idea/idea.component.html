@@ -1,10 +1,9 @@
 <!-- <img *ngIf="screen.innerWidth>550" class="profile-image" [src]="tweet.profileImage" alt="profile"> -->
 <div class="container">
     <div class="name">
-        <span>{{idea.name}}</span>
-        <span> {{idea.family}}</span>
+        <span>{{idea.time.hours}}:{{idea.time.minutes}}</span>
         <span *ngIf="screen.innerWidth>550" class="username">@{{idea.username}}</span>
-        <span class="time">{{idea.time.hours}}:{{idea.time.minutes}}</span>
+        <span class="info">{{idea.name}} {{idea.family}}</span>
     </div>
     <div mat-ripple (click)="showIdea()" [ngClass]="{'rtl':idea.dir=='rtl'}" [dir]="idea.dir || 'ltr'" class="content">
         <span>{{idea.content}}</span>
@@ -14,12 +13,12 @@
     </div>
     <div class="numbers">
         <div>
-            <mat-icon matRipple>chat_bubble_outline</mat-icon>
             <span>{{idea.comments}}</span>
+            <mat-icon matRipple>chat_bubble_outline</mat-icon>
         </div>
         <div>
-            <mat-icon matRipple>autorenew</mat-icon>
             <span>{{idea.reTweets}}</span>
+            <mat-icon matRipple>autorenew</mat-icon>
         </div>
         <div>
             <mat-icon (click)="isLiked = false" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>

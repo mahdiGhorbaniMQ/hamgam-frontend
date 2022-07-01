@@ -5,7 +5,7 @@
             <span>{{item.title}}</span>
         </router-link>
     </div>
-    <div *ngIf="informations.size<6" class="item" matRipple [matMenuTriggerFor]="more" [ngClass]="{'selected':informations.moreCondition}">
+    <div *ngIf="informations.size<5" class="item" matRipple [matMenuTriggerFor]="more" [ngClass]="{'selected':informations.moreCondition}">
         <div class="more">
             <mat-icon style="transform: rotate(90deg);">more_vert</mat-icon>
             <span>More</span>

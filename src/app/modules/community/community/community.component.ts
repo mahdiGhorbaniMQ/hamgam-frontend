@@ -21,56 +21,56 @@ export class CommunityComponent implements OnInit {
     this.navInfo.select(1)
     this.users = [
       {
-        name:"Sara",
-        family:"Starck",
-        image:"../../../../assets/profile.jpeg",
+        name:"سارا",
+        family:"استارک",
+        image:"../../../../assets/profile2.jpg",
         username:"sara_123"
       },
       {
-        name:"Kate",
-        family:"Lingard",
-        image:"../../../../assets/profile3.jpg",
+        name:"کتی",
+        family:"لینگارد",
+        image:"../../../../assets/profile2.jpg",
         username:"hello1010"
       },
       {
-        name:"Jon",
-        family:"Doe",
+        name:"جان",
+        family:"دو",
         image:"../../../../assets/profile2.jpg",
         username:"JonDoeJon"
       },
       {
-        name:"Sara",
-        family:"Starck",
-        image:"../../../../assets/profile.jpeg",
+        name:"سارا",
+        family:"استارک",
+        image:"../../../../assets/profile2.jpg",
         username:"sara_123"
       },
       {
-        name:"Kate",
-        family:"Lingard",
-        image:"../../../../assets/profile3.jpg",
+        name:"کتی",
+        family:"لینگارد",
+        image:"../../../../assets/profile2.jpg",
         username:"hello1010"
       },
       {
-        name:"Jon",
-        family:"Doe",
+        name:"جان",
+        family:"دو",
         image:"../../../../assets/profile2.jpg",
         username:"JonDoeJon"
       },
       {
-        name:"Sara",
-        family:"Starck",
-        image:"../../../../assets/profile.jpeg",
+        name:"سارا",
+        family:"استارک",
+        image:"../../../../assets/profile2.jpg",
         username:"sara_123"
       },
       {
-        name:"Kate",
-        family:"Lingard",
-        image:"../../../../assets/profile3.jpg",
+        name:"کتی",
+        family:"لینگارد",
+        image:"../../../../assets/profile2.jpg",
         username:"hello1010"
       },
       {
-        name:"Jon",
-        family:"Doe",
+        name:"جان",
+        family:"دو",
         image:"../../../../assets/profile2.jpg",
         username:"JonDoeJon"
       },
