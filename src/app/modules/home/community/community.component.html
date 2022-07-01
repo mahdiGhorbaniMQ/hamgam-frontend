@@ -3,56 +3,18 @@
         <span><b>Community</b></span>
         <mat-icon mat-ripple (click)="reload(icon._elementRef)" #icon>replay</mat-icon>
     </div>
+    
     <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                Spring
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                Angular
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                React JS
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Node JS
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Linux
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Java
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-        </mat-expansion-panel>
+      <mat-expansion-panel *ngFor="let skill of skills">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              {{skill.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-user-suggestion *ngFor="let user of skill.users" [user]="user"></app-user-suggestion>
+      </mat-expansion-panel>
     </mat-accordion>
+
     <div class="footer">
         <button mat-button routerLink="/community"> SEE MORE </button>
     </div>

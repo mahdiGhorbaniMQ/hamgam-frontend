@@ -1,4 +1,9 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { SkillModel } from 'src/app/core/models/skill-model';
+import { UserModel } from 'src/app/core/models/user-model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { SkillService } from 'src/app/core/services/skill.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-community',
@@ -7,73 +12,16 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 })
 export class CommunityComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth:AuthService
+  ) { }
 
-  users!:{
-    name:string,
-    family:string,
-    image:string,
-    username:string
-  }[]
+  skills!:SkillModel[]
 
   ngOnInit(): void {
-    this.users = [
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-    ]
+    this.skills = this.auth.userInfo.skills    
   }
+
   reload(el:ElementRef){
     el.nativeElement.classList.add("rotate")
     setTimeout(() => {

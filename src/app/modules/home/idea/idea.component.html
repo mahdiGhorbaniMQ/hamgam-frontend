@@ -1,32 +1,22 @@
 <!-- <img *ngIf="screen.innerWidth>550" class="profile-image" [src]="tweet.profileImage" alt="profile"> -->
 <div class="container">
     <div class="name">
-        <span>{{idea.time.hours}}:{{idea.time.minutes}}</span>
-        <span *ngIf="screen.innerWidth>550" class="username">@{{idea.username}}</span>
-        <span class="info">{{idea.name}} {{idea.family}}</span>
+        <span>{{idea.date.getHours()}}:{{idea.date.getMinutes()}}</span>
+        <span *ngIf="screen.innerWidth>550" class="username">{{idea.creator.email}}</span>
+        <span class="info">{{idea.creator.name}}</span>
     </div>
-    <div mat-ripple (click)="showIdea()" [ngClass]="{'rtl':idea.dir=='rtl'}" [dir]="idea.dir || 'ltr'" class="content">
+    <div mat-ripple (click)="showIdea()" class="rtl content" dir="ltr">
         <span>{{idea.content}}</span>
     </div>
-    <div class="images" *ngIf="idea.images!=null">
-        <img *ngFor="let image of idea.images" [src]="image" alt="image">
-    </div>
-    <div class="numbers">
+    <div class="numbers" dir="rtl">
         <div>
-            <span>{{idea.comments}}</span>
+            <span>{{idea.requests.length}}</span>
             <mat-icon matRipple>chat_bubble_outline</mat-icon>
         </div>
         <div>
-            <span>{{idea.reTweets}}</span>
-            <mat-icon matRipple>autorenew</mat-icon>
-        </div>
-        <div>
-            <mat-icon (click)="isLiked = false" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
-            <mat-icon (click)="isLiked = true" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
-            <span>{{idea.likes + (isLiked?1:0)}}</span>
-        </div>
-        <div>
-            <mat-icon matRipple style="transform: rotateY(180deg);">reply</mat-icon>
+            <span>{{idea.likes.length}}</span>
+            <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
+            <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
         </div>
     </div>
 </div>

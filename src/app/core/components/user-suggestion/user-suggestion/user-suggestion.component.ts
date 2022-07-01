@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserModel } from 'src/app/core/models/user-model';
 
 @Component({
   selector: 'app-user-suggestion',
@@ -7,12 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UserSuggestionComponent implements OnInit {
 
-  @Input("user") user!:{
-    name:string,
-    family:string,
-    image:string,
-    username:string
-  }
+  @Input("user") user!:UserModel
   constructor() { }
 
   ngOnInit(): void {

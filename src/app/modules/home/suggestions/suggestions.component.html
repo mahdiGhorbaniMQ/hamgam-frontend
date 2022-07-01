@@ -3,9 +3,9 @@
         <span><b>You should see</b></span>
         <mat-icon mat-ripple (click)="reload(icon._elementRef)" #icon>replay</mat-icon>
     </div>
-    <div class="idea" *ngFor="let idea of ideas">
-        <div class="name">{{idea.username}}</div>
-        <div class="time">{{idea.time.hours}}:{{idea.time.minutes}}</div>
+    <div class="idea" *ngFor="let idea of ideas" dir="rtl">
+        <div class="name">{{idea.title}}</div>
+        <div class="time">{{idea.date.getHours()}}:{{idea.date.getMinutes()}}</div>
     </div>
     <!-- <app-follow-suggestion *ngFor="let user of users" [user]="user"></app-follow-suggestion> -->
 </div>

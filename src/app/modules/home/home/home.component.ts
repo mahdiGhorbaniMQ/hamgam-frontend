@@ -1,6 +1,9 @@
 import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
+import { IdeaModel } from 'src/app/core/models/idea-model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { IdeaService } from 'src/app/core/services/idea.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
 
 @Component({
@@ -10,156 +13,20 @@ import { ScreenService } from 'src/app/core/services/screen.service';
 })
 export class HomeComponent implements OnInit {
 
-  ideas!: {
-    name:string
-    family:string
-    username:string
-    profileImage:string
-    images?:string[]
-    time:Time
-    content:string
-    likes:number
-    comments:number
-    reTweets:number
-    dir?:"rtl"|"ltr"
-  }[]
-
+  ideas!:IdeaModel[]
   scroll=0
   selected="ideas"
 
   constructor(
     private navInfo:NavInformationService,
-    public screen:ScreenService) {}
+    public screen:ScreenService,
+    private ideaService:IdeaService,
+    private auth:AuthService
+  ) {}
 
   ngOnInit(): void {
     this.navInfo.select(0)
-    this.navInfo.informations.map(item=>{
-      if(item.title == "Home") item.isSelected = true
-      else { item.isSelected = false}
-    })
-
-    this.ideas = [
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-      {
-        name:"مهدی",
-        family:"قربانی",
-        username:"MahdiGhorbaniMQ",
-        profileImage:"../../../../assets/profile.jpg",
-        time:{minutes:40,hours:17},
-        content:"سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!! سلام به همگی این اولین ایده‌ی من هستش!!",
-        likes:150,
-        comments:80,
-        reTweets:24,
-        dir:"rtl"
-      },
-    ]
+    this.ideas = this.ideaService.allIdeas
   }
 
   onscroll(e:any,scrollTop:number){
@@ -168,11 +35,12 @@ export class HomeComponent implements OnInit {
 
   selectTab(tab:string){
     this.selected = tab
-    let tmp = [...this.ideas]
-    this.ideas = []
-    setTimeout(() => {
-      this.ideas = [...tmp]
-    }, 600);
+    if (tab=="ideas")
+      this.ideas = this.ideaService.allIdeas
+    else if(tab=="your_requests")
+      this.ideas = this.ideaService.allIdeas.filter(idea=>idea.requests.map(req=>req.user).includes(this.auth.userInfo))
+    else if(tab=="your_ideas")
+      this.ideas = this.ideaService.allIdeas.filter(idea=>idea.creator == this.auth.userInfo)
   }
 
 }

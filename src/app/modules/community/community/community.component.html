@@ -2,201 +2,25 @@
     <mat-tab-group [color]="'accent'">
         <mat-tab label="All skills">
             <mat-accordion>
-                <mat-expansion-panel>
+                <mat-expansion-panel *ngFor="let skill of allSkills">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Spring
+                            {{skill.name}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Angular
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            React JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Node JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Linux
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Java
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Spring
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Angular
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            React JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Node JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Linux
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Java
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Spring
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Angular
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            React JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Node JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Linux
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Java
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+                    <app-user-suggestion *ngFor="let user of skill.users" [user]="user"></app-user-suggestion>
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-tab>
         <mat-tab label="Your skills">
             <mat-accordion>
-                <mat-expansion-panel>
+                <mat-expansion-panel *ngFor="let skill of yourSkills">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Spring
+                            {{skill.name}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Angular
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            React JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Node JS
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Linux
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Java
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+                    <app-user-suggestion *ngFor="let user of skill.users" [user]="user"></app-user-suggestion>
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-tab>
@@ -208,11 +32,7 @@
                             <app-user-suggestion [user]="user"></app-user-suggestion>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <p mat-ripple>Angular</p>
-                    <p mat-ripple>Spring</p>
-                    <p mat-ripple>Node js</p>
-                    <p mat-ripple>Java</p>
-                    <p mat-ripple>React</p>
+                    <p *ngFor="let skill of user.skills" mat-ripple>{{skill.name}}</p>
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-tab>

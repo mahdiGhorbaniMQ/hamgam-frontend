@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
+import { IdeaModel } from 'src/app/core/models/idea-model';
+import { UserModel } from 'src/app/core/models/user-model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { IdeaService } from 'src/app/core/services/idea.service';
 
 @Component({
   selector: 'app-idea',
@@ -8,86 +13,37 @@ import { NavInformationService } from 'src/app/core/components/nav-bar/nav-infor
 })
 export class IdeaComponent implements OnInit {
 
-  constructor(private navInfo:NavInformationService) { }
-  users!:{
-    name:string,
-    family:string,
-    image:string,
-    username:string
-  }[]
+  constructor(
+    private navInfo:NavInformationService,
+    private auth:AuthService,
+    private ideaService:IdeaService,
+    private route:ActivatedRoute
+  ) { }
+
+  idea!:IdeaModel
   isLiked!:boolean
+  id!:string
+  userInfo!:UserModel
+  
   ngOnInit(): void {
     this.navInfo.select(0)
-    this.users = [
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-    ]
+    this.userInfo = this.auth.userInfo
+    this.id = this.route.snapshot.paramMap.get("id")!
+    this.idea = this.ideaService.getById(this.id)
+    this.isLiked = this.idea.likes.includes(this.userInfo)
   }
-  longText = `این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  ین یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است
-  این یک متن طولانی است این یک متن طولانی است`;
 
+  like(){
+    let index = this.idea.likes.indexOf(this.userInfo)
+    if(index>-1){
+      this.idea.likes = [...this.idea.likes.slice(0,index),...this.idea.likes.slice((index+1),(this.idea.likes.length-index))]
+      this.isLiked = false
+    }
+    else{
+      this.idea.likes.push(this.userInfo)
+      this.isLiked = true
+    }
+    
+    this.ideaService.update(this.idea)
+  }
 }

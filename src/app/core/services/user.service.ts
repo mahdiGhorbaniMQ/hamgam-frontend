@@ -16,7 +16,7 @@ export class UserService {
 
   getUsersBySkill(skill:string):UserModel[]{
     return this.allUsers.filter(user=>{
-      user.skills.map(skill=>skill.name).includes(skill)
+      return user.skills.map(skill=>skill.name).includes(skill)
     })
   }
 

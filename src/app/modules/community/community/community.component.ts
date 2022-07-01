@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
+import { SkillModel } from 'src/app/core/models/skill-model';
+import { UserModel } from 'src/app/core/models/user-model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { SkillService } from 'src/app/core/services/skill.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-community',
@@ -8,72 +13,23 @@ import { NavInformationService } from 'src/app/core/components/nav-bar/nav-infor
 })
 export class CommunityComponent implements OnInit {
 
-  constructor(private navInfo:NavInformationService) { }
+  constructor(
+    private navInfo:NavInformationService,
+    private userService:UserService,
+    private skillsService:SkillService,
+    private auth:AuthService
+  ) { }
 
-  users!:{
-    name:string,
-    family:string,
-    image:string,
-    username:string
-  }[]
+  userInfo!:UserModel
+  users!:UserModel[]
+  allSkills!:SkillModel[]
+  yourSkills!:SkillModel[]
 
   ngOnInit(): void {
+    this.userInfo = this.auth.userInfo
+    this.users = this.userService.allUsers
+    this.allSkills = this.skillsService.allSkills
+    this.yourSkills = this.skillsService.allSkills.filter(skill=>skill.users.includes(this.userInfo))
     this.navInfo.select(1)
-    this.users = [
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-      {
-        name:"سارا",
-        family:"استارک",
-        image:"../../../../assets/profile2.jpg",
-        username:"sara_123"
-      },
-      {
-        name:"کتی",
-        family:"لینگارد",
-        image:"../../../../assets/profile2.jpg",
-        username:"hello1010"
-      },
-      {
-        name:"جان",
-        family:"دو",
-        image:"../../../../assets/profile2.jpg",
-        username:"JonDoeJon"
-      },
-    ]
   }
 }

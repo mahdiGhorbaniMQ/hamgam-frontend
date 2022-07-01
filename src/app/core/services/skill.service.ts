@@ -17,7 +17,7 @@ export class SkillService {
   getByName(name:string):SkillModel{
     return this.allSkills.filter(skill=>skill.name==name)[0]
   }
-  getByNames(names:string[]):SkillModel[]{
+  getByNames(names:string[]):SkillModel[]{    
     return this.allSkills.filter(skill=>names.includes(skill.name))
   }
   getById(id:string):SkillModel{
@@ -42,7 +42,7 @@ export class SkillService {
   }
   delete(skill:SkillModel){
     let index = this.allSkills.indexOf(this.getById(skill.id!))
-    this.allSkills = [...this.allSkills.slice(0,index),...this.allSkills.slice((index+1),(length-index-1))]
+    this.allSkills = [...this.allSkills.slice(0,index),...this.allSkills.slice((index+1),(this.allSkills.length-index))]
   }
 
 

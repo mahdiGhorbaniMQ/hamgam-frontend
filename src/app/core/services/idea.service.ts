@@ -30,6 +30,6 @@ export class IdeaService {
   }
   delete(idea:IdeaModel){
     let index = this.allIdeas.indexOf(this.getById(idea.id!))
-    this.allIdeas = [...this.allIdeas.slice(0,index),...this.allIdeas.slice((index+1),(length-index-1))]
+    this.allIdeas = [...this.allIdeas.slice(0,index),...this.allIdeas.slice((index+1),(this.allIdeas.length-index))]
   }
 }

@@ -1,19 +1,19 @@
 <div class="container">    
     <mat-card dir="rtl">
-        <mat-card-title>این اولین ایده من هستش</mat-card-title>
-        <mat-card-subtitle>مهدی قربانی</mat-card-subtitle>
+        <mat-card-title>{{idea.title}}</mat-card-title>
+        <mat-card-subtitle>{{idea.creator.name}}</mat-card-subtitle>
         <mat-card-content>
-          <p>{{longText}}</p>
+          <p>{{idea.content}}</p>
         </mat-card-content>
         <mat-card-actions>
             <div>
-                <mat-icon (click)="isLiked = false" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
-                <mat-icon (click)="isLiked = true" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
-                <span>{{253 + (isLiked?1:0)}}</span>
+                <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
+                <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
+                <span>{{idea.likes.length}}</span>
             </div>
             <div>
                 <mat-icon matRipple>chat_bubble_outline</mat-icon>
-                <span>{{29}}</span>
+                <span>{{idea.requests.length}}</span>
             </div>
         </mat-card-actions>
     </mat-card>
@@ -21,26 +21,22 @@
     <mat-tab-group [color]="'warn'" [backgroundColor]="'primary'">
         <mat-tab label="Subscribers">
             <div class="subscribers">
-                <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+                <app-user-suggestion *ngFor="let user of idea.subscribers" [user]="user"></app-user-suggestion>
             </div>
         </mat-tab>
         <mat-tab label="Necessary skills">
             <div class="skills">
-                <p mat-ripple>Spring</p>
-                <p mat-ripple>Java</p>
-                <p mat-ripple>React</p>
-                <p mat-ripple>Linux</p>
-                <p mat-ripple>Js</p>
+                <p mat-ripple *ngFor="let skill of idea.skills">{{skill.name}}</p>
             </div>
         </mat-tab>
         <mat-tab label="likes">
             <div class="likes">
-                <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+                <app-user-suggestion *ngFor="let user of idea.likes" [user]="user"></app-user-suggestion>
             </div>
         </mat-tab>
         <mat-tab label="requests">
             <div class="requests">
-                <app-user-suggestion *ngFor="let user of users" [user]="user"></app-user-suggestion>
+                <app-user-suggestion *ngFor="let request of idea.requests" [user]="request.user"></app-user-suggestion>
             </div>
         </mat-tab>
     </mat-tab-group>

@@ -2,6 +2,10 @@ import { Time } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { IdeaModel } from 'src/app/core/models/idea-model';
+import { UserModel } from 'src/app/core/models/user-model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { IdeaService } from 'src/app/core/services/idea.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
 
 @Component({
@@ -13,31 +17,39 @@ export class IdeaComponent implements OnInit {
 
   isLiked!:boolean
 
-  @Input("idea") idea!:{
-    name:string
-    family:string
-    username:string
-    profileImage:string
-    images?:string[]
-    time:Time
-    content:string
-    likes:number
-    comments:number
-    reTweets:number
-    dir?:"rtl"|"ltr"
-  }
+  @Input("idea") idea!:IdeaModel
+  
+  userInfo!:UserModel
+
 
   constructor(
     public screen:ScreenService,
+    private ideaService:IdeaService,
+    private auth:AuthService,
     private router:Router) { }
 
   ngOnInit(): void {
+    this.userInfo = this.auth.userInfo
+    this.isLiked = this.idea.likes.includes(this.userInfo)    
   }
 
   showIdea(){
     setTimeout(() => {
-      this.router.navigate(["/idea",this.idea.username])      
+      this.router.navigate(["/idea",this.idea.id])      
     }, 250);
   }
   
+  like(){
+    let index = this.idea.likes.indexOf(this.userInfo)
+    if(index>-1){
+      this.idea.likes = [...this.idea.likes.slice(0,index),...this.idea.likes.slice((index+1),(this.idea.likes.length-index))]
+      this.isLiked = false
+    }
+    else{
+      this.idea.likes.push(this.userInfo)
+      this.isLiked = true
+    }
+    
+    this.ideaService.update(this.idea)
+  }
 }
