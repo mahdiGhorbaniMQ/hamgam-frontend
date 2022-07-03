@@ -3,7 +3,8 @@ form, mat-form-field{
     width: 100%;
     text-align: right;
     line-height: 25px;
-}
-.chips{
-    text-align: left !important;
+    button{
+        margin: 3px;
+        background-color: rgb(119, 167, 168);
+    }
 }

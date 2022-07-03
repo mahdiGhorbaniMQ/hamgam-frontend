@@ -1,16 +1,16 @@
 <div class="container">
-    <form [formGroup]="formGroup">
-        <h1>Login</h1>
+    <form dir="rtl" [formGroup]="formGroup">
+        <h1>ورود</h1>
         <div>
             <mat-form-field appearance="outline">
-                <mat-label>Enter your email</mat-label>
+                <mat-label>ایمیل خود را وارد کنید</mat-label>
                 <input matInput placeholder="example@example.com" [formControl]="email" required>
                 <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="outline">
-                <mat-label>Enter your password</mat-label>
+                <mat-label>رمز عبور خود را وارد کنید</mat-label>
                 <input required matInput [formControl]="password" [type]="hidePass ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
                   <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -19,10 +19,10 @@
               </mat-form-field>
         </div>
         <div class="acts">
-          <button mat-button (click)="login()">Login</button>
-          <button mat-button routerLink="/register">Have not account?</button>
+          <button mat-button (click)="login()">ورود</button>
+          <button mat-button routerLink="/register" class="link">ساختن اکانت</button>
         </div>
         <br>
-        <button mat-button routerLink="" >forgot your password?</button>
+        <button mat-button routerLink="" >رمز عبور خود را فراموش کرده اید؟</button>
     </form>
 </div>

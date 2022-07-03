@@ -1,27 +1,30 @@
-<mat-stepper>
-    <mat-step [stepControl]="nameFormGroup" label="Name">
-        <form [formGroup]="nameFormGroup">
-            <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  placeholder="Skill name"
-                  formControlName="name">
+<div dir="rtl">
+    <h2>افزودن مهارت </h2>
+    <mat-stepper>
+        <mat-step [stepControl]="nameFormGroup" label="نام">
+            <form [formGroup]="nameFormGroup">
+                <mat-form-field appearance="outline">
+                    <mat-label>نام مهارت</mat-label>
+                    <input
+                    matInput
+                    placeholder="نام مهارت"
+                    formControlName="name">
 
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext>next</button>
+                </mat-form-field>
+                <div>
+                <button mat-button matStepperNext>بعدی</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step label="دسته‌بندی">
+            <div class="categories">
+                <div *ngFor="let category of categories" (click)="selectCategory(category)"
+                    [ngClass]="{'selected':selectedCategories.has(category)}">{{category.name}}</div>
             </div>
-        </form>
-    </mat-step>
-    <mat-step label="Category">
-        <div class="categories">
-            <div *ngFor="let category of categories" (click)="selectCategory(category)"
-                [ngClass]="{'selected':selectedCategories.has(category)}">{{category.name}}</div>
-        </div>
-        <div>
-            <button mat-button matStepperPrevious>previous</button>
-            <button mat-button matStepperNext>add</button>
-        </div>
-    </mat-step>
-</mat-stepper>
+            <div>
+                <button mat-button matStepperPrevious>قبلی</button>
+                <button mat-button matStepperNext>افزودن</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

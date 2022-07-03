@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup">
     <mat-form-field class="chips" appearance="outline">
-      <mat-label>Subescriber</mat-label>
+      <mat-label>افراد فعال</mat-label>
       <mat-chip-list #userList aria-label="User selection">
         <mat-chip
           *ngFor="let user of selectedUsers"
@@ -11,7 +11,7 @@
           </button>
         </mat-chip>
         <input
-          placeholder="New Subescriber..."
+          placeholder="عضو جدید..."
           #userInput
           [formControl]="userCtrl"
           [matAutocomplete]="auto"
@@ -26,7 +26,7 @@
       </mat-autocomplete>
     </mat-form-field>
     <div>
-      <button mat-button (click)="submit()">ثبت</button>
       <button mat-button matStepperPrevious>قبلی</button>
+      <button mat-button (click)="submit()">ثبت ایده</button>
     </div>
 </form>

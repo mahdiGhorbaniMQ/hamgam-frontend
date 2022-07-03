@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup">
     <mat-form-field class="chips" appearance="outline">
-      <mat-label>Skills</mat-label>
+      <mat-label>مهارت‌ها</mat-label>
       <mat-chip-list #chipList aria-label="Skill selection">
         <mat-chip
           *ngFor="let skill of selectedSkills"
@@ -11,7 +11,7 @@
           </button>
         </mat-chip>
         <input
-          placeholder="New skill..."
+          placeholder="مهارت جدید..."
           #skillInput
           [formControl]="skillCtrl"
           [matAutocomplete]="auto"
@@ -21,13 +21,13 @@
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
-          {{skill.name}} ({{skill.users.length}} person)
+          {{skill.name}} ({{skill.users.length}} نفر)
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <div>
-      <button mat-button class="left" (click)="openDialog()">Add Skill</button>
-      <button mat-button matStepperNext>بعدی</button>
+      <button mat-button class="left" (click)="openDialog()">مهارت یافت نشد؟</button>
       <button mat-button matStepperPrevious>قبلی</button>
+      <button mat-button matStepperNext>بعدی</button>
     </div>
   </form>

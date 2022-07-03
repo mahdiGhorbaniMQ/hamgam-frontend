@@ -29,14 +29,14 @@ export class LoginComponent implements OnInit {
 
   getEmailError() {
     if (this.email.hasError('required')) {
-      return 'You must enter an email';
+      return 'فیلد ایمیل ضروری است';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.email.hasError('email') ? 'ایمیل معتبر نیست' : '';
   }
   getPassError() {
     if (this.email.hasError('required')) {
-      return 'You must enter a password';
+      return 'فیلد رمز عبور ضروری است';
     }
     return '';
   }

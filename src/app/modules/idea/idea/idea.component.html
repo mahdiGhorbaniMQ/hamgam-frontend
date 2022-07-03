@@ -1,7 +1,11 @@
 <div class="container">    
     <mat-card dir="rtl">
-        <mat-card-title>{{idea.title}}</mat-card-title>
-        <mat-card-subtitle>{{idea.creator.name}}</mat-card-subtitle>
+        <mat-card-title>
+            {{idea.title}}
+        </mat-card-title>
+        <mat-card-subtitle [routerLink]="'/profile/'+idea.creator.email">
+            {{idea.creator.name}}
+        </mat-card-subtitle>
         <mat-card-content>
           <p>{{idea.content}}</p>
         </mat-card-content>
@@ -19,12 +23,12 @@
     </mat-card>
     <br>
     <mat-tab-group [color]="'warn'" [backgroundColor]="'primary'">
-        <mat-tab label="Subscribers">
+        <mat-tab label="افراد فعال">
             <div class="subscribers">
                 <app-user-suggestion *ngFor="let user of idea.subscribers" [user]="user"></app-user-suggestion>
             </div>
         </mat-tab>
-        <mat-tab label="Necessary skills">
+        <mat-tab label="مهارت های لازم">
             <div class="skills">
                 <p mat-ripple *ngFor="let skill of idea.skills">{{skill.name}}</p>
             </div>
@@ -34,7 +38,7 @@
                 <app-user-suggestion *ngFor="let user of idea.likes" [user]="user"></app-user-suggestion>
             </div>
         </mat-tab>
-        <mat-tab label="requests">
+        <mat-tab label="درخواست ها">
             <div class="requests">
                 <app-user-suggestion *ngFor="let request of idea.requests" [user]="request.user"></app-user-suggestion>
             </div>

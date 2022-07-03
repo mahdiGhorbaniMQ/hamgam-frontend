@@ -189,6 +189,31 @@ export class InformationService {
         name:"Devops",
         skills:[]
       },
+      {
+        id:"4",
+        name:"Android",
+        skills:[]
+      },
+      {
+        id:"5",
+        name:"Desktop",
+        skills:[]
+      },
+      {
+        id:"6",
+        name:"network",
+        skills:[]
+      },
+      {
+        id:"7",
+        name:"hardware",
+        skills:[]
+      },
+      {
+        id:"8",
+        name:"other",
+        skills:[]
+      },
     ]
 
 

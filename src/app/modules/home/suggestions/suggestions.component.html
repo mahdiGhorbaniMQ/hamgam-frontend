@@ -4,8 +4,7 @@
         <mat-icon mat-ripple (click)="reload(icon._elementRef)" #icon>replay</mat-icon>
     </div>
     <div class="idea" *ngFor="let idea of ideas" dir="rtl">
-        <div class="name">{{idea.title}}</div>
+        <div class="name" [routerLink]="'/idea/'+idea.id">{{idea.title}}</div>
         <div class="time">{{idea.date.getHours()}}:{{idea.date.getMinutes()}}</div>
     </div>
-    <!-- <app-follow-suggestion *ngFor="let user of users" [user]="user"></app-follow-suggestion> -->
 </div>

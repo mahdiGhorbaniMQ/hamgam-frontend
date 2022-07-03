@@ -1,25 +1,25 @@
 <div class="container">
-    <form [formGroup]="formGroup">
-        <h1>Register</h1>
+    <form dir="rtl" [formGroup]="formGroup">
+        <h1>ثبت نام</h1>
         <mat-stepper>
-            <mat-step label="Info">
+            <mat-step label="اطلاعات">
                 <div>
                     <mat-form-field appearance="outline">
-                        <mat-label>Enter your name</mat-label>
-                        <input matInput placeholder="Jon Doe" [formControl]="name" required>
-                        <mat-error *ngIf="name.invalid">{{getEmailError()}}</mat-error>
+                        <mat-label>نام کامل خود را وارد کنید</mat-label>
+                        <input matInput [formControl]="name" required>
+                        <mat-error *ngIf="name.invalid">{{getNameError()}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter your email</mat-label>
+                    <mat-form-field  appearance="outline">
+                        <mat-label>ایمیل خود را وارد کنید</mat-label>
                         <input matInput placeholder="example@example.com" [formControl]="email" required>
                         <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field appearance="outline">
-                        <mat-label>Enter a password</mat-label>
+                        <mat-label>یک رمز عبور انتخاب نمایید</mat-label>
                         <input required matInput [formControl]="password" [type]="hidePass ? 'password' : 'text'">
                         <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
                           <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -28,36 +28,25 @@
                       </mat-form-field>
                 </div>
                 <div class="acts">
-                  <button mat-button routerLink="/login">Already have an account?</button>
-                  <button mat-button matStepperNext>Next</button>
+                    <button mat-button matStepperNext>بعدی</button>
                 </div>
             </mat-step>
-            <mat-step label="About">
+            <mat-step [formControl]="bio" label="درباره">
                 <div>
                     <mat-form-field appearance="outline">
-                        <mat-label>Enter your name</mat-label>
-                        <input matInput placeholder="Jon Doe" [formControl]="name" required>
-                        <mat-error *ngIf="name.invalid">{{getEmailError()}}</mat-error>
+                        <mat-label>درباره خود بنویسید</mat-label>
+                        <textarea placeholder="راه های ارتباطی و ..." matInput [formControl]="bio" rows="8"></textarea>
                     </mat-form-field>
                 </div>
-                <br>
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter your name</mat-label>
-                        <input matInput placeholder="Jon Doe" [formControl]="name" required>
-                        <mat-error *ngIf="name.invalid">{{getEmailError()}}</mat-error>
-                    </mat-form-field>
-                </div>
-                <br>
                 <div class="acts">
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button matStepperPrevious>قبلی</button>
+                    <button mat-button matStepperNext>بعدی</button>
                 </div>
             </mat-step>
-            <mat-step label="Skills">
+            <mat-step label="مهارت‌ها">
                 <mat-form-field class="chips" appearance="outline">
-                    <mat-label>Skills</mat-label>
-                    <mat-chip-list #chipList aria-label="Skill selection">
+                    <mat-label>مهارت‌های خود را وارد کنید</mat-label>
+                    <mat-chip-list #chipList aria-label="انتخاب مهارت‌ها">
                       <mat-chip
                         *ngFor="let skill of selectedSkills"
                         (removed)="removeSkill(skill)">
@@ -67,7 +56,7 @@
                         </button>
                       </mat-chip>
                       <input
-                        placeholder="New skill..."
+                        placeholder="مهارت جدید..."
                         #skillInput
                         [formControl]="skillCtrl"
                         [matAutocomplete]="auto"
@@ -77,19 +66,19 @@
                     </mat-chip-list>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                       <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
-                        {{skill.name}} ({{skill.users.length}} person)
+                        {{skill.name}} ({{skill.users.length}} نفر)
                       </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <br>
                 <div class="acts">
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="register()">Signup</button>
-                    <button mat-button class="right" (click)="openDialog()">Add more skill</button>
+                    <button mat-button matStepperPrevious>قبلی</button>
+                    <button mat-button (click)="register()">ثبت نام</button>
+                    <button mat-button (click)="openDialog()" class="left">
+                        مهارت یافت نشد؟
+                    </button>
                 </div>
             </mat-step>
         </mat-stepper>
+        <button class="link" mat-button routerLink="/login">از قبل ثبت نام کرده اید؟</button>
     </form>
-
-    <!-- (click)="register()" -->
 </div>

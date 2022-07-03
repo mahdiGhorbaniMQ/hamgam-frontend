@@ -14,7 +14,6 @@ import { ScreenService } from 'src/app/core/services/screen.service';
 export class HomeComponent implements OnInit {
 
   ideas!:IdeaModel[]
-  scroll=0
   selected="ideas"
 
   constructor(
@@ -27,10 +26,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.navInfo.select(0)
     this.ideas = this.ideaService.allIdeas
-  }
-
-  onscroll(e:any,scrollTop:number){
-    this.scroll = scrollTop
   }
 
   selectTab(tab:string){

@@ -21,14 +21,12 @@ export class RegisterComponent implements OnInit {
 
   name = new FormControl('', [Validators.required]);
   bio = new FormControl('', []);
-  connctions = new FormControl('', []);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required])
   hidePass = true;
   formGroup = this._formBuilder.group({
     name: this.name,
     bio: this.bio,
-    connctions: this.connctions,
     email: this.email,
     password: this.password
   });
@@ -56,16 +54,24 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  getEmailError() {
+  getNameError(){
     if (this.email.hasError('required')) {
-      return 'You must enter an email';
+      return 'فیلد نام ضروری است';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return '';
+  }
+
+  getEmailError() {
+    if (this.email.hasError('required')) {
+      return 'فیلد ایمیل ضروری است';
+    }
+
+    return this.email.hasError('email') ? 'ایمیل معتبر نیست' : '';
   }
   getPassError() {
     if (this.email.hasError('required')) {
-      return 'You must enter a password';
+      return 'فیلد رمز عبور ضروری است';
     }
     return '';
   }
