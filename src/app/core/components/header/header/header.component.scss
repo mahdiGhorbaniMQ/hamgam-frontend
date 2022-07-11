@@ -22,10 +22,16 @@
     max-width: 400px;
 }
 
+.home{
+    position: absolute;
+    right: 10px;
+    background-color: rgb(119, 167, 168);
+    color: white;
+}
 .info{
     padding: 7px; border-radius: 5px;
     position: absolute;
-    right: 50px;
+    right: 65px;
     display: flex;
     justify-content: center;
     align-items: center;

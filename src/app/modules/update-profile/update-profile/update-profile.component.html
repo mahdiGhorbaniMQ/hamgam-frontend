@@ -44,8 +44,8 @@
                         <div class="img-container">
                             <img [src]="myfilesrc" class="img">
                         </div>
-                        <mat-toolbar style="height: 20px;">
-                            <input matInput readonly name="memberContactNo" />
+                        <mat-toolbar style="display: none;">
+                            <input matInput readonly name="memberContactNo"/>
                         </mat-toolbar>
                         <input type="file" #UploadFileInput id="fileUpload" name="fileUpload" (change)="fileChangeEvent($event)"
                             accept="image/*" />

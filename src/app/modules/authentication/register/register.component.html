@@ -44,8 +44,8 @@
                         <div class="img-container">
                             <img [src]="myfilesrc" class="img">
                         </div>
-                        <mat-toolbar style="height: 20px;">
-                            <input matInput readonly name="memberContactNo" />
+                        <mat-toolbar style="display: none;">
+                            <input matInput readonly name="memberContactNo"/>
                         </mat-toolbar>
                         <input type="file" #UploadFileInput id="fileUpload" name="fileUpload" (change)="fileChangeEvent($event)"
                             accept="image/*" />
@@ -98,6 +98,6 @@
                 </div>
             </mat-step>
         </mat-stepper>
-        <button class="link" mat-button routerLink="/login">از قبل ثبت نام کرده اید؟</button>
+        <!-- <button class="link" mat-button routerLink="/login">از قبل ثبت نام کرده اید؟</button> -->
     </form>
 </div>

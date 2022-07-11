@@ -19,6 +19,10 @@
       </mat-form-field>
 </div>
 
+<button routerLink="" class="home" mat-mini-fab>
+    <mat-icon>home</mat-icon>
+</button>
+
 <div mat-ripple class="info" routerLink="/profile" *ngIf="isAuthenticated">
     <span>{{auth.userInfo.name}}</span>
     <img [src]="auth.userInfo.img" alt="profile" height="35px" width="auto">
