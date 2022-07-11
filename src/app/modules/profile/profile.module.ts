@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    AngularMaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports:[
     ProfileComponent

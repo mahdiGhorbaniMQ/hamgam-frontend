@@ -1,4 +1,5 @@
 import { Time } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { IdeaModel } from 'src/app/core/models/idea-model';
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
     private navInfo:NavInformationService,
     public screen:ScreenService,
     private ideaService:IdeaService,
-    private auth:AuthService
+    private auth:AuthService,
   ) {}
 
   ngOnInit(): void {

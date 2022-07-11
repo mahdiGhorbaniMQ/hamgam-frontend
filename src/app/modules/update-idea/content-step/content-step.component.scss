@@ -1,0 +1,12 @@
+form, mat-form-field{
+    position: relative;
+    width: 100%;
+    text-align: right;
+    line-height: 25px;
+    button{
+        background-color: rgb(119, 167, 168);
+    }
+}
+.chips{
+    text-align: left !important;
+}

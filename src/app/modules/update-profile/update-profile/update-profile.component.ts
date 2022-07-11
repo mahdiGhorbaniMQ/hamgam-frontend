@@ -6,25 +6,26 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/add-skill-form/add-skill-form.component';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { SkillService } from 'src/app/core/services/skill.service';
 
+
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-update-profile',
+  templateUrl: './update-profile.component.html',
+  styleUrls: ['./update-profile.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class UpdateProfileComponent implements OnInit {
 
   firstName = new FormControl('', [Validators.required]);
   lastName = new FormControl('',[]);
-  image = new FormControl(null, []);
   bio = new FormControl('', []);
+  image = new FormControl('', []);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required])
   hidePass = true;
-
   formGroup = this._formBuilder.group({
     firstName: this.firstName,
     lastName: this.lastName,
@@ -33,8 +34,6 @@ export class RegisterComponent implements OnInit {
     email: this.email,
     password: this.password
   });
-
-
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillCtrl = new FormControl('');
@@ -53,9 +52,8 @@ export class RegisterComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.navInfo.select(4)
+    this.navInfo.select(2)
   }
-
 
   getNameError(){
     if (this.email.hasError('required')) {
@@ -88,7 +86,6 @@ export class RegisterComponent implements OnInit {
   
   register(){}
 
-
   add(event: MatChipInputEvent): void {
     const value = event.value;
     let skill = this.skillService.getByName(value)
@@ -116,13 +113,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // openDialog(): void {
-  //   import("src/app/core/components/add-skill-form/add-skill-form.module").then(m => m.AddSkillFormModule)
-  //   const dialogRef = this.dialog.open(AddSkillFormComponent, {
-  //     width: '350px',
-  //     height: '450px',
-  //   });
-  // }
+  openDialog(): void {
+    import("src/app/core/components/add-skill-form/add-skill-form.module").then(m => m.AddSkillFormModule)
+    const dialogRef = this.dialog.open(AddSkillFormComponent, {
+      width: '350px',
+      height: '450px',
+    });
+  }
 
   @ViewChild('UploadFileInput') uploadFileInput!: ElementRef;
   myfilename = 'Select File';

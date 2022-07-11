@@ -4,14 +4,14 @@
 
 <div class="search" *ngIf="screenWidth>700">
     <mat-form-field appearance="outline">
-        <mat-label>Search on skills</mat-label>
+        <mat-label>Search on users</mat-label>
         <input [formControl]="myControl"
                [matAutocomplete]="auto"
                matInput
                placeholder="Search">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="navigate($event)">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option}}
+                {{option.name}}
             </mat-option>
         </mat-autocomplete>
         <mat-icon matSuffix>search</mat-icon>
@@ -19,7 +19,7 @@
       </mat-form-field>
 </div>
 
-<div mat-ripple class="info" routerLink="/profile">
+<div mat-ripple class="info" routerLink="/profile" *ngIf="isAuthenticated">
     <span>{{auth.userInfo.name}}</span>
     <img [src]="auth.userInfo.img" alt="profile" height="35px" width="auto">
 </div>

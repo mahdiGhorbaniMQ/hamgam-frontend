@@ -1,6 +1,6 @@
 <div class="container">
     <form dir="rtl" [formGroup]="formGroup">
-        <h1>ثبت نام</h1>
+        <h1>ویرایش</h1>
         <mat-stepper>
             <mat-step label="اطلاعات">
                 <div>
@@ -40,7 +40,7 @@
             </mat-step>
             <mat-step [formControl]="bio" label="درباره">
                 <div>
-                    <mat-form-field>
+                    <mat-form-field >
                         <div class="img-container">
                             <img [src]="myfilesrc" class="img">
                         </div>
@@ -91,13 +91,12 @@
                 </mat-form-field>
                 <div class="acts">
                     <button mat-button matStepperPrevious>قبلی</button>
-                    <button mat-button (click)="register()">ثبت نام</button>
-                    <!-- <button mat-button (click)="openDialog()" class="left">
+                    <button mat-button (click)="register()">ثبت</button>
+                    <button mat-button (click)="openDialog()" class="left">
                         مهارت یافت نشد؟
-                    </button> -->
+                    </button>
                 </div>
             </mat-step>
         </mat-stepper>
-        <button class="link" mat-button routerLink="/login">از قبل ثبت نام کرده اید؟</button>
     </form>
 </div>

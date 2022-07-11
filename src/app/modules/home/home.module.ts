@@ -8,6 +8,7 @@ import { AngularMaterialModule } from 'src/app/core/share/angular-material/angul
 import { IdeaSuggestionComponent } from './idea-suggestion/idea-suggestion.component';
 import { RouterModule } from '@angular/router';
 import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/user-suggestion.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/us
     CommonModule,
     AngularMaterialModule,
     RouterModule,
-    UserSuggestionModule
+    UserSuggestionModule,
   ],
   exports:[
     HomeComponent,

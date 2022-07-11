@@ -1,5 +1,6 @@
 <div class="container">    
     <mat-card dir="rtl">
+        <button [routerLink]="'/idea/'+idea.id+'/update'" *ngIf="idea.creator == userInfo" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
         <mat-card-title>
             {{idea.title}}
         </mat-card-title>

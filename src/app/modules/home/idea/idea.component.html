@@ -5,8 +5,8 @@
         <span [routerLink]="'/profile/'+idea.creator.email" *ngIf="screen.innerWidth>550" class="username">{{idea.creator.email}}</span>
         <span [routerLink]="'/profile/'+idea.creator.email" class="info">{{idea.creator.name}}</span>
     </div>
-    <div (click)="showIdea()" class="rtl content" dir="ltr">
-        <span>{{idea.content}}</span>
+    <div (click)="showIdea()" class="rtl content" dir="rtl">
+        <span>{{idea.title}}</span>
     </div>
     <div class="numbers" dir="rtl">
         <div>

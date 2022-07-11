@@ -8,6 +8,9 @@ import { LoginComponent } from './modules/authentication/login/login.component';
 import { RegisterComponent } from './modules/authentication/register/register.component';
 import { CommunityComponent } from './modules/community/community/community.component';
 import { IdeaComponent } from './modules/idea/idea/idea.component';
+import { UpdateProfileComponent } from './modules/update-profile/update-profile/update-profile.component';
+import { UpdateIdeaComponent } from './modules/update-idea/update-idea/update-idea.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,10 +21,17 @@ const routes: Routes = [
   {
     path:"profile",
     component:ProfileComponent,
+    canActivate:[AuthGuard],
     loadChildren: ()=> import("src/app/modules/profile/profile.module").then(m => m.ProfileModule)
   },
   {
-    path:"profile/:username",
+    path:"profile/update",
+    component:UpdateProfileComponent,
+    canActivate:[AuthGuard],
+    loadChildren: ()=> import("src/app/modules/update-profile/update-profile.module").then(m => m.UpdateProfileModule)
+  },
+  {
+    path:"profile/:email",
     component:ProfileComponent,
     loadChildren: ()=> import("src/app/modules/profile/profile.module").then(m => m.ProfileModule)
   },
@@ -33,7 +43,14 @@ const routes: Routes = [
   {
     path:"idea",
     component:CreateIdeaComponent,
+    canActivate:[AuthGuard],
     loadChildren: ()=> import("src/app/modules/create-idea/create-idea.module").then(m => m.CreateIdeaModule)
+  },
+  {
+    path:"idea/:id/update",
+    component:UpdateIdeaComponent,
+    canActivate:[AuthGuard],
+    loadChildren: ()=> import("src/app/modules/update-idea/update-idea.module").then(m => m.UpdateIdeaModule)
   },
   {
     path:"idea/:id",

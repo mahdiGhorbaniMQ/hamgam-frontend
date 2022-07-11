@@ -1,31 +1,26 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { UserModel } from '../models/user-model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
-  search(value:string):Observable<string[]>{
-    let obs = new Subject<string[]>()
-    setTimeout(() => {
-      let res = [
-        "salam",
-        "khodafez",
-        "hellooooo",
-        "how are you",
-        "goodbye",
-        "we",
-        "you",
-        "me"
-      ]
-      obs.next(
-        res.filter(option => option.toLowerCase().includes(value.toLowerCase()))
-      )
-    }, 200);
+  search(value:string):Observable<UserModel[]>{
+    let obs = new BehaviorSubject<UserModel[]>([])
+    obs.next(
+      this.userService.allUsers.filter(user=>{
+        
+        let name = user.name.toLowerCase()
+        let email = user.email.toLowerCase()
+        return name.includes(value.toLowerCase()) || email.includes(value.toLowerCase())
+      })
+    )
     return obs.asObservable();
   }
 }
