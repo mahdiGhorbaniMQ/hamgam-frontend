@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-update-idea',
@@ -27,6 +28,7 @@ export class UpdateIdeaComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
+    public theme:ThemeService,
     private navInfo:NavInformationService
   ){ }
 

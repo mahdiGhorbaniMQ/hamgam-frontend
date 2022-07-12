@@ -2,9 +2,13 @@
     display: flex;
     justify-content: center; align-items: center;
     width: 100%; min-height: 100%;
+}
+.body{
+    display: flex;
+    justify-content: center; align-items: center;
+    width: 100%; min-height: 100%;
     background-color: rgb(223, 223, 223);
 }
-
 .container{
     padding-top: 50px;
     padding-bottom: 50px;
@@ -55,4 +59,33 @@
         margin: 15px;
         background-color: rgb(168, 119, 119);
     }
+}
+
+.body.dark{
+    background-color: rgb(112, 112, 112);
+    .container{
+        background-color: rgb(61, 61, 61);
+        color: #fff;
+        box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
+        mat-stepper, mat-step, mat-form-field, input,mat-label,mat-option{
+            background-color: rgb(61, 61, 61);
+            color: #fff;
+        }
+        .label{
+            color: #fff;
+        }
+        mat-chip{
+            background-color: rgb(95, 95, 95);
+            color: #fff;
+        }
+    }
+}
+
+mat-option.dark{
+    background-color: rgb(61, 61, 61);
+    color: #fff;
+}
+mat-option.dark:hover{
+    background-color: rgb(46, 46, 46);
+    color: #fff;
 }

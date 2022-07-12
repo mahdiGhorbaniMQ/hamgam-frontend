@@ -1,4 +1,4 @@
-<div [ngClass]="{'fullscreen':!screen.showMenu}">
+<div [ngClass]="{'fullscreen':!screen.showMenu,'dark':theme.dark}">
     <app-header></app-header>
     <app-nav-bar></app-nav-bar>
     <div class="body" (click)="selectBody()" [ngClass]="{'hideInfo':screen.innerWidth<=700}">

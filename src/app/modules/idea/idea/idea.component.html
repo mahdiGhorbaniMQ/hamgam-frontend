@@ -1,43 +1,30 @@
-<div class="container">    
-    <mat-card dir="rtl">
-        <button [routerLink]="'/idea/'+idea.id+'/update'" *ngIf="idea.creator == userInfo" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
-        <mat-card-title>
-            {{idea.title}}
-        </mat-card-title>
-        <mat-card-subtitle [routerLink]="'/profile/'+idea.creator.email">
-            {{idea.creator.name}}
-        </mat-card-subtitle>
-        <mat-card-content>
-          <p>{{idea.content}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-            <div>
-                <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
-                <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
-                <span>{{idea.likes.length}}</span>
+<div class="body" [ngClass]="{'dark':theme.dark}">
+    <div class="container">    
+        <div class="card" dir="rtl">
+            <button [routerLink]="'/idea/'+idea.id+'/update'" *ngIf="idea.creator == userInfo" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
+            <h4 class="name" [routerLink]="'/profile/'+idea.creator.email">
+                {{idea.creator.name}} {{idea.date.getHours()}}:{{idea.date.getMinutes()}}
+            </h4>
+            <h1>
+                {{idea.title}}
+            </h1>
+            <div class="content">
+              <p>{{idea.content}}</p>
             </div>
-            <div>
-                <mat-icon matRipple>chat_bubble_outline</mat-icon>
-                <span>{{idea.requests.length}}</span>
-            </div>
-        </mat-card-actions>
-    </mat-card>
-    <br>
-    <mat-tab-group [color]="'warn'" [backgroundColor]="'primary'">
-        <mat-tab label="افراد فعال">
-            <div class="subscribers">
-                <app-user-suggestion *ngFor="let user of idea.subscribers" [user]="user"></app-user-suggestion>
-            </div>
-        </mat-tab>
-        <mat-tab label="مهارت های لازم">
             <div class="skills">
-                <p mat-ripple *ngFor="let skill of idea.skills">{{skill.name}}</p>
+                <span *ngFor="let skill of idea.skills">{{skill.name}}</span>
             </div>
-        </mat-tab>
-        <mat-tab label="likes">
-            <div class="likes">
-                <app-user-suggestion *ngFor="let user of idea.likes" [user]="user"></app-user-suggestion>
+            <div class="actions">
+                <div>
+                    <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
+                    <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
+                    <span>{{idea.likes.length}}</span>
+                </div>
+                <div>
+                    <mat-icon matRipple>chat_bubble_outline</mat-icon>
+                    <span>{{idea.requests.length}}</span>
+                </div>
             </div>
-        </mat-tab>
-    </mat-tab-group>
+        </div>
+    </div>
 </div>

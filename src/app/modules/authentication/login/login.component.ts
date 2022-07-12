@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
+    public theme:ThemeService,
     private navInfo:NavInformationService) { }
 
   ngOnInit(): void {

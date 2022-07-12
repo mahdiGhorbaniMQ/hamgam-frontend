@@ -8,3 +8,22 @@ form, mat-form-field{
         background-color: rgb(119, 167, 168);
     }
 }
+form.dark{
+    mat-label,mat-option{
+        background-color: rgb(61, 61, 61);
+        color: #fff;
+    }
+    mat-chip{
+        background-color: rgb(95, 95, 95);
+        color: #fff;
+    }
+}
+
+mat-option.dark{
+    background-color: rgb(61, 61, 61);
+    color: #fff;
+}
+mat-option.dark:hover{
+    background-color: rgb(46, 46, 46);
+    color: #fff;
+}

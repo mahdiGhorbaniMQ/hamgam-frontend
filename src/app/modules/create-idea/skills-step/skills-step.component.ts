@@ -10,6 +10,7 @@ import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/ad
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { SkillService } from 'src/app/core/services/skill.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -29,7 +30,10 @@ export class SkillsStepComponent implements OnInit {
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor(private skillService:SkillService, private dialog: MatDialog) {
+  constructor(
+    public theme:ThemeService,
+    private skillService:SkillService,
+    private dialog: MatDialog) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skillName: string) => (skillName ? this._filter(skillName) : skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),

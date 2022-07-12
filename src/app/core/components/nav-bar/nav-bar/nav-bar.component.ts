@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { NavInformationService } from '../nav-information.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { NavInformationService } from '../nav-information.service';
 export class NavBarComponent implements OnInit {
 
 
-  constructor(public informations: NavInformationService) {
+  constructor(
+    public informations: NavInformationService,
+    public theme:ThemeService,
+  ) {
 
   }
   

@@ -42,3 +42,19 @@ app-header{
 .hideInfo{
     width: 100% !important;
 }
+
+.dark{
+    app-nav-bar{
+        box-shadow: 2px 7px 10px  rgb(92, 92, 92);
+        background-color: rgb(61, 61, 61);
+        color: #fff;
+    }
+    app-header{
+        background-color: rgb(61, 61, 61);
+        color: #fff;
+    }
+    .body{
+        background-color: rgb(112, 112, 112);
+        color: #fff;
+    }
+}

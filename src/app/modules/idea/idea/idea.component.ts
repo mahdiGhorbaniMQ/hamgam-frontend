@@ -5,6 +5,7 @@ import { IdeaModel } from 'src/app/core/models/idea-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-idea',
@@ -17,6 +18,7 @@ export class IdeaComponent implements OnInit {
     private navInfo:NavInformationService,
     private auth:AuthService,
     private ideaService:IdeaService,
+    public theme:ThemeService,
     private route:ActivatedRoute
   ) { }
 

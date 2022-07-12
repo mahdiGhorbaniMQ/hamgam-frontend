@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" [ngClass]="{'dark':theme.dark}">
     <mat-form-field class="chips" appearance="outline">
       <mat-label>افراد فعال</mat-label>
       <mat-chip-list #userList aria-label="User selection">
@@ -20,7 +20,7 @@
           (matChipInputTokenEnd)="addUser($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedUser($event)">
-        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+        <mat-option [ngClass]="{'dark':theme.dark}" *ngFor="let user of filteredUsers | async" [value]="user">
           {{user.name}}
         </mat-option>
       </mat-autocomplete>

@@ -3,9 +3,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.body{
+    width: 100%; min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(223, 223, 223);
 }
 .container{
+    position: relative;
     margin-top: 50px;
     margin-bottom: 50px;
     width: 85%;
@@ -15,26 +22,37 @@
         top: -15px;
         background-color: rgb(168, 119, 119);
     }
-    mat-card{
+    .card{
         border-radius: 10px;
-        padding: 22px;
+        padding: 40px;
+        padding-top: 50px;
         background-color: #fff;
         box-shadow: 2px 0px 8px rgb(139, 139, 139), -2px 0px 8px rgb(139, 139, 139);
-        mat-card-title{
+        h1{
+            font-size: 26px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            // padding-right: 10px;
+            // padding-left: 10px;
             line-height: 32px;
         }
-        mat-card-content, mat-card-title, mat-card-subtitle{
-            padding-top: 10px;
+        h4{
+            padding-right: 20px;
+        }
+        .content, h1, .name{
             .time{
                 position: absolute;
-                left: 25px;
+                left: 20px;
             }
             p{
-                padding: 10px;
+                font-size: 16px;
+                line-height: 27px;
+                padding-right: 10px;
+                padding-left: 10px;
                 white-space: pre-wrap;
             }
         }
-        mat-card-actions{
+        .actions{
             display: flex;
             div{
                 display: flex;
@@ -52,30 +70,14 @@
             }
         }
     }
-    mat-tab-group{
-        box-shadow: 2px 0px 8px rgb(139, 139, 139), -2px 0px 8px rgb(139, 139, 139);
-        background-color: #fff;
-        border-radius: 10px;
-        width: 100%;
-    }
-    .likes, .subscribers, .requests{
-        position: relative;
-        width: calc(100% - 80px);
-        left: 40px;
-        padding-bottom: 10px;
-        app-user-suggestion{
-            margin:0 0 0 8px;
-        }
-    }
-    .skills{
-        position: relative;
-        width: 100%;
-        p{
-            margin-top: 8px;
-            position: relative;
-            left: 40px;
-            padding: 10px; border-radius: 5px;
-            width: calc(100% - 100px);
-        }
+    
+}
+
+.body.dark{
+    background-color: rgb(112, 112, 112);
+    .card{
+        background-color: rgb(61, 61, 61);
+        color: #fff;
+        box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
     }
 }

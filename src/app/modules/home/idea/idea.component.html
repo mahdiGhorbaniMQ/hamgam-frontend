@@ -1,5 +1,5 @@
 <!-- <img *ngIf="screen.innerWidth>550" class="profile-image" [src]="tweet.profileImage" alt="profile"> -->
-<div class="container">
+<div class="container" [ngClass]="{'dark':theme.dark}">
     <div class="name">
         <span>{{idea.date.getHours()}}:{{idea.date.getMinutes()}}</span>
         <span [routerLink]="'/profile/'+idea.creator.email" *ngIf="screen.innerWidth>550" class="username">{{idea.creator.email}}</span>

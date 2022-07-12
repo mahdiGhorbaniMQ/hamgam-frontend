@@ -7,6 +7,7 @@ import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-idea',
@@ -25,6 +26,7 @@ export class IdeaComponent implements OnInit {
   constructor(
     public screen:ScreenService,
     private ideaService:IdeaService,
+    public theme:ThemeService,
     private auth:AuthService,
     private router:Router) { }
 

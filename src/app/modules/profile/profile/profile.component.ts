@@ -6,6 +6,7 @@ import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private navInfo:NavInformationService,
     private auth:AuthService,
+    public theme:ThemeService,
     private userService:UserService,
     private rout:ActivatedRoute,
     private ideaService:IdeaService) { }

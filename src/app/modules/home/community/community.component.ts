@@ -3,6 +3,7 @@ import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SkillService } from 'src/app/core/services/skill.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -13,7 +14,8 @@ import { UserService } from 'src/app/core/services/user.service';
 export class CommunityComponent implements OnInit {
 
   constructor(
-    private auth:AuthService
+    private auth:AuthService,
+    public theme:ThemeService,
   ) { }
 
   skills!:SkillModel[]

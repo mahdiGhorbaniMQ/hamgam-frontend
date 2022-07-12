@@ -8,6 +8,7 @@ import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
 import { SearchService } from 'src/app/core/services/search.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private search:SearchService,
+    public theme:ThemeService,
     public auth:AuthService,
     private router:Router,
     public screen:ScreenService){}

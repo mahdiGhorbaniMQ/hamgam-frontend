@@ -58,3 +58,14 @@
 .container::-webkit-scrollbar {
     display: none;
 }
+
+.container.dark{
+    background-color: rgb(112, 112, 112);
+    box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
+    background-color: rgb(61, 61, 61);
+    color: #fff;
+    mat-expansion-panel, .footer, mat-panel-title{
+        background-color: rgb(61, 61, 61);
+        color: #fff;
+    }
+}

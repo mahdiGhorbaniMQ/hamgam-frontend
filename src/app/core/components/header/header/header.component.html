@@ -1,16 +1,12 @@
-<div routerLink="home" matRipple class="logo">
-    <img src="../../../../../assets/logo3.png" width="35px" height="auto" alt="logo" title="logo">
-</div>
-
-<div class="search" *ngIf="screenWidth>700">
+<div class="search" *ngIf="screenWidth>700" [ngClass]="{'dark':theme.dark}">
     <mat-form-field appearance="outline">
-        <mat-label>Search on users</mat-label>
+        <mat-label [ngClass]="{'dark':theme.dark}">Search on users</mat-label>
         <input [formControl]="myControl"
                [matAutocomplete]="auto"
                matInput
                placeholder="Search">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="navigate($event)">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <mat-option [ngClass]="{'dark':theme.dark}" *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option.name}}
             </mat-option>
         </mat-autocomplete>
@@ -28,8 +24,7 @@
     <img [src]="auth.userInfo.img" alt="profile" height="35px" width="auto">
 </div>
 
-<div class="links">
+<div class="panel">
     <button (click)="screen.showMenu = !screen.showMenu" mat-button *ngIf="screenWidth<=700"><mat-icon>menu</mat-icon></button>
-    <button *ngIf="screenWidth>=460" mat-button routerLink="/community">Community</button>
-    <!-- <button *ngIf="screenWidth>=460" mat-button>Help</button> -->
+    <mat-slide-toggle [(ngModel)]="theme.dark" color="primary"><mat-icon class="dark-mode">brightness_3</mat-icon>Dark mode</mat-slide-toggle>
 </div>

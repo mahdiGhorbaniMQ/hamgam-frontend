@@ -9,6 +9,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, startWith } from 'rxjs/operators';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-create-idea',
@@ -34,6 +35,7 @@ export class CreateIdeaComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
+    public theme:ThemeService,
     private navInfo:NavInformationService
   ){ }
 

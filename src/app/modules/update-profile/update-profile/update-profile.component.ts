@@ -10,6 +10,7 @@ import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/ad
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { SkillService } from 'src/app/core/services/skill.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class UpdateProfileComponent implements OnInit {
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
   constructor(
+    public theme:ThemeService,
     private _formBuilder: FormBuilder,
     private navInfo:NavInformationService,
     private skillService:SkillService,

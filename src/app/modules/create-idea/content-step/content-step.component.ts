@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-content-step',
@@ -8,7 +9,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class ContentStepComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public theme:ThemeService,
+  ) { }
 
   ngOnInit(): void {
   }

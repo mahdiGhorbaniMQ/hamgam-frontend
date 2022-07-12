@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -29,7 +30,10 @@ export class SubscribersStepComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<string>();
 
 
-  constructor(private userService:UserService) {
+  constructor(
+    private userService:UserService,
+    public theme:ThemeService,
+  ) {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
       map((user: string) => (user ? this._filterUser(user) : userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())),

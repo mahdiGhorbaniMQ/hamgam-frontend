@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryModel } from 'src/app/core/models/category-model';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-add-skill-form',
@@ -22,7 +23,12 @@ export class AddSkillFormComponent implements OnInit {
     category: ['', Validators.required],
   });
 
-  constructor(private _formBuilder: FormBuilder, private snack:MatSnackBar,private categoryService:CategoryService) {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private snack:MatSnackBar,
+    public theme:ThemeService,
+    private categoryService:CategoryService
+  ) {
     this.categories = this.categoryService.allCategories    
   }
 

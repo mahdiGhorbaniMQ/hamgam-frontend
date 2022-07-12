@@ -4,6 +4,7 @@ import { IdeaModel } from 'src/app/core/models/idea-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-suggestions',
@@ -17,7 +18,8 @@ export class SuggestionsComponent implements OnInit {
 
   constructor(
     private ideaService:IdeaService,
-    private auth:AuthService
+    private auth:AuthService,
+    public theme:ThemeService
   ) { }
 
   ngOnInit(): void {

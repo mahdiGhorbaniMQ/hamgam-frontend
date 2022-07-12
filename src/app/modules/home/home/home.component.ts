@@ -6,6 +6,7 @@ import { IdeaModel } from 'src/app/core/models/idea-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private navInfo:NavInformationService,
     public screen:ScreenService,
+    public theme:ThemeService,
     private ideaService:IdeaService,
     private auth:AuthService,
   ) {}

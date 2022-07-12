@@ -55,3 +55,9 @@
 .container::-webkit-scrollbar {
     display: none;
 }
+
+.container.dark{
+    background-color: rgb(61, 61, 61);
+    color: #fff;
+    box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
+}

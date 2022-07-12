@@ -9,6 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { SkillService } from 'src/app/core/services/skill.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-register',
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private navInfo:NavInformationService,
+    public theme:ThemeService,
     private skillService:SkillService,
      private dialog: MatDialog) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
