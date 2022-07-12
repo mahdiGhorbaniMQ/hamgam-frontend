@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private http:HttpClient,public screen:ScreenService,private info:InformationService){}
 
   ngOnInit() {
-    // this.http.post("http://localhost:8000/accounts/signup",{firstName:"test",lastName:"test",email:"test@gmail.com",password:"test"}).subscribe(r=>console.log(r));
+    this.http.post("http://localhost:8000/accounts/signup",{firstName:"test",lastName:"test",email:"test@gmail.com",password:"test"}).subscribe(r=>console.log(r));
     this.checkScreen()
   }
   

@@ -39,10 +39,5 @@
                 <app-user-suggestion *ngFor="let user of idea.likes" [user]="user"></app-user-suggestion>
             </div>
         </mat-tab>
-        <mat-tab label="درخواست ها">
-            <div class="requests">
-                <app-user-suggestion *ngFor="let request of idea.requests" [user]="request.user"></app-user-suggestion>
-            </div>
-        </mat-tab>
     </mat-tab-group>
 </div>
