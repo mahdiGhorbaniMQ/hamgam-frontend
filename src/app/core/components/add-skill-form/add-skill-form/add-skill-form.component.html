@@ -1,7 +1,10 @@
 <div dir="rtl" [ngClass]="{'dark':theme.dark}">
     <h2>افزودن مهارت </h2>
     <mat-stepper>
-        <mat-step [stepControl]="nameFormGroup" label="نام">
+        <mat-step [stepControl]="nameFormGroup">
+            <ng-template matStepLabel>
+                <span class="label">نام</span>
+            </ng-template>
             <form [formGroup]="nameFormGroup">
                 <mat-form-field appearance="outline">
                     <mat-label>نام مهارت</mat-label>
@@ -16,7 +19,10 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step label="دسته‌بندی">
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="label">دسته‌بندی</span>
+            </ng-template>
             <div class="categories">
                 <div *ngFor="let category of categories" (click)="selectCategory(category)"
                     [ngClass]="{'selected':selectedCategories.has(category)}">{{category.name}}</div>

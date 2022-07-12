@@ -93,3 +93,8 @@ $hamgam-frontend-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 *{font-family: Vazirmatn, sans-serif;}
+
+.dialog-dark mat-dialog-container{
+  background: rgb(61, 61, 61)!important;
+  color: #fff!important;
+}

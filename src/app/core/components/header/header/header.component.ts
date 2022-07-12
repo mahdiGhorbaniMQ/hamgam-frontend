@@ -49,4 +49,7 @@ export class HeaderComponent implements OnInit {
     this.myControl.setValue('')
     this.router.navigate(["/profile/"+event.option.value.email])
   }
+  setTheme(){
+    localStorage.setItem("dark",!this.theme.dark?'1':'0')
+  }
 }
