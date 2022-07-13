@@ -35,10 +35,19 @@ export class HomeComponent implements OnInit {
     this.selected = tab
     if (tab=="ideas")
       this.ideas = this.ideaService.allIdeas
-    else if(tab=="your_requests")
-      this.ideas = this.ideaService.allIdeas.filter(idea=>idea.requests.map(req=>req.user).includes(this.auth.userInfo))
+    else if(tab=="suggestions")
+      this.ideas = this.ideaService.allIdeas.filter(idea=>this.hasItem(idea.skills,this.auth.userInfo.skills))
     else if(tab=="your_ideas")
       this.ideas = this.ideaService.allIdeas.filter(idea=>idea.creator == this.auth.userInfo)
   }
 
+  hasItem(arr1:any[],arr2:any[]):boolean{
+    let res = false
+    arr1.forEach(item=>{
+      arr2.forEach(item2=>{
+        if(item == item2){res = true;}
+      })
+    })
+    return res
+  }
 }

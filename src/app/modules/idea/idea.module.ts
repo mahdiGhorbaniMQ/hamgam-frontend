@@ -5,6 +5,8 @@ import { IdeaRoutingModule } from './idea-routing.module';
 import { IdeaComponent } from './idea/idea.component';
 import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
 import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/user-suggestion.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/us
     CommonModule,
     IdeaRoutingModule,
     AngularMaterialModule,
-    UserSuggestionModule
+    UserSuggestionModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule
   ],
   exports:[
     IdeaComponent

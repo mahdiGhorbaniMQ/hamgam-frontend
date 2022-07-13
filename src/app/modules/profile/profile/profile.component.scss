@@ -57,7 +57,7 @@
         margin: 50px; padding-top: 20px;
         width:80%;
         h1{
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
         >div{
             display: flex;
@@ -65,11 +65,21 @@
         }
         .skill{
             border-radius: 25px;
-            background-color: cadetblue;
+            background-color: rgb(153, 153, 153);
             margin: 5px;
             padding: 15px;
+            column-gap: 10px;
             display: flex;
             align-items: center;
+            img{
+                width: 30px;
+                height: 30px;
+                border-radius: 15px;
+                margin: 0;
+            }
+            span{
+                margin-right: 8px;
+            }
         }
     }
     .ideas{
@@ -98,6 +108,10 @@
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
         .ideas .idea:hover{
             background-color: rgb(73, 73, 73);
+        }
+        .skill{
+            color: #fff;
+            background-color: rgb(37, 37, 37);
         }
         h1{
             color: #fff;

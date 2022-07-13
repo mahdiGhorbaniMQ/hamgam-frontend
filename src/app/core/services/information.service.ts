@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RequestModel } from '../models/request-model';
+import { CommentModel } from '../models/comment-model';
 import { CategoryService } from './category.service';
 import { IdeaService } from './idea.service';
 import { SkillService } from './skill.service';
@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 export class InformationService {
 
 
-  requests:RequestModel[] = []
+  comments:CommentModel[] = []
 
   constructor(
     private users:UserService,
@@ -63,41 +63,41 @@ export class InformationService {
 
 
 
-    this.requests = [
+    this.comments = [
       {
         id:"0",
-        content:"سلام این یک متن درخواست برای ایده شما هستش تا با دیدنش مهارت های من را ببینید و از طریق اطلاعات تماسم با من تماس بگیرید",
-        resume:"test",
-        user:users.getUserById("3")
+        content:"سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است",
+        user:users.getUserById("3"),
+        date:new Date()
       },
       {
         id:"1",
-        content:"سلام این یک متن درخواست برای ایده شما هستش تا با دیدنش مهارت های من را ببینید و از طریق اطلاعات تماسم با من تماس بگیرید",
-        resume:"test",
+        content:"سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است",
+        date:new Date(),
         user:users.getUserById("0")
       },
       {
         id:"2",
-        content:"سلام این یک متن درخواست برای ایده شما هستش تا با دیدنش مهارت های من را ببینید و از طریق اطلاعات تماسم با من تماس بگیرید",
-        resume:"test",
+        content:"سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است",
+        date:new Date(),
         user:users.getUserById("1")
       },
       {
         id:"3",
-        content:"سلام این یک متن درخواست برای ایده شما هستش تا با دیدنش مهارت های من را ببینید و از طریق اطلاعات تماسم با من تماس بگیرید",
-        resume:"test",
+        content:"سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است",
+        date:new Date(),
         user:users.getUserById("3")
       },
       {
         id:"4",
-        content:"سلام این یک متن درخواست برای ایده شما هستش تا با دیدنش مهارت های من را ببینید و از طریق اطلاعات تماسم با من تماس بگیرید",
-        resume:"test",
+        content:"سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است",
+        date:new Date(),
         user:users.getUserById("2")
       },
       {
         id:"5",
-        content:"سلام این یک متن درخواست برای ایده شما هستش تا با دیدنش مهارت های من را ببینید و از طریق اطلاعات تماسم با من تماس بگیرید",
-        resume:"test",
+        content:"سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است سلام این یک کامنت طولانی است",
+        date:new Date(),
         user:users.getUserById("4")
       },
     ]
@@ -241,7 +241,7 @@ export class InformationService {
         creator:users.getUserById("0"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -264,7 +264,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -287,7 +287,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -310,7 +310,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -333,7 +333,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -356,7 +356,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -379,7 +379,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -402,7 +402,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -425,7 +425,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -448,7 +448,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },
@@ -471,7 +471,7 @@ export class InformationService {
         creator:users.getUserById("1"),
         date:new Date(),
         likes:users.getUsersByIds(["0","1","2","4"]),
-        requests:this.requests,
+        comments:this.comments,
         skills:skills.getByNames(["Java","Spring","Angular"]),
         subscribers:users.getUsersByIds(["0","1"])
       },

@@ -11,7 +11,10 @@
         <div class="skills" *ngIf="userInfo&&userInfo.skills.length>0">
             <h1>مهارت ها</h1>
             <div >
-                <div class="skill" *ngFor="let skill of userInfo.skills">{{skill.name}}</div>
+                <div class="skill" *ngFor="let skill of userInfo.skills">
+                    <span>{{skill.name}}</span>
+                    <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                </div>
             </div>
         </div>
         <div class="ideas" *ngIf="userIdeas.length>0">

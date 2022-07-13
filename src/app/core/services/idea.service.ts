@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IdeaModel } from '../models/idea-model';
-import { RequestModel } from '../models/request-model';
 
 @Injectable({
   providedIn: 'root'

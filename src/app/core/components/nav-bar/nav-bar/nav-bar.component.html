@@ -11,7 +11,7 @@
             <span>More</span>
         </div>
     </div>
-    <mat-menu #more class="more-menu">
+    <mat-menu #more class="more-menu" [class]="theme.dark?'dark-menu-list':'light-menu-list'">
         <button [routerLink]="item.endponint" (click)="informations.select(i+informations.size)" mat-menu-item *ngFor="let item of informations.informations.slice(informations.size);let i = index">
             <router-link [routerLink]="item.endponint" (click)="informations.select(i)">
                 <mat-icon>{{item.icon}}</mat-icon>

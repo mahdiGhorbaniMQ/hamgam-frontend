@@ -28,6 +28,34 @@
         padding-top: 50px;
         background-color: #fff;
         box-shadow: 2px 0px 8px rgb(139, 139, 139), -2px 0px 8px rgb(139, 139, 139);
+        .skills-title{
+            margin-top: 30px;
+        }
+        .skills{
+            display: flex;
+            flex-wrap: wrap;
+            color: rgb(37, 37, 37);
+            margin: 30px; margin-top: 0;
+            width:80%;
+            .skill{
+                border-radius: 25px;
+                background-color: rgb(153, 153, 153);
+                margin: 5px;
+                padding: 15px;
+                column-gap: 10px;
+                display: flex;
+                align-items: center;
+                img{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 15px;
+                    margin: 0;
+                }
+                span{
+                    margin-right: 8px;
+                }
+            }
+        }
         h1{
             font-size: 26px;
             padding-top: 10px;
@@ -70,6 +98,39 @@
             }
         }
     }
+    .comments{
+        .comment-item{
+            border-radius: 10px;
+            padding: 40px;
+            padding-bottom: 30px;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 2px 0px 8px rgb(139, 139, 139), -2px 0px 8px rgb(139, 139, 139);
+            .email{
+                color:gray;
+            }
+            .email:hover{
+                color:rgb(88, 88, 88);
+            }
+            .time{
+                position: absolute;
+                left: 40px;
+            }
+        }
+        .comment-item:first-child{
+            margin-top: 60px;
+        }
+        mat-form-field{
+            position: relative;
+            width: 100%;
+            text-align: right;
+            line-height: 25px;
+        }
+        .send{
+            margin: 15px;
+            background-color: rgb(119, 167, 168);
+        }
+    }
     
 }
 
@@ -79,5 +140,20 @@
         background-color: rgb(61, 61, 61);
         color: #fff;
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
+        .skills .skill{
+            color: #fff;
+            background-color: rgb(37, 37, 37);
+        }
+    }
+    .comments{
+        .comment-item{
+            background-color: rgb(61, 61, 61);
+            color: #fff;
+            box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
+        }
+
+        mat-label{
+            color: #fff;
+        }
     }
 }

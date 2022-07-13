@@ -6,17 +6,46 @@
         <span [routerLink]="'/profile/'+idea.creator.email" class="info">{{idea.creator.name}}</span>
     </div>
     <div (click)="showIdea()" class="rtl content" dir="rtl">
-        <span>{{idea.title}}</span>
+        <p>{{idea.title}}</p>
     </div>
     <div class="numbers" dir="rtl">
         <div>
-            <span>{{idea.likes.length}}</span>
+            <span [matMenuTriggerFor]="menuLikes">{{idea.likes.length}}</span>
             <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
             <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
+
+            <mat-menu #menuLikes="matMenu" [class]="theme.dark?'dark-menu-list':''">
+                <div dir="ltr" *ngFor="let user of idea.likes" style="margin-right: 15px;">
+                    <app-user-suggestion [user]="user"></app-user-suggestion>
+                </div>
+            </mat-menu>
         </div>
-        <div>
-            <span>{{idea.requests.length}}</span>
-            <mat-icon matRipple [routerLink]="'/request/'+idea.id">chat_bubble_outline</mat-icon>
+        <div [routerLink]="'/idea/'+idea.id">
+            <span>{{idea.comments.length}}</span>
+            <mat-icon matRipple>chat_bubble_outline</mat-icon>
+        </div>
+        <div [matMenuTriggerFor]="menuSubscribers">
+            <span>{{idea.subscribers.length}}</span>
+            <mat-icon matRipple>people</mat-icon>
+
+            <mat-menu #menuSubscribers="matMenu" [class]="theme.dark?'dark-menu-list':''">
+                <b mat-menu-item>افراد فعال در ایده</b>
+                <div dir="ltr" *ngFor="let user of idea.subscribers" style="margin-right: 15px;">
+                    <app-user-suggestion [user]="user"></app-user-suggestion>
+                </div>
+            </mat-menu>
+        </div>
+        <div [matMenuTriggerFor]="menuSkills">
+            <span>{{idea.skills.length}}</span>
+            <mat-icon matRipple>priority_high</mat-icon>
+
+            <mat-menu #menuSkills="matMenu" [class]="theme.dark?'dark-menu-list':'light-menu-list'">
+                <b mat-menu-item>مهارت های لازم</b>
+                <div dir="ltr" class="skill-container" *ngFor="let skill of idea.skills" style="margin-right: 15px;">
+                    <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                    {{skill.name}}
+                </div>
+            </mat-menu>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { RequestModel } from "./request-model";
+import { CommentModel } from "./comment-model";
 import { SkillModel } from "./skill-model";
 import { UserModel } from "./user-model";
 
@@ -11,5 +11,5 @@ export interface IdeaModel {
     skills:SkillModel[]
     subscribers:UserModel[]
     likes:UserModel[]
-    requests:RequestModel[]
+    comments:CommentModel[]
 }

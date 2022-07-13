@@ -11,19 +11,75 @@
             <div class="content">
               <p>{{idea.content}}</p>
             </div>
-            <div class="skills">
-                <span *ngFor="let skill of idea.skills">{{skill.name}}</span>
+            <h3 *ngIf="idea.skills.length>0" class="skills-title"><b>مهارت‌های لازم</b></h3>
+            <div *ngIf="idea.skills.length>0" class="skills">
+                <div class="skill" *ngFor="let skill of userInfo.skills">
+                    <span>{{skill.name}}</span>
+                    <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                </div>
             </div>
             <div class="actions">
                 <div>
+                    <span [matMenuTriggerFor]="menuLikes">{{idea.likes.length}}</span>
                     <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
                     <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
-                    <span>{{idea.likes.length}}</span>
+        
+                    <mat-menu #menuLikes="matMenu" [class]="theme.dark?'dark-menu-list':''">
+                        <div dir="ltr" *ngFor="let user of idea.likes" style="margin-right: 15px;">
+                            <app-user-suggestion [user]="user"></app-user-suggestion>
+                        </div>
+                    </mat-menu>
                 </div>
                 <div>
+                    <span>{{idea.comments.length}}</span>
                     <mat-icon matRipple>chat_bubble_outline</mat-icon>
-                    <span>{{idea.requests.length}}</span>
                 </div>
+                <div [matMenuTriggerFor]="menuSubscribers">
+                    <span>{{idea.subscribers.length}}</span>
+                    <mat-icon matRipple>people</mat-icon>
+        
+                    <mat-menu #menuSubscribers="matMenu" [class]="theme.dark?'dark-menu-list':''">
+                        <b mat-menu-item>افراد فعال در ایده</b>
+                        <div dir="ltr" *ngFor="let user of idea.subscribers" style="margin-right: 15px;">
+                            <app-user-suggestion [user]="user"></app-user-suggestion>
+                        </div>
+                    </mat-menu>
+                </div>
+                <div [matMenuTriggerFor]="menuSkills">
+                    <span>{{idea.skills.length}}</span>
+                    <mat-icon matRipple>priority_high</mat-icon>
+        
+                    <mat-menu #menuSkills="matMenu" [class]="theme.dark?'dark-menu-list':'light-menu-list'">
+                        <b mat-menu-item>مهارت های لازم</b>
+                        <div dir="ltr" class="skill-container" *ngFor="let skill of idea.skills" style="margin-right: 15px;">
+                            <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                            {{skill.name}}
+                        </div>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+
+        <div class="comments" dir="rtl">
+            <div class="comment-item">
+                <h3><b>نظر خود را ثبت کنید</b></h3>
+                <mat-form-field appearance="outline" >
+                    <mat-label>متنی درباره این ایده بنویسید</mat-label>
+                    <input
+                      dir="rtl"
+                      matInput
+                      [formControl]="comment"
+                      required
+                    />
+                    <mat-error *ngIf="comment.invalid">{{getCommentError()}}</mat-error>
+                </mat-form-field>
+                <button mat-button (click)="send()" class="send">ثبت</button>
+            </div>
+            <div class="comment-item" *ngFor="let comment of idea.comments" [routerLink]="'/profile/'+comment.user.email">
+                <span class="time">{{comment.date.getHours()}}:{{comment.date.getMinutes()}}</span>
+                <p><b>{{comment.user.name}}</b></p>
+                <p class="email">{{comment.user.email}}</p>
+                <p>{{comment.content}}</p>
             </div>
         </div>
     </div>

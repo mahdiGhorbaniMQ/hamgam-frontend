@@ -94,7 +94,22 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 *{font-family: Vazirmatn, sans-serif;}
 
-.dialog-dark mat-dialog-container{
-  background: rgb(61, 61, 61)!important;
+.dialog-dark mat-dialog-container,.dark-menu-list{
+  b,span,mat-icon{color: #fff!important;}
+  background: rgb(66, 66, 66)!important;
   color: #fff!important;
+}
+
+.dark-menu-list,.light-menu-list{
+  .skill-container{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    .skill-image{
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+    }
+  }
 }

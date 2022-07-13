@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { IdeaModel } from 'src/app/core/models/idea-model';
@@ -26,6 +27,9 @@ export class IdeaComponent implements OnInit {
   isLiked!:boolean
   id!:string
   userInfo!:UserModel
+
+
+  comment = new FormControl('', [Validators.required])
   
   ngOnInit(): void {
     this.navInfo.select(0)
@@ -47,5 +51,13 @@ export class IdeaComponent implements OnInit {
     }
     
     this.ideaService.update(this.idea)
+  }
+  
+  send(){}
+  getCommentError() {
+    if (this.comment.hasError('required')) {
+      return 'این فیلد ضروری است';
+    }
+    return '';
   }
 }
