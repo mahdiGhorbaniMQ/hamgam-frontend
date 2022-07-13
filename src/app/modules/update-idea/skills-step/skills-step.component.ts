@@ -73,9 +73,12 @@ export class SkillsStepComponent implements OnInit {
 
   openDialog(): void {
     import("src/app/core/components/add-skill-form/add-skill-form.module").then(m => m.AddSkillFormModule)
-    const dialogRef = this.dialog.open(AddSkillFormComponent, {
+    let options = {
       width: '350px',
       height: '450px',
-    });
+      panelClass: ''
+    }
+    if(this.theme.dark) options.panelClass = 'dialog-dark'
+    const dialogRef = this.dialog.open(AddSkillFormComponent,options);
   }
 }

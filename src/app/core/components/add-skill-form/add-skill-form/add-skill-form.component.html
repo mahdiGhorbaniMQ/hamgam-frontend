@@ -3,19 +3,34 @@
     <mat-stepper>
         <mat-step [stepControl]="nameFormGroup">
             <ng-template matStepLabel>
-                <span class="label">نام</span>
+                <span class="label">اطلاعات</span>
             </ng-template>
             <form [formGroup]="nameFormGroup">
-                <mat-form-field appearance="outline">
-                    <mat-label>نام مهارت</mat-label>
-                    <input
-                    matInput
-                    placeholder="نام مهارت"
-                    formControlName="name">
-
-                </mat-form-field>
+                <div class="field">
+                    <h3><b>نام مهارت</b></h3>
+                    <mat-form-field appearance="outline">
+                        <mat-label>نام مهارت</mat-label>
+                        <input
+                        matInput
+                        placeholder="نام مهارت"
+                        formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div class="field">
+                    <h3><b>انتخاب عکس برای مهارت</b></h3>
+                    <mat-form-field>
+                        <div class="img-container">
+                            <img [src]="myfilesrc" class="img">
+                        </div>
+                        <mat-toolbar style="display: none;">
+                            <input matInput readonly name="memberContactNo"/>
+                        </mat-toolbar>
+                        <input type="file" #UploadFileInput id="fileUpload" name="fileUpload" (change)="fileChangeEvent($event)"
+                            accept="image/*" />
+                    </mat-form-field>
+                </div>
                 <div>
-                <button mat-button matStepperNext>بعدی</button>
+                    <button mat-button matStepperNext>بعدی</button>
                 </div>
             </form>
         </mat-step>

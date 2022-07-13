@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryModel } from 'src/app/core/models/category-model';
@@ -15,6 +15,9 @@ export class AddSkillFormComponent implements OnInit {
 
   categories:CategoryModel[] = []
   selectedCategories:Set<CategoryModel> = new Set()
+
+  image = new FormControl(null, []);
+
 
   nameFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
@@ -41,5 +44,40 @@ export class AddSkillFormComponent implements OnInit {
     else
       this.selectedCategories.add(category)
     this.snack.open("An error exists!","ok!")
+  }
+
+
+  @ViewChild('UploadFileInput') uploadFileInput!: ElementRef;
+  myfilename = 'Select File';
+  myfilesrc = '../../../../assets/logo.jpg';
+
+  fileChangeEvent(fileInput: any) {
+
+    if (fileInput.target.files && fileInput.target.files[0]) {
+
+      
+      this.myfilename = fileInput.target.files[0].name ;
+      this.image.setValue( fileInput.target.files[0] )
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        this.myfilesrc = e.target.result
+        
+        image.onload = rs => {
+          
+          // Return Base64 Data URL
+          const imgBase64Path = e.target.result;
+
+        };
+      };
+      reader.readAsDataURL(fileInput.target.files[0]);
+      
+
+      // Reset File Input to Selct Same file again
+      // this.uploadFileInput.nativeElement.value = "";
+    } else {
+      this.myfilename = 'Select File';
+    }
   }
 }
