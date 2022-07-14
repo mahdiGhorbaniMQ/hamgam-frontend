@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
@@ -35,7 +35,17 @@ export class RegisterComponent implements OnInit {
     password: this.password
   });
 
-
+  canExit() : boolean {
+ 
+    if((this.formGroup.touched||this.skillCtrl.touched)){
+      if (confirm("با خارج شدن از صفحه اطلاعات وارد شده از بین می‌رود، آیا مطمئنید؟")) {
+        return true
+      } else {
+        return false
+      }
+    }
+    return true
+  }
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillCtrl = new FormControl('');
@@ -52,7 +62,7 @@ export class RegisterComponent implements OnInit {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skillName: string) => (skillName ? this._filter(skillName) : skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
-    );
+    )
   }
   ngOnInit(): void {
     this.navInfo.select(4)
@@ -158,5 +168,13 @@ export class RegisterComponent implements OnInit {
     } else {
       this.myfilename = 'Select File';
     }
+  }
+
+  selectSearch(){
+    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())
+    this.filteredSkills = this.skillCtrl.valueChanges.pipe(
+      startWith(null),
+      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+    );
   }
 }

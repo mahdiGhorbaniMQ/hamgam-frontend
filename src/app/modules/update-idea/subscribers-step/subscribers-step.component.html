@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" [ngClass]="{'dark':theme.dark}">
-    <mat-form-field class="chips" appearance="outline">
+    <mat-form-field (click)="selectSearch()" class="chips" appearance="outline">
       <mat-label>افراد فعال</mat-label>
       <mat-chip-list #userList aria-label="User selection">
         <mat-chip
@@ -11,6 +11,7 @@
           </button>
         </mat-chip>
         <input
+          (click)="selectSearch()"
           placeholder="عضو جدید..."
           #userInput
           [formControl]="userCtrl"

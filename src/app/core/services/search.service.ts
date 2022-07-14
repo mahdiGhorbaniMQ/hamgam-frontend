@@ -16,6 +16,8 @@ export class SearchService {
     obs.next(
       this.userService.allUsers.filter(user=>{
         
+        if(typeof(value) != "string") return this.userService.allUsers
+
         let name = user.name.toLowerCase()
         let email = user.email.toLowerCase()
         return name.includes(value.toLowerCase()) || email.includes(value.toLowerCase())

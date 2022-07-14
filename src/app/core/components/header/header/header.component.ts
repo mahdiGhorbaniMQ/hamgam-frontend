@@ -34,11 +34,10 @@ export class HeaderComponent implements OnInit {
     this.auth.isAuthentication.subscribe(isAuthenticated=> this.isAuthenticated = isAuthenticated)
     this.checkScreen()
     this.myControl.valueChanges.pipe(
-      // delay(500),
       startWith(''),
       map((value:any) => this.search.search(value)),
     ).subscribe(options=>{
-        this.filteredOptions = options
+      this.filteredOptions = options
     });
   }
   @HostListener('window:resize')
@@ -51,5 +50,8 @@ export class HeaderComponent implements OnInit {
   }
   setTheme(){
     localStorage.setItem("dark",!this.theme.dark?'1':'0')
+  }
+  selectSearch(){
+    this.filteredOptions = this.search.search(this.myControl.value)
   }
 }

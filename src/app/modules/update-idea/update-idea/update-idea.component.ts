@@ -40,4 +40,16 @@ export class UpdateIdeaComponent implements OnInit {
     
   }
 
+  canExit() : boolean {
+ 
+    if((this.contentFormGroup.touched||this.skillsFormGroup.touched||this.subscribersFormGroup.touched)){
+      if (confirm("با خارج شدن از صفحه تغییرات اعمال شده از بین می‌رود، آیا مطمئنید؟")) {
+        return true
+      } else {
+        return false
+      }
+    }
+    return true
+  }
+
 }

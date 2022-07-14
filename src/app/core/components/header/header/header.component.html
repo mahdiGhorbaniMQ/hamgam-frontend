@@ -1,7 +1,9 @@
-<div class="search" *ngIf="screenWidth>700" [ngClass]="{'dark':theme.dark}">
-    <mat-form-field appearance="outline">
+<div class="search" (click)="selectSearch()" *ngIf="screenWidth>700" [ngClass]="{'dark':theme.dark}">
+    <mat-form-field (click)="selectSearch()" appearance="outline">
         <mat-label [ngClass]="{'dark':theme.dark}">Search on users</mat-label>
-        <input [formControl]="myControl"
+        <input
+               (click)="selectSearch()"
+               [formControl]="myControl"
                [matAutocomplete]="auto"
                matInput
                placeholder="Search">

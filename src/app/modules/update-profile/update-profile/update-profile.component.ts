@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/add-skill-form/add-skill-form.component';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
@@ -36,6 +36,18 @@ export class UpdateProfileComponent implements OnInit {
     password: this.password
   });
 
+  canExit() : boolean {
+ 
+    if(this.formGroup.touched||this.skillCtrl.touched){
+      if (confirm("با خارج شدن از صفحه تغییرات اعمال شده از بین می‌رود، آیا مطمئنید؟")) {
+        return true
+      } else {
+        return false
+      }
+    }
+    return true
+  }
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillCtrl = new FormControl('');
   filteredSkills!: Observable<SkillModel[]>;  
@@ -47,11 +59,11 @@ export class UpdateProfileComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private navInfo:NavInformationService,
     private skillService:SkillService,
-     private dialog: MatDialog) {
+    private dialog: MatDialog) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
       map((skillName: string) => (skillName ? this._filter(skillName) : skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
-    );
+    )
   }
   ngOnInit(): void {
     this.navInfo.select(2)
@@ -158,5 +170,13 @@ export class UpdateProfileComponent implements OnInit {
     } else {
       this.myfilename = 'Select File';
     }
+  }
+
+  selectSearch(){
+    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())
+    this.filteredSkills = this.skillCtrl.valueChanges.pipe(
+      startWith(null),
+      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+    );
   }
 }

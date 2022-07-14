@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/add-skill-form/add-skill-form.component';
 import { SkillModel } from 'src/app/core/models/skill-model';
@@ -79,5 +79,13 @@ export class SkillsStepComponent implements OnInit {
     }
     if(this.theme.dark) options.panelClass = 'dialog-dark'
     const dialogRef = this.dialog.open(AddSkillFormComponent,options);
+  }
+
+  selectSearch(){
+    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())
+    this.filteredSkills = this.skillCtrl.valueChanges.pipe(
+      startWith(null),
+      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+    );
   }
 }

@@ -1,12 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatStepperIntl } from '@angular/material/stepper';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Observable } from 'rxjs';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { map, startWith } from 'rxjs/operators';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { ThemeService } from 'src/app/core/services/theme.service';
@@ -45,5 +39,17 @@ export class CreateIdeaComponent implements OnInit {
 
   submit(){
     
+  }
+
+  canExit() : boolean {
+ 
+    if((this.contentFormGroup.touched||this.skillsFormGroup.touched||this.subscribersFormGroup.touched)){
+      if (confirm("با خارج شدن از صفحه اطلاعات وارد شده از بین می‌رود، آیا مطمئنید؟")) {
+        return true
+      } else {
+        return false
+      }
+    }
+    return true
   }
 }

@@ -73,7 +73,7 @@
                     <ng-template matStepLabel>
                         <span class="label">مهارت‌ها</span>
                     </ng-template>
-                    <mat-form-field class="chips" appearance="outline">
+                    <mat-form-field (click)="selectSearch()" class="chips" appearance="outline">
                         <mat-label>مهارت‌های خود را وارد کنید</mat-label>
                         <mat-chip-list #chipList aria-label="انتخاب مهارت‌ها">
                           <mat-chip
@@ -85,6 +85,7 @@
                             </button>
                           </mat-chip>
                           <input
+                            (click)="selectSearch()"
                             placeholder="مهارت جدید..."
                             #skillInput
                             [formControl]="skillCtrl"

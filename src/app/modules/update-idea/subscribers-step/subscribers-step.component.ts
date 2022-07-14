@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
@@ -37,7 +37,7 @@ export class SubscribersStepComponent implements OnInit {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
       map((user: string) => (user ? this._filterUser(user) : userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())),
-    );
+    )
   }
 
   ngOnInit(): void {
@@ -77,4 +77,10 @@ export class SubscribersStepComponent implements OnInit {
   submit(){
     this.onSubmit.emit();
   }
+  selectSearch(){   
+    this.filteredUsers = new BehaviorSubject(this.userCtrl.value ? this._filterUser(this.userCtrl.value) : this.userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())
+    this.filteredUsers = this.userCtrl.valueChanges.pipe(
+      startWith(null),
+      map((userName: string) => (this.userCtrl.value ? this._filterUser(this.userCtrl.value) : this.userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())),
+    );  }
 }

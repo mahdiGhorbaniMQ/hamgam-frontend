@@ -11,6 +11,7 @@ import { IdeaComponent } from './modules/idea/idea/idea.component';
 import { UpdateProfileComponent } from './modules/update-profile/update-profile/update-profile.component';
 import { UpdateIdeaComponent } from './modules/update-idea/update-idea/update-idea.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { DeactivateGuard } from './core/guards/deactivate.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     path:"profile/update",
     component:UpdateProfileComponent,
     canActivate:[AuthGuard],
+    canDeactivate:[DeactivateGuard],
     loadChildren: ()=> import("src/app/modules/update-profile/update-profile.module").then(m => m.UpdateProfileModule)
   },
   {
@@ -44,12 +46,14 @@ const routes: Routes = [
     path:"idea",
     component:CreateIdeaComponent,
     canActivate:[AuthGuard],
+    canDeactivate:[DeactivateGuard],
     loadChildren: ()=> import("src/app/modules/create-idea/create-idea.module").then(m => m.CreateIdeaModule)
   },
   {
     path:"idea/:id/update",
     component:UpdateIdeaComponent,
     canActivate:[AuthGuard],
+    canDeactivate:[DeactivateGuard],
     loadChildren: ()=> import("src/app/modules/update-idea/update-idea.module").then(m => m.UpdateIdeaModule)
   },
   {
@@ -65,6 +69,7 @@ const routes: Routes = [
   {
     path:"register",
     component:RegisterComponent,
+    canDeactivate:[DeactivateGuard],
     loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
   },
   {
