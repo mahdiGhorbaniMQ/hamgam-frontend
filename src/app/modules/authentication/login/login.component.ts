@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -22,6 +25,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     public theme:ThemeService,
+    private authService:AuthService,
+    private router:Router,
+    private snack:MatSnackBar,
     private navInfo:NavInformationService) { }
 
   ngOnInit(): void {
@@ -43,5 +49,12 @@ export class LoginComponent implements OnInit {
     return '';
   }
   
-  login(){}
+  async login(){
+    try{
+      let logedin = await this.authService.login(this.email.value,this.password.value)
+      if(logedin) this.router.navigate(["/"])
+    }catch(e){
+      this.snack.open("ایمیل . پسورد همخوانی ندارند!","ok!")
+    }
+  }
 }

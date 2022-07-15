@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   filteredOptions!: Observable<UserModel[]>;
   screenWidth!:number
   ngOnInit() {
-    this.auth.isAuthentication.subscribe(isAuthenticated=> this.isAuthenticated = isAuthenticated)
+    this.auth.isAuthenticated.subscribe(isAuthenticated=> this.isAuthenticated = isAuthenticated)
     this.checkScreen()
     this.myControl.valueChanges.pipe(
       startWith(''),

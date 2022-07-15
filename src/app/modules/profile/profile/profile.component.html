@@ -2,13 +2,13 @@
     <div dir="rtl" class="container">
         <h2 class="notfound" *ngIf="!userInfo">کاربر یافت نشد!</h2>
         <div class="info" *ngIf="userInfo">
-            <img *ngIf="userInfo.img" [src]="userInfo.img" alt="profile">
-            <h2>{{userInfo.name}}</h2>
+            <img [src]="userInfo.img" alt="profile">
+            <h2>{{userInfo.firstName + " " +userInfo.lastName}}</h2>
             <h3>{{userInfo.email}}</h3>
             <p>{{userInfo.bio}}</p>
         </div>
         <button routerLink="/profile/update" *ngIf="isUserProf" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
-        <div class="skills" *ngIf="userInfo&&userInfo.skills.length>0">
+        <div class="skills" *ngIf="userInfo&&userInfo.skills!.length>0">
             <h1>مهارت ها</h1>
             <div >
                 <div class="skill" *ngFor="let skill of userInfo.skills">
@@ -17,10 +17,10 @@
                 </div>
             </div>
         </div>
-        <div class="ideas" *ngIf="userIdeas.length>0">
+        <div class="ideas" *ngIf="userIdeas.size>0">
             <h1>ایده ها</h1>
-            <div class="idea" *ngFor="let idea of userIdeas" [routerLink]="'/idea/'+idea.id">
-                {{idea.title}}
+            <div class="idea" *ngFor="let idea of userIdeas|keyvalue" [routerLink]="'/idea/'+idea.value">
+                {{idea.value.title}}
             </div>
         </div>
     </div>    

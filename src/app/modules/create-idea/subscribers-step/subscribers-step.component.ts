@@ -65,8 +65,8 @@ export class SubscribersStepComponent implements OnInit {
   private _filterUser(value: string):UserModel[]{
     if(typeof(value) != "string") return this.userService.allUsers.filter(user=>!this.selectedUsers.has(user))
     return this.userService.allUsers.filter(user => (
-      (user.name.toLowerCase().includes(value.toLowerCase())
-      || user.email.toLowerCase().includes(value.toLowerCase()))
+      ((user.firstName!.toLowerCase() + " " + user.lastName!.toLowerCase()).includes(value.toLowerCase())
+      || user.email!.toLowerCase().includes(value.toLowerCase()))
       && !this.selectedUsers.has(user)
     ));
   }

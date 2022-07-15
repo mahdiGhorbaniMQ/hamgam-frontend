@@ -66,7 +66,7 @@ export class SkillsStepComponent implements OnInit {
   private _filter(value: string): SkillModel[] {
     if(typeof(value) != "string") return this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill))
     return this.skillService.allSkills.filter(skill => {
-      return skill.name.toLowerCase().includes(value.toLowerCase()) && !this.selectedSkills.has(skill)
+      return skill.name!.toLowerCase().includes(value.toLowerCase()) && !this.selectedSkills.has(skill)
     });
   }
 

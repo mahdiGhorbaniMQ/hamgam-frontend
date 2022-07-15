@@ -2,10 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { IdeaModel } from 'src/app/core/models/idea-model';
-import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
+import { InformationService } from 'src/app/core/services/information.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
 
   userInfo!:UserModel
   isUserProf:boolean = true
-  userIdeas:IdeaModel[] = []
+  userIdeas: Map<number,IdeaModel> = new Map()
 
   constructor(
     private navInfo:NavInformationService,
@@ -26,21 +26,51 @@ export class ProfileComponent implements OnInit {
     public theme:ThemeService,
     private userService:UserService,
     private rout:ActivatedRoute,
+    private informations:InformationService,
     private ideaService:IdeaService) { }
 
   ngOnInit(): void {
     this.navInfo.select(2)
     this.rout.paramMap.subscribe(data=>{
-      let email = data.get("email")
-      if(!email)
+      let id:any = data.get("id")
+      if(!id){
         this.userInfo = this.auth.userInfo
+        console.log(this.userInfo);
+      }
       else{
-        this.userInfo = this.userService.getUserByemail(email)
+        id = Number.parseInt(id)!
+        if(!this.informations.users.has(id))
+          this.informations.users.set(id,{skills:[]})!
+        this.userInfo = this.informations.users.get(id)!
+        
         if(this.userInfo!=this.auth.userInfo)
           this.isUserProf = false
       }
-      this.userIdeas = this.ideaService.allIdeas.filter(idea=>idea.creator == this.userInfo)
+      this.informations.ideas.forEach(idea=>{
+        if(idea.creator?.id == this.userInfo.id)
+        this.userIdeas.set(idea.id!,idea)
+      })
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 1000);
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 2000);
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 3000);
     })
+    console.log(this.userInfo);
+    
   }
 
   @ViewChild('UploadFileInput') uploadFileInput!: ElementRef;

@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user-model';
-import { SkillService } from './skill.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +10,36 @@ export class UserService {
   allUsers:UserModel[] = []
 
 
-  constructor(private skills:SkillService) {
-
+  constructor(
+    private http:HttpClient
+  ) {
+    this.fillIdeas()
   }
 
+  fillIdeas(){
+    
+  }
+  
   getUsersBySkill(skill:string):UserModel[]{
     return this.allUsers.filter(user=>{
-      return user.skills.map(skill=>skill.name).includes(skill)
+      return user.skills!.map(skill=>skill.name).includes(skill)
     })
   }
 
-  getUserById(id:string):UserModel{
+  getUserById(id:number):UserModel{
+    // return new Promise<UserModel>((resolve, reject)=>{
+    //   this.http.get("/api/accounts").subscribe(
+    //     data=>{
+          
+    //     },
+    //     err=>reject(err)
+    //   )
+    // })
     return this.allUsers.filter(user=>{
-      return user.id==id
+      return user.id! == id
     })[0]
   }
-  getUsersByIds(ids:string[]):UserModel[]{
+  getUsersByIds(ids:number[]):UserModel[]{
     return this.allUsers.filter(user=>{
       return ids.includes(user.id!)
     })
@@ -33,12 +47,12 @@ export class UserService {
 
   getUserByName(name:string):UserModel{
     return this.allUsers.filter(user=>{
-      return user.name==name
+      return user.firstName+" "+user.lastName==name
     })[0]
   }
   getUsersByNames(names:string[]):UserModel[]{
     return this.allUsers.filter(user=>{
-      return names.includes(user.name)
+      return names.includes(user.firstName+" "+user.lastName)
     })
   }
 
@@ -49,7 +63,7 @@ export class UserService {
   }
   getUsersByEmails(emails:string[]):UserModel[]{
     return this.allUsers.filter(user=>{
-      return emails.includes(user.email)
+      return emails.includes(user.email!)
     })
   }
 }

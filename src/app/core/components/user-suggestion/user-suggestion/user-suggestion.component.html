@@ -1,8 +1,8 @@
-<div class="container" mat-ripple [routerLink]="'/profile/'+user.email" [ngClass]="{'dark':theme.dark}">
+<div class="container" mat-ripple [routerLink]="'/profile/'+user.id" [ngClass]="{'dark':theme.dark}">
     <img [src]="user.img" alt="profile">
     <div class="info">
         <div class="name">
-            <span>{{user.name}}</span>
+            <span>{{user.firstName + " " + user.lastName}}</span>
         </div>
         <div class="username">
             <span>{{user.email}}</span>

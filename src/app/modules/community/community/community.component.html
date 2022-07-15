@@ -6,14 +6,14 @@
                     <span class="label">All skills</span>
                 </ng-template>
                 <mat-accordion>
-                    <mat-expansion-panel *ngFor="let skill of allSkills">
+                    <mat-expansion-panel *ngFor="let skill of informations.skills|keyvalue">
                         <mat-expansion-panel-header>
                             <mat-panel-title class="skill-container">
-                                <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
-                                {{skill.name}}
+                                <img [src]="skill.value.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                                {{skill.value.name}}
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <app-user-suggestion *ngFor="let user of skill.users" [user]="user"></app-user-suggestion>
+                        <app-user-suggestion *ngFor="let user of skill.value.users" [user]="user"></app-user-suggestion>
                     </mat-expansion-panel>
                 </mat-accordion>
             </mat-tab>
@@ -38,13 +38,13 @@
                     <span class="label">All users</span>
                 </ng-template>
                 <mat-accordion  class="allUsers">
-                    <mat-expansion-panel *ngFor="let user of users">
+                    <mat-expansion-panel *ngFor="let user of informations.users|keyvalue">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <app-user-suggestion [user]="user"></app-user-suggestion>
+                                <app-user-suggestion [user]="user.value"></app-user-suggestion>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p *ngFor="let skill of user.skills" mat-ripple class="skill-container">
+                        <p *ngFor="let skill of user.value.skills" mat-ripple class="skill-container">
                             <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
                             {{skill.name}}
                         </p>

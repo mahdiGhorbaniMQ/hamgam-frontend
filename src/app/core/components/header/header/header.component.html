@@ -9,7 +9,7 @@
                placeholder="Search">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="navigate($event)">
             <mat-option [ngClass]="{'dark':theme.dark}" *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.name}}
+                {{option.firstName + " " + option.lastName}}
             </mat-option>
         </mat-autocomplete>
         <mat-icon matSuffix>search</mat-icon>
@@ -22,7 +22,7 @@
 </button>
 
 <div mat-ripple class="info" routerLink="/profile" *ngIf="isAuthenticated">
-    <span>{{auth.userInfo.name}}</span>
+    <span>{{auth.userInfo.firstName + " " + auth.userInfo.lastName}}</span>
     <img [src]="auth.userInfo.img" alt="profile" height="35px" width="auto">
 </div>
 

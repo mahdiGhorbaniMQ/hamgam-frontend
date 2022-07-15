@@ -1,7 +1,7 @@
 import { SkillModel } from "./skill-model";
 
 export interface CategoryModel {
-    id?:string
+    id?:number
     name:string
-    skills:SkillModel[]
+    skills?:SkillModel[]
 }

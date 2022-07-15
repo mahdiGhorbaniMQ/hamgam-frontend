@@ -4,10 +4,13 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -56,7 +59,10 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private navInfo:NavInformationService,
+    private authService:AuthService,
     public theme:ThemeService,
+    private router:Router,
+    private snack:MatSnackBar,
     private skillService:SkillService,
      private dialog: MatDialog) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
@@ -98,7 +104,26 @@ export class RegisterComponent implements OnInit {
     return '';
   }
   
-  register(){}
+  async register(){
+    try {
+      let skills:SkillModel[] = []
+      this.selectedSkills.forEach(skill=>{skills.push(skill)})
+
+      let registerd = await this.authService.register({
+        firstName:this.firstName.value,
+        lastName:this.lastName.value,
+        bio:this.bio.value,
+        email:this.email.value,
+        password:this.password.value,
+        skills:skills
+      },this.image.value)
+      if(registerd){
+        this.router.navigate(["/login"])
+      } 
+    } catch (err:any) {
+      this.snack.open(err.message,"ok!")
+    }
+  }
 
 
   add(event: MatChipInputEvent): void {
@@ -124,7 +149,7 @@ export class RegisterComponent implements OnInit {
   private _filter(value: string): SkillModel[] {
     if(typeof(value) != "string") return this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill))
     return this.skillService.allSkills.filter(skill => {
-      return skill.name.toLowerCase().includes(value.toLowerCase()) && !this.selectedSkills.has(skill)
+      return skill.name!.toLowerCase().includes(value.toLowerCase()) && !this.selectedSkills.has(skill)
     });
   }
 

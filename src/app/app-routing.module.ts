@@ -33,7 +33,7 @@ const routes: Routes = [
     loadChildren: ()=> import("src/app/modules/update-profile/update-profile.module").then(m => m.UpdateProfileModule)
   },
   {
-    path:"profile/:email",
+    path:"profile/:id",
     component:ProfileComponent,
     loadChildren: ()=> import("src/app/modules/profile/profile.module").then(m => m.ProfileModule)
   },

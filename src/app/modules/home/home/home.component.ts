@@ -5,6 +5,7 @@ import { NavInformationService } from 'src/app/core/components/nav-bar/nav-infor
 import { IdeaModel } from 'src/app/core/models/idea-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
+import { InformationService } from 'src/app/core/services/information.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -15,7 +16,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class HomeComponent implements OnInit {
 
-  ideas!:IdeaModel[]
+  ideas!:Map<number,IdeaModel>
   selected="ideas"
 
   constructor(
@@ -23,22 +24,24 @@ export class HomeComponent implements OnInit {
     public screen:ScreenService,
     public theme:ThemeService,
     private ideaService:IdeaService,
+    private informations:InformationService,
     private auth:AuthService,
   ) {}
 
   ngOnInit(): void {
     this.navInfo.select(0)
-    this.ideas = this.ideaService.allIdeas
+
+    this.ideas = this.informations.ideas
   }
 
   selectTab(tab:string){
     this.selected = tab
     if (tab=="ideas")
-      this.ideas = this.ideaService.allIdeas
-    else if(tab=="suggestions")
-      this.ideas = this.ideaService.allIdeas.filter(idea=>this.hasItem(idea.skills,this.auth.userInfo.skills))
-    else if(tab=="your_ideas")
-      this.ideas = this.ideaService.allIdeas.filter(idea=>idea.creator == this.auth.userInfo)
+      this.ideas = this.informations.ideas
+    // else if(tab=="suggestions")
+      // this.ideas = this.ideaService.allIdeas.filter(idea=>this.hasItem(idea.skills,this.auth.userInfo.skills))
+    // else if(tab=="your_ideas")
+      // this.ideas = this.ideaService.allIdeas.filter(idea=>idea.creator == this.auth.userInfo)
   }
 
   hasItem(arr1:any[],arr2:any[]):boolean{

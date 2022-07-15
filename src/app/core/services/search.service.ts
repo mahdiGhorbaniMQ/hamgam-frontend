@@ -18,8 +18,8 @@ export class SearchService {
         
         if(typeof(value) != "string") return this.userService.allUsers
 
-        let name = user.name.toLowerCase()
-        let email = user.email.toLowerCase()
+        let name = user.firstName!.toLowerCase()+" "+user.lastName!.toLowerCase()
+        let email = user.email!.toLowerCase()
         return name.includes(value.toLowerCase()) || email.includes(value.toLowerCase())
       })
     )

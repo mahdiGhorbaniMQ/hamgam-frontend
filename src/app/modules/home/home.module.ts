@@ -17,13 +17,14 @@ import { HttpClientModule } from '@angular/common/http';
     IdeaComponent,
     SuggestionsComponent,
     CommunityComponent,
-    IdeaSuggestionComponent
+    IdeaSuggestionComponent,
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     RouterModule,
     UserSuggestionModule,
+    HttpClientModule
   ],
   exports:[
     HomeComponent,

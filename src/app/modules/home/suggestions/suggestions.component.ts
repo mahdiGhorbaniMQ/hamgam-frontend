@@ -4,6 +4,7 @@ import { IdeaModel } from 'src/app/core/models/idea-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
+import { InformationService } from 'src/app/core/services/information.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
@@ -14,17 +15,19 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class SuggestionsComponent implements OnInit {
 
   userInfo!:UserModel
-  ideas!:IdeaModel[]
+  ideas!:Map<number,IdeaModel>
 
   constructor(
     private ideaService:IdeaService,
+    public informations:InformationService,
     private auth:AuthService,
     public theme:ThemeService
   ) { }
 
   ngOnInit(): void {
     this.userInfo = this.auth.userInfo
-    this.ideas = this.ideaService.allIdeas.filter(idea=>this.has(idea.skills,this.userInfo.skills))
+    this.ideas = this.informations.ideas
+    // .filter(idea=>this.has(idea.skills,this.userInfo.skills))
   }
 
   reload(el:ElementRef){

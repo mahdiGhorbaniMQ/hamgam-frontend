@@ -20,7 +20,7 @@
               </mat-form-field>
         </div>
         <div class="acts">
-          <button mat-button (click)="login()">ورود</button>
+          <button mat-button [disabled]="!formGroup.valid" (click)="login()">ورود</button>
           <button mat-button routerLink="/register" class="link">ساختن اکانت</button>
         </div>
     </form>

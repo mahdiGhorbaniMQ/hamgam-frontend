@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SkillModel } from '../models/skill-model';
+import { InformationService } from './information.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,44 +10,141 @@ export class SkillService {
 
   allSkills:SkillModel[] = []
 
-  constructor() {}
-
-  getAll():SkillModel[]{
-    return this.allSkills
+  constructor(private http:HttpClient,private informations:InformationService) {
+    this.fillSkills()
   }
 
-  getByName(name:string):SkillModel{
-    return this.allSkills.filter(skill=>skill.name==name)[0]
-  }
-  getByNames(names:string[]):SkillModel[]{    
-    return this.allSkills.filter(skill=>names.includes(skill.name))
-  }
-  getById(id:string):SkillModel{
-    return this.allSkills.filter(skill=>skill.id == id)[0]
-  }
-  getByIds(ids:string[]):SkillModel[]{
-    return this.allSkills.filter(skill=>ids.includes(skill.id!))
-  }
-  getByCategory(category:string):SkillModel[]{
-    return this.allSkills.filter(skill=>skill.categories.map(category=>category.name).includes(category))
-  }
-  getByCategories(categories:string[]):SkillModel[]{
-    return this.allSkills.filter(skill=>this.has(skill.categories,categories))
-  }
-  create(skill:SkillModel){
-    skill.id = this.allSkills.map(idea=>idea.id).map(id=>Number.parseInt(id!)).sort().reverse()[0]+1+"" 
-    this.allSkills.push(skill)
-  }
-  update(skill:SkillModel){
-    let index = this.allSkills.indexOf(this.getById(skill.id!))
-    this.allSkills[index] = skill
-  }
-  delete(skill:SkillModel){
-    let index = this.allSkills.indexOf(this.getById(skill.id!))
-    this.allSkills = [...this.allSkills.slice(0,index),...this.allSkills.slice((index+1),(this.allSkills.length-index))]
+  fillSkills(){
+    this.http.get("/api/skills").subscribe(
+      (data:any)=>{
+        data.forEach(async (item:any) => {
+          
+          let skill:SkillModel = {};
+
+          if(this.informations.skills.has(item.id!)){
+            skill = this.informations.skills.get(item.id)!
+          }
+          
+          skill.id = item.id,
+          skill.name = item.name,
+          skill.categories = []
+          skill.image = ""
+          skill.users = []
+
+          this.informations.skills.set(skill.id!,skill)           
+          
+          await this.fillById(skill.id!)
+
+        });
+      },
+      err=>{setTimeout(() => {
+        this.fillSkills()
+      }, 5000);}
+    )
   }
 
 
+
+  async fillById(id:number):Promise<SkillModel>{
+    return new Promise<SkillModel>((resolve, reject) => {
+      this.http.get("/api/skills/"+id).subscribe(
+        (data:any)=>{
+          let skill = this.informations.skills.get(id)!;
+          
+          skill.name = data.name
+          skill.id = data.id
+
+          data.users.forEach((userItem:any) => {
+            skill.users?.push(this.parseUser(userItem))
+          });
+
+          data.categories.forEach((categoryItem:any) => {            
+            skill.categories?.push(this.parseCategory(categoryItem))
+          });          
+        }
+      )
+    })
+  }
+
+
+  parseUser(userData:any){    
+    if(this.informations.users.has(userData.id)){
+      let user = this.informations.users.get(userData.id)!
+      user!.id = userData.id
+      user!.email = userData.email
+      user!.img = userData.avatar?userData.avatar:"src/assets/no-prof.jpg"
+
+      if(!user!.firstName)
+        user.firstName = ""
+      if(!user!.lastName)
+        user!.lastName = ""
+
+      return user
+    }
+    else{
+      let user = {
+        id: userData.id,
+        email: userData.email,
+        img: userData.avatar?userData.avatar:"src/assets/no-prof.jpg",
+        firstName: "",
+        lastName: ""
+      }
+      this.informations.users.set(user.id!,user)
+      return this.informations.users.get(user.id!)!
+    }
+  }
+
+  parseCategory(categoryData:any){    
+    if(this.informations.categories.has(categoryData.id)){
+      let category = this.informations.categories.get(categoryData.id)!
+      category!.id = categoryData.id
+      category!.name = categoryData.name
+      return category
+    }
+    else{
+      let category = {
+        id: categoryData.id,
+        name: categoryData.name,
+      }
+      this.informations.categories.set(category.id!,category)
+      return this.informations.categories.get(category.id!)!
+    }
+  }
+
+  getByName(name:string):SkillModel | null{
+    let res = null
+    this.informations.skills.forEach(skill=>{
+      if(skill.name = name){
+        res = skill
+      }
+    })
+    return res
+  }
+  async create(name:string, cat:number[]):Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+      let data = {
+        name: name,
+        categories: cat,
+      }
+      let httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Token '+localStorage.getItem("token")
+        })
+      };
+      this.http.post("/api/skill",data,httpOptions).subscribe(
+        (res:any)=>{
+          resolve(true)
+        },err=>{
+          reject(err)
+        }
+      )
+    })
+  }
+
+
+  getByUserId(id:string){
+    // return this.allSkills.filter(skill=>skill.users.includes())
+  }
 
 
 

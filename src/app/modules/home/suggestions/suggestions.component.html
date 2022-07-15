@@ -3,8 +3,8 @@
         <span><b>You should see</b></span>
         <mat-icon mat-ripple (click)="reload(icon._elementRef)" #icon>replay</mat-icon>
     </div>
-    <div class="idea" *ngFor="let idea of ideas" dir="rtl">
-        <div class="name" [routerLink]="'/idea/'+idea.id">{{idea.title}}</div>
-        <div class="time">{{idea.date.getHours()}}:{{idea.date.getMinutes()}}</div>
+    <div class="idea" *ngFor="let idea of ideas|keyvalue" dir="rtl">
+        <div class="name" [routerLink]="'/idea/'+idea.value.id">{{idea.value.title}}</div>
+        <div class="time">{{idea.value.date!.getHours()}}:{{idea.value.date!.getMinutes()}}</div>
     </div>
 </div>

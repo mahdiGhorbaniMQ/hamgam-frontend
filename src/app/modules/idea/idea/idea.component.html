@@ -2,8 +2,8 @@
     <div class="container">    
         <div class="card" dir="rtl">
             <button [routerLink]="'/idea/'+idea.id+'/update'" *ngIf="idea.creator == userInfo" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
-            <h4 class="name" [routerLink]="'/profile/'+idea.creator.email">
-                {{idea.creator.name}} {{idea.date.getHours()}}:{{idea.date.getMinutes()}}
+            <h4 dir="rtl" class="name" [routerLink]="'/profile/'+idea.creator!.email">
+                <span> {{idea.creator?.firstName +" "+ idea.creator?.lastName}} </span><span> {{idea.date!.getHours()}}:{{idea.date!.getMinutes()}} </span>
             </h4>
             <h1>
                 {{idea.title}}
@@ -11,16 +11,16 @@
             <div class="content">
               <p>{{idea.content}}</p>
             </div>
-            <h3 *ngIf="idea.skills.length>0" class="skills-title"><b>مهارت‌های لازم</b></h3>
-            <div *ngIf="idea.skills.length>0" class="skills">
-                <div class="skill" *ngFor="let skill of userInfo.skills">
+            <h3 *ngIf="idea.skills!.length>0" class="skills-title"><b>مهارت‌های لازم</b></h3>
+            <div *ngIf="idea.skills!.length>0" class="skills">
+                <div class="skill" *ngFor="let skill of idea.skills">
                     <span>{{skill.name}}</span>
                     <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
                 </div>
             </div>
             <div class="actions">
                 <div>
-                    <span [matMenuTriggerFor]="menuLikes">{{idea.likes.length}}</span>
+                    <span [matMenuTriggerFor]="menuLikes">{{idea.likes!.length}}</span>
                     <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
                     <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
         
@@ -31,11 +31,11 @@
                     </mat-menu>
                 </div>
                 <div>
-                    <span>{{idea.comments.length}}</span>
+                    <span>{{idea.comments!.length}}</span>
                     <mat-icon matRipple>chat_bubble_outline</mat-icon>
                 </div>
                 <div [matMenuTriggerFor]="menuSubscribers">
-                    <span>{{idea.subscribers.length}}</span>
+                    <span>{{idea.subscribers!.length}}</span>
                     <mat-icon matRipple>people</mat-icon>
         
                     <mat-menu #menuSubscribers="matMenu" [class]="theme.dark?'dark-menu-list':''">
@@ -46,7 +46,7 @@
                     </mat-menu>
                 </div>
                 <div [matMenuTriggerFor]="menuSkills">
-                    <span>{{idea.skills.length}}</span>
+                    <span>{{idea.skills!.length}}</span>
                     <mat-icon matRipple>priority_high</mat-icon>
         
                     <mat-menu #menuSkills="matMenu" [class]="theme.dark?'dark-menu-list':'light-menu-list'">
@@ -75,10 +75,10 @@
                 </mat-form-field>
                 <button mat-button (click)="send()" class="send">ثبت</button>
             </div>
-            <div class="comment-item" *ngFor="let comment of idea.comments" [routerLink]="'/profile/'+comment.user.email">
-                <span class="time">{{comment.date.getHours()}}:{{comment.date.getMinutes()}}</span>
-                <p><b>{{comment.user.name}}</b></p>
-                <p class="email">{{comment.user.email}}</p>
+            <div class="comment-item" *ngFor="let comment of idea.comments" [routerLink]="'/profile/'+comment.user!.email">
+                <span class="time">{{comment.date!.getHours()}}:{{comment.date!.getMinutes()}}</span>
+                <p><b>{{comment.user?.firstName + " " + comment.user?.lastName}}</b></p>
+                <p class="email">{{comment.user!.email}}</p>
                 <p>{{comment.content}}</p>
             </div>
         </div>

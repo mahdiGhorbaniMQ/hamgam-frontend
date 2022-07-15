@@ -3,6 +3,7 @@ import { NavInformationService } from 'src/app/core/components/nav-bar/nav-infor
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { InformationService } from 'src/app/core/services/information.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -19,6 +20,7 @@ export class CommunityComponent implements OnInit {
     private userService:UserService,
     public theme:ThemeService,
     private skillsService:SkillService,
+    public informations:InformationService,
     private auth:AuthService
   ) { }
 
@@ -31,7 +33,7 @@ export class CommunityComponent implements OnInit {
     this.userInfo = this.auth.userInfo
     this.users = this.userService.allUsers
     this.allSkills = this.skillsService.allSkills
-    this.yourSkills = this.skillsService.allSkills.filter(skill=>skill.users.includes(this.userInfo))
+    this.yourSkills = this.skillsService.allSkills.filter(skill=>skill.users!.includes(this.userInfo))
     this.navInfo.select(1)
   }
 }

@@ -96,7 +96,7 @@
                         </mat-chip-list>
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                           <mat-option [ngClass]="{'dark':theme.dark}" *ngFor="let skill of filteredSkills | async" [value]="skill">
-                            {{skill.name}} ({{skill.users.length}} نفر)
+                            {{skill.name}} ({{skill.users!.length}} نفر)
                           </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>

@@ -30,9 +30,9 @@ export class IdeaComponent implements OnInit {
     private auth:AuthService,
     private router:Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.userInfo = this.auth.userInfo
-    this.isLiked = this.idea.likes.includes(this.userInfo)    
+    this.isLiked = this.idea.likes!.includes(this.userInfo)    
   }
 
   showIdea(){
@@ -42,16 +42,16 @@ export class IdeaComponent implements OnInit {
   }
   
   like(){
-    let index = this.idea.likes.indexOf(this.userInfo)
+    let index = this.idea.likes!.indexOf(this.userInfo)
     if(index>-1){
-      this.idea.likes = [...this.idea.likes.slice(0,index),...this.idea.likes.slice((index+1),(this.idea.likes.length-index))]
+      this.idea.likes = [...this.idea.likes!.slice(0,index),...this.idea.likes!.slice((index+1),(this.idea.likes!.length-index))]
       this.isLiked = false
     }
     else{
-      this.idea.likes.push(this.userInfo)
+      this.idea.likes!.push(this.userInfo)
       this.isLiked = true
     }
     
-    this.ideaService.update(this.idea)
+    // this.ideaService.update(this.idea)
   }
 }
