@@ -15,7 +15,7 @@ export class SkillService {
   }
 
   fillSkills(){
-    this.http.get("/api/skills").subscribe(
+    this.http.get("http://178.63.240.70:7556/api/skills").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -28,7 +28,7 @@ export class SkillService {
           skill.id = item.id,
           skill.name = item.name,
           skill.categories = []
-          skill.image = ""
+          skill.image = "/assets/no-prof.jpg"
           skill.users = []
 
           this.informations.skills.set(skill.id!,skill)           
@@ -47,7 +47,7 @@ export class SkillService {
 
   async fillById(id:number):Promise<SkillModel>{
     return new Promise<SkillModel>((resolve, reject) => {
-      this.http.get("/api/skills/"+id).subscribe(
+      this.http.get("http://178.63.240.70:7556/api/skills/"+id).subscribe(
         (data:any)=>{
           let skill = this.informations.skills.get(id)!;
           
@@ -72,7 +72,7 @@ export class SkillService {
       let user = this.informations.users.get(userData.id)!
       user!.id = userData.id
       user!.email = userData.email
-      user!.img = userData.avatar?userData.avatar:"src/assets/no-prof.jpg"
+      user!.img = userData.avatar?userData.avatar:"/assets/no-prof.jpg"
 
       if(!user!.firstName)
         user.firstName = ""
@@ -85,7 +85,7 @@ export class SkillService {
       let user = {
         id: userData.id,
         email: userData.email,
-        img: userData.avatar?userData.avatar:"src/assets/no-prof.jpg",
+        img: userData.avatar?userData.avatar:"/assets/no-prof.jpg",
         firstName: "",
         lastName: ""
       }
@@ -131,7 +131,7 @@ export class SkillService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/skill",data,httpOptions).subscribe(
+      this.http.post("http://178.63.240.70:7556/api/skill",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{

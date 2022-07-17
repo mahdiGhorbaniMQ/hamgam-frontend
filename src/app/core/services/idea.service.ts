@@ -14,7 +14,7 @@ export class IdeaService {
   }
 
   fillIdeas(){
-    this.http.get("/api/ideas").subscribe(
+    this.http.get("http://178.63.240.70:7556/api/ideas").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -50,7 +50,7 @@ export class IdeaService {
 
   async fillById(id:number):Promise<IdeaModel>{
     return new Promise<IdeaModel>((resolve, reject) => {
-      this.http.get("/api/ideas/"+id).subscribe(
+      this.http.get("http://178.63.240.70:7556/api/ideas/"+id).subscribe(
         (data:any)=>{
           let idea = this.informations.ideas.get(id)!;
           
@@ -78,7 +78,7 @@ export class IdeaService {
       let user = this.informations.users.get(userData.id)!
       user!.id = userData.id
       user!.email = userData.email
-      user!.img = userData.avatar?userData.avatar:"src/assets/no-prof.jpg"
+      user!.img = userData.avatar?userData.avatar:"/assets/no-prof.jpg"
 
       if(!user!.firstName)
         user.firstName = ""
@@ -91,7 +91,7 @@ export class IdeaService {
       let user = {
         id: userData.id,
         email: userData.email,
-        img: userData.avatar?userData.avatar:"src/assets/no-prof.jpg",
+        img: userData.avatar?userData.avatar:"/assets/no-prof.jpg",
         firstName: "",
         lastName: ""
       }
@@ -164,7 +164,7 @@ export class IdeaService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/idea",data,httpOptions).subscribe(
+      this.http.post("http://178.63.240.70:7556/api/idea",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -186,7 +186,7 @@ export class IdeaService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
+      this.http.post("http://178.63.240.70:7556/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{

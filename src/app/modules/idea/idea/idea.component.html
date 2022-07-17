@@ -15,7 +15,7 @@
             <div *ngIf="idea.skills!.length>0" class="skills">
                 <div class="skill" *ngFor="let skill of idea.skills">
                     <span>{{skill.name}}</span>
-                    <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                    <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
                 </div>
             </div>
             <div class="actions">
@@ -52,7 +52,7 @@
                     <mat-menu #menuSkills="matMenu" [class]="theme.dark?'dark-menu-list':'light-menu-list'">
                         <b mat-menu-item>مهارت های لازم</b>
                         <div dir="ltr" class="skill-container" *ngFor="let skill of idea.skills" style="margin-right: 15px;">
-                            <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                            <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
                             {{skill.name}}
                         </div>
                     </mat-menu>

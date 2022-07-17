@@ -9,7 +9,7 @@
                     <mat-expansion-panel *ngFor="let skill of informations.skills|keyvalue">
                         <mat-expansion-panel-header>
                             <mat-panel-title class="skill-container">
-                                <img [src]="skill.value.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                                <img [src]="skill.value.image || '/assets/logo.jpg'" alt="img" class="skill-image">
                                 {{skill.value.name}}
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -25,7 +25,7 @@
                     <mat-expansion-panel *ngFor="let skill of yourSkills">
                         <mat-expansion-panel-header>
                             <mat-panel-title class="skill-container">
-                                <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                                <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
                                 {{skill.name}}
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -45,7 +45,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <p *ngFor="let skill of user.value.skills" mat-ripple class="skill-container">
-                            <img [src]="skill.image || '../../../../assets/logo.jpg'" alt="img" class="skill-image">
+                            <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
                             {{skill.name}}
                         </p>
                     </mat-expansion-panel>

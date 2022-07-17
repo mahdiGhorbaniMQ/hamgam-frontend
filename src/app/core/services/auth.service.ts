@@ -28,10 +28,10 @@ export class AuthService {
   async login(email:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       
-      localStorage.setItem("token","5e441e55e9b63bab3870fc2bca693f4b83610190")
+      localStorage.setItem("token","f19664213c3ede9929d0dd64533252064840e4c4")
       this.isAuthenticated.next(true)
 
-      this.http.post("/api/accounts/login",{email:email,password:password}).subscribe(
+      this.http.post("http://178.63.240.70:7556/api/accounts/login",{email:email,password:password}).subscribe(
         (res:any)=>{
           localStorage.setItem("token",res.token)
           this.isAuthenticated.next(true)
@@ -48,7 +48,7 @@ export class AuthService {
       })
     };
   
-    this.http.get("/api/accounts/users/me",httpOptions).subscribe(
+    this.http.get("http://178.63.240.70:7556/api/accounts/users/me",httpOptions).subscribe(
       (data:any)=>{
         if(!this.informations.users.has(data.id))
           this.informations.users.set(data.id,this.userInfo)
@@ -79,7 +79,7 @@ export class AuthService {
         skills:user.skills?.map(skill=>skill.id),
         avatar:img
       }
-      this.http.post("/api/accounts/signup",data).subscribe(
+      this.http.post("http://178.63.240.70:7556/api/accounts/signup",data).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -103,7 +103,7 @@ export class AuthService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/accounts/update",data,httpOptions).subscribe(
+      this.http.post("http://178.63.240.70:7556/api/accounts/update",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
