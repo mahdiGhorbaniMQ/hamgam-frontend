@@ -25,15 +25,34 @@ export class CommunityComponent implements OnInit {
   ) { }
 
   userInfo!:UserModel
-  users!:UserModel[]
-  allSkills!:SkillModel[]
-  yourSkills!:SkillModel[]
+  users!:Map<number,UserModel>
+  allSkills!:Map<number,SkillModel>
+  yourSkills:Map<number,SkillModel> = new Map()
 
   ngOnInit(): void {
     this.userInfo = this.auth.userInfo
-    this.users = this.userService.allUsers
-    this.allSkills = this.skillsService.allSkills
-    this.yourSkills = this.skillsService.allSkills.filter(skill=>skill.users!.includes(this.userInfo))
+    this.users = this.informations.users
+    this.allSkills = this.informations.skills
+    setTimeout(() => {
+      this.informations.skills.forEach((skill,id)=>{
+        if(skill.users!.includes(this.userInfo))
+          this.yourSkills.set(id,skill)
+      })      
+    }, 1000);
+
+    setTimeout(() => {
+      this.informations.skills.forEach((skill,id)=>{
+        if(skill.users!.includes(this.userInfo))
+          this.yourSkills.set(id,skill)
+      })      
+    }, 2000);
+
+    setTimeout(() => {
+      this.informations.skills.forEach((skill,id)=>{
+        if(skill.users!.includes(this.userInfo))
+          this.yourSkills.set(id,skill)
+      })      
+    }, 3500);
     this.navInfo.select(1)
   }
 }

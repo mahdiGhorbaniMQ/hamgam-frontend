@@ -13,8 +13,8 @@ export class IdeaService {
     this.fillIdeas()
   }
 
-  fillIdeas(){
-    this.http.get("http://178.63.240.70:7556/api/ideas").subscribe(
+  async fillIdeas(){
+    this.http.get("/api/ideas").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -42,15 +42,13 @@ export class IdeaService {
 
         });
       },
-      err=>{setTimeout(() => {
-        this.fillIdeas()
-      }, 5000);}
+      err=>{}
     )
   }
 
   async fillById(id:number):Promise<IdeaModel>{
     return new Promise<IdeaModel>((resolve, reject) => {
-      this.http.get("http://178.63.240.70:7556/api/ideas/"+id).subscribe(
+      this.http.get("/api/ideas/"+id).subscribe(
         (data:any)=>{
           let idea = this.informations.ideas.get(id)!;
           
@@ -65,9 +63,14 @@ export class IdeaService {
             idea.likes?.push(this.parseUser(userItem))
           });
 
-          data.comments.forEach((commentItem:any) => {            
-            idea.comments?.push(this.parseComment(commentItem))
-          });          
+          this.http.get("/api/ideas/comments").subscribe((comments:any)=>{
+
+            comments.forEach((comment:any) => {
+              if(comment.idea == idea.id)
+                idea.comments?.push(this.parseComment(comment,idea))
+            });
+          })
+
         }
       )
     })
@@ -78,7 +81,8 @@ export class IdeaService {
       let user = this.informations.users.get(userData.id)!
       user!.id = userData.id
       user!.email = userData.email
-      user!.img = userData.avatar?userData.avatar:"/assets/no-prof.jpg"
+      // user!.img = userData.avatar?userData.avatar:"/assets/no-prof.jpg"
+      user!.img = "/assets/no-prof.jpg"
 
       if(!user!.firstName)
         user.firstName = ""
@@ -91,7 +95,8 @@ export class IdeaService {
       let user = {
         id: userData.id,
         email: userData.email,
-        img: userData.avatar?userData.avatar:"/assets/no-prof.jpg",
+        // img: userData.avatar?userData.avatar:"/assets/no-prof.jpg",
+        img: "/assets/no-prof.jpg",
         firstName: "",
         lastName: ""
       }
@@ -100,11 +105,11 @@ export class IdeaService {
     }
   }
 
-  parseComment(commentData:any){
+  parseComment(commentData:any,idea:IdeaModel){
     if(this.informations.comments.has(commentData.id)){
       let comment = this.informations.comments.get(commentData.id)!
       comment.id = commentData.id
-      comment.date = new Date(commentData.created)
+      comment.date = new Date(commentData.publish)
       comment.content = commentData.content
       let commentor = {}
       if(this.informations.users.has(commentData.commentor))
@@ -112,13 +117,13 @@ export class IdeaService {
       else 
         this.informations.users.set(commentData.commentor,commentor)!
       comment.user = commentor
-      
+      comment.idea = idea
       return comment
     }
     else{
       let comment:CommentModel = {
         id: commentData.id,
-        date: new Date(commentData.created),
+        date: new Date(commentData.publish),
         content: commentData.content,
       }
       let commentor = {}
@@ -156,17 +161,20 @@ export class IdeaService {
       let data = {
         title: idea.title,
         content: idea.content,
-        users: idea.subscribers,
-        skills: idea.skills
+        pub_date: new Date(),
+        status: "published",
+        users: idea.subscribers?.map(idea=>idea.id),
+        skills: idea.skills?.map(skill=>skill.id)
       }
       let httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("http://178.63.240.70:7556/api/idea",data,httpOptions).subscribe(
+      this.http.post("/api/ideas/create/",data,httpOptions).subscribe(
         (res:any)=>{
-          resolve(true)
+          this.fillById(res.id)
+          resolve(res)
         },err=>{
           reject(err)
         }
@@ -186,7 +194,7 @@ export class IdeaService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("http://178.63.240.70:7556/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
+      this.http.post("/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{

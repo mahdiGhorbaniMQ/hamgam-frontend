@@ -35,13 +35,14 @@ export class ProfileComponent implements OnInit {
       let id:any = data.get("id")
       if(!id){
         this.userInfo = this.auth.userInfo
-        console.log(this.userInfo);
       }
       else{
         id = Number.parseInt(id)!
         if(!this.informations.users.has(id))
           this.informations.users.set(id,{skills:[]})!
         this.userInfo = this.informations.users.get(id)!
+        console.log(this.userInfo);
+        
         
         if(this.userInfo!=this.auth.userInfo)
           this.isUserProf = false
@@ -69,7 +70,6 @@ export class ProfileComponent implements OnInit {
         })
       }, 3000);
     })
-    console.log(this.userInfo);
     
   }
 

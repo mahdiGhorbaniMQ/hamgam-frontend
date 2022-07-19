@@ -14,8 +14,8 @@ export class SkillService {
     this.fillSkills()
   }
 
-  fillSkills(){
-    this.http.get("http://178.63.240.70:7556/api/skills").subscribe(
+  async fillSkills(){
+    this.http.get("/api/skills").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -37,9 +37,7 @@ export class SkillService {
 
         });
       },
-      err=>{setTimeout(() => {
-        this.fillSkills()
-      }, 5000);}
+      err=>{}
     )
   }
 
@@ -47,7 +45,7 @@ export class SkillService {
 
   async fillById(id:number):Promise<SkillModel>{
     return new Promise<SkillModel>((resolve, reject) => {
-      this.http.get("http://178.63.240.70:7556/api/skills/"+id).subscribe(
+      this.http.get("/api/skills/"+id).subscribe(
         (data:any)=>{
           let skill = this.informations.skills.get(id)!;
           
@@ -55,6 +53,15 @@ export class SkillService {
           skill.id = data.id
 
           data.users.forEach((userItem:any) => {
+            if(this.informations.users.has(userItem.id)){
+              let user = this.informations.users.get(userItem.id)
+              if(user?.skills)
+                user.skills?.push(skill)
+              else 
+                user!.skills = [skill]
+            }
+            else
+              this.informations.users.set(userItem.id,{skills:[skill]})
             skill.users?.push(this.parseUser(userItem))
           });
 
@@ -113,25 +120,27 @@ export class SkillService {
 
   getByName(name:string):SkillModel | null{
     let res = null
-    this.informations.skills.forEach(skill=>{
-      if(skill.name = name){
+    this.informations.skills.forEach((skill,id)=>{
+      if(skill.name == name){
         res = skill
       }
     })
     return res
   }
-  async create(name:string, cat:number[]):Promise<any>{
+  async create(name:string, cat:string[],img:any,owner:number):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       let data = {
         name: name,
         categories: cat,
+        owner:owner,
+        users:[]
       }
       let httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("http://178.63.240.70:7556/api/skill",data,httpOptions).subscribe(
+      this.http.post("/api/skills/create",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{

@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { IdeaModel } from 'src/app/core/models/idea-model';
 import { UserModel } from 'src/app/core/models/user-model';
@@ -22,7 +23,9 @@ export class IdeaComponent implements OnInit {
     private ideaService:IdeaService,
     public informations:InformationService,
     public theme:ThemeService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router:Router,
+    private http:HttpClient
   ) { }
 
   idea!:IdeaModel
@@ -60,7 +63,25 @@ export class IdeaComponent implements OnInit {
     // this.ideaService.update(this.idea)
   }
   
-  send(){}
+  send(){
+    
+    if(!this.auth.userInfo.id) {
+      this.router.navigate(["/login"])
+      return
+    }
+    let body = {
+      publish:new Date(),
+      title:"title",
+      content:this.comment.value,
+      status:true,
+      commentor:this.auth.userInfo.id,
+      idea:this.idea.id,
+    }    
+    this.http.post("/api/ideas/comments/create",body).subscribe(res=>{
+      this.idea.comments?.push(this.ideaService.parseComment(res,this.idea))
+      this.comment.reset()
+    })
+  }
   getCommentError() {
     if (this.comment.hasError('required')) {
       return 'این فیلد ضروری است';

@@ -27,17 +27,14 @@ export class AuthService {
 
   async login(email:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
-      
-      localStorage.setItem("token","f19664213c3ede9929d0dd64533252064840e4c4")
-      this.isAuthenticated.next(true)
 
-      this.http.post("http://178.63.240.70:7556/api/accounts/login",{email:email,password:password}).subscribe(
+      this.http.post("/api/accounts/login/",{email:email,password:password}).subscribe(
         (res:any)=>{
           localStorage.setItem("token",res.token)
           this.isAuthenticated.next(true)
           resolve(true)
         },err=>{
-          reject(err)
+          reject(err.message)
         })      
     })
   }
@@ -48,13 +45,17 @@ export class AuthService {
       })
     };
   
-    this.http.get("http://178.63.240.70:7556/api/accounts/users/me",httpOptions).subscribe(
+    this.http.get("/api/accounts/users/me",httpOptions).subscribe(
       (data:any)=>{
+        
         if(!this.informations.users.has(data.id))
           this.informations.users.set(data.id,this.userInfo)
 
         this.userInfo = this.informations.users.get(data.id)!
         this.userInfo.id = data.id
+        this.userInfo.email = data.email
+        this.userInfo.firstName = data.first_name
+        this.userInfo.lastName = data.last_name
       },
       err=>{
         localStorage.removeItem("token")
@@ -77,9 +78,10 @@ export class AuthService {
         bio:user.bio,
         lastName:user.lastName,
         skills:user.skills?.map(skill=>skill.id),
-        avatar:img
+        // avatar:img
+        avatar:"/assets/no-prof.jpg"
       }
-      this.http.post("http://178.63.240.70:7556/api/accounts/signup",data).subscribe(
+      this.http.post("/api/accounts/signup",data).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -96,14 +98,16 @@ export class AuthService {
         firstName:user.firstName,
         lastName:user.lastName,
         skills:user.skills?.map(skill=>skill.id),
-        avatar:img
+        // avatar:img
+        avatar:"/assets/no-prof.jpg"
+
       }
       let httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("http://178.63.240.70:7556/api/accounts/update",data,httpOptions).subscribe(
+      this.http.post("/api/accounts/update",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{

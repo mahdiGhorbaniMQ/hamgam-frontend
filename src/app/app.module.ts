@@ -7,6 +7,7 @@ import { HeaderModule } from './core/components/header/header.module';
 import { NavBarModule } from './core/components/nav-bar/nav-bar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularMaterialModule } from './core/share/angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavBarModule,
     HeaderModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

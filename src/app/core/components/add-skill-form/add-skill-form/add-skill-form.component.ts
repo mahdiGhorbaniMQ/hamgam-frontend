@@ -1,8 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryModel } from 'src/app/core/models/category-model';
+import { SkillModel } from 'src/app/core/models/skill-model';
+import { UserModel } from 'src/app/core/models/user-model';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { InformationService } from 'src/app/core/services/information.service';
+import { SkillService } from 'src/app/core/services/skill.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
@@ -13,6 +19,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class AddSkillFormComponent implements OnInit {
 
 
+  userInfo!:UserModel
   categories:CategoryModel[] = []
   selectedCategories:Set<CategoryModel> = new Set()
 
@@ -30,9 +37,16 @@ export class AddSkillFormComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private snack:MatSnackBar,
     public theme:ThemeService,
-    private categoryService:CategoryService
+    private skillService:SkillService,
+    private informations:InformationService,
+    private categoryService:CategoryService,
+    private auth:AuthService,
+    public dialogRef: MatDialogRef<AddSkillFormComponent>,
   ) {
-    this.categories = this.categoryService.allCategories    
+    informations.categories.forEach(category => {
+      this.categories.push(category)
+    });
+    this.userInfo = auth.userInfo!
   }
 
   ngOnInit(): void {
@@ -43,7 +57,6 @@ export class AddSkillFormComponent implements OnInit {
       this.selectedCategories.delete(category)
     else
       this.selectedCategories.add(category)
-    this.snack.open("An error exists!","ok!")
   }
 
 
@@ -79,5 +92,24 @@ export class AddSkillFormComponent implements OnInit {
     } else {
       this.myfilename = 'Select File';
     }
+  }
+  async create(){
+    let cats:string[] = []
+    this.selectedCategories.forEach(cat => {
+      cats.push(""+cat.id!)
+    });
+    try{
+      let data = await this.skillService.create(
+        this.nameFormGroup.get("name")?.value,
+        cats,
+        this.image.value,
+        this.userInfo.id!
+      )
+      if(data) this.dialogRef.close();
+    } catch(err){
+      console.log(err);
+      this.snack.open("An error exists!","ok!")
+    }
+
   }
 }

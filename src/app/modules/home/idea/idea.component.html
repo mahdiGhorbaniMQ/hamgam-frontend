@@ -2,8 +2,8 @@
 <div class="container" [ngClass]="{'dark':theme.dark}">
     <div class="name">
         <span>{{idea.date!.getHours() }}:{{idea.date!.getMinutes()}}</span>
-        <span [routerLink]="'/profile/'+idea.creator!.email" *ngIf="screen.innerWidth>550" class="username">{{idea.creator!.email}}</span>
-        <span [routerLink]="'/profile/'+idea.creator!.email" class="info">
+        <span [routerLink]="'/profile/'+idea.creator!.id" *ngIf="screen.innerWidth>550" class="username">{{idea.creator!.email}}</span>
+        <span [routerLink]="'/profile/'+idea.creator!.id" class="info">
             {{idea.creator!.firstName + " " + idea.creator!.lastName}}
         </span>
     </div>

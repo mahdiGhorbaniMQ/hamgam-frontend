@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
+import { IdeaService } from './core/services/idea.service';
 import { InformationService } from './core/services/information.service';
 import { ScreenService } from './core/services/screen.service';
+import { SkillService } from './core/services/skill.service';
 import { ThemeService } from './core/services/theme.service';
+import { UserService } from './core/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +18,11 @@ export class AppComponent {
   constructor(
     public screen:ScreenService,
     public theme:ThemeService,
-    private info:InformationService
+    private info:InformationService,
+    private userService:UserService,
+    private authService:AuthService,
+    private ideaService:IdeaService,
+    private skillService:SkillService,
   ){
   }
 

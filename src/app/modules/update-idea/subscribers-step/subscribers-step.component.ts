@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { UserModel } from 'src/app/core/models/user-model';
+import { InformationService } from 'src/app/core/services/information.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -32,20 +33,27 @@ export class SubscribersStepComponent implements OnInit {
 
   constructor(
     private userService:UserService,
+    private informations:InformationService,
     public theme:ThemeService,
   ) {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
-      map((user: string) => (user ? this._filterUser(user) : userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())),
+      map((user: string) => (user ? this._filterUser(user) : this.asArr(this.informations.users).filter(user=>!this.selectedUsers.has(user)).slice())),
     )
   }
-
+  asArr(map:Map<any,any>){
+    let arr:any[] = []
+    map.forEach((item:any,key:any)=>{
+      arr.push(item)
+    })
+    return arr
+  }
   ngOnInit(): void {
   }
 
   addUser(event: MatChipInputEvent): void {
     const value = event.value;
-    let user = this.userService.getUserByName(value) || this.userService.getUserByemail(value)
+    let user = this.userService.getUserByName(value) || this.userService.getUserByEmail(value)
     if(user){
       this.selectedUsers.add(user);
       event.chipInput!.clear();
@@ -65,8 +73,8 @@ export class SubscribersStepComponent implements OnInit {
   }
 
   private _filterUser(value: string):UserModel[]{
-    if(typeof(value) != "string") return this.userService.allUsers.filter(user=>!this.selectedUsers.has(user))
-    return this.userService.allUsers.filter(user => (
+    if(typeof(value) != "string") return this.asArr(this.informations.users).filter(user=>!this.selectedUsers.has(user))
+    return this.asArr(this.informations.users).filter(user => (
       ((user.firstName+user.lastName!).toLowerCase().includes(value.toLowerCase())
       || user.email!.toLowerCase().includes(value.toLowerCase()))
       && !this.selectedUsers.has(user)
@@ -78,9 +86,9 @@ export class SubscribersStepComponent implements OnInit {
     this.onSubmit.emit();
   }
   selectSearch(){   
-    this.filteredUsers = new BehaviorSubject(this.userCtrl.value ? this._filterUser(this.userCtrl.value) : this.userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())
+    this.filteredUsers = new BehaviorSubject(this.userCtrl.value ? this._filterUser(this.userCtrl.value) : this.asArr(this.informations.users).filter(user=>!this.selectedUsers.has(user)).slice())
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
-      map((userName: string) => (this.userCtrl.value ? this._filterUser(this.userCtrl.value) : this.userService.allUsers.filter(user=>!this.selectedUsers.has(user)).slice())),
+      map((userName: string) => (this.userCtrl.value ? this._filterUser(this.userCtrl.value) : this.asArr(this.informations.users).filter(user=>!this.selectedUsers.has(user)).slice())),
     );  }
 }

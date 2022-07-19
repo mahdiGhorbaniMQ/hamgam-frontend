@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       let logedin = await this.authService.login(this.email.value,this.password.value)
       if(logedin) this.router.navigate(["/"])
     }catch(e){
-      this.snack.open("ایمیل . پسورد همخوانی ندارند!","ok!")
+      this.snack.open("ایمیل و پسورد همخوانی ندارند","ok!")
     }
   }
 }

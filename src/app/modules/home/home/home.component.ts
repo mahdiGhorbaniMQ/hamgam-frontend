@@ -16,7 +16,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class HomeComponent implements OnInit {
 
-  ideas!:Map<number,IdeaModel>
+  ideas:Map<number,IdeaModel> = new Map()
   selected="ideas"
 
   constructor(
@@ -38,10 +38,21 @@ export class HomeComponent implements OnInit {
     this.selected = tab
     if (tab=="ideas")
       this.ideas = this.informations.ideas
-    // else if(tab=="suggestions")
-      // this.ideas = this.ideaService.allIdeas.filter(idea=>this.hasItem(idea.skills,this.auth.userInfo.skills))
-    // else if(tab=="your_ideas")
-      // this.ideas = this.ideaService.allIdeas.filter(idea=>idea.creator == this.auth.userInfo)
+    else if(tab=="suggestions"){
+      this.ideas.clear()
+      this.informations.ideas.forEach((idea,id)=>{
+        if(this.hasItem(idea.skills||[],this.auth.userInfo.skills||[])){
+          this.ideas.set(id,idea)
+        }
+      })
+    }
+    else if(tab=="your_ideas")
+    this.ideas.clear()
+      this.informations.ideas.forEach((idea,id)=>{
+        if(idea.creator == this.auth.userInfo){
+          this.ideas.set(id,idea)
+        }
+      })
   }
 
   hasItem(arr1:any[],arr2:any[]):boolean{

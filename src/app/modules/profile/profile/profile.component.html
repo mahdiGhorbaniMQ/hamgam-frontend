@@ -19,7 +19,7 @@
         </div>
         <div class="ideas" *ngIf="userIdeas.size>0">
             <h1>ایده ها</h1>
-            <div class="idea" *ngFor="let idea of userIdeas|keyvalue" [routerLink]="'/idea/'+idea.value">
+            <div class="idea" *ngFor="let idea of userIdeas|keyvalue" [routerLink]="'/idea/'+idea.value.id">
                 {{idea.value.title}}
             </div>
         </div>

@@ -26,7 +26,11 @@ export class SuggestionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.auth.userInfo
-    this.ideas = this.informations.ideas
+    this.informations.ideas.forEach((idea,id) => {
+        if(this.has(idea.skills!,this.userInfo.skills!)){
+        this.ideas.set(id,idea)
+      }
+    });
     // .filter(idea=>this.has(idea.skills,this.userInfo.skills))
   }
 

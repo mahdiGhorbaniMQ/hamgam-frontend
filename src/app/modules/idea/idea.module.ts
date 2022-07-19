@@ -7,6 +7,7 @@ import { AngularMaterialModule } from 'src/app/core/share/angular-material/angul
 import { UserSuggestionModule } from 'src/app/core/components/user-suggestion/user-suggestion.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     UserSuggestionModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports:[
     IdeaComponent

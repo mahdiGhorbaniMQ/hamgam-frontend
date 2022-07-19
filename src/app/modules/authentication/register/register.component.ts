@@ -11,6 +11,7 @@ import { map, startWith } from 'rxjs/operators';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { SkillModel } from 'src/app/core/models/skill-model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { InformationService } from 'src/app/core/services/information.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -64,11 +65,20 @@ export class RegisterComponent implements OnInit {
     private router:Router,
     private snack:MatSnackBar,
     private skillService:SkillService,
+    private informations:InformationService,
      private dialog: MatDialog) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
-      map((skillName: string) => (skillName ? this._filter(skillName) : skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+      map((skillName: string) => (skillName ? this._filter(skillName) : this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill)).slice())),
     )
+  }
+
+  asArr(map:Map<any,any>){
+    let arr:any[] = []
+    map.forEach((item:any,key:any)=>{
+      arr.push(item)
+    })
+    return arr
   }
   ngOnInit(): void {
     this.navInfo.select(4)
@@ -77,14 +87,14 @@ export class RegisterComponent implements OnInit {
 
   getNameError(){
     if (this.email.hasError('required')) {
-      return 'فیلد نام ضروری است';
+      return 'فیلد نام کوچک ضروری است';
     }
 
     return '';
   }
   getFamilyError(){
     if (this.email.hasError('required')) {
-      return 'فیلد فامیلی ضروری است';
+      return 'فیلد نام خانوادگی ضروری است';
     }
 
     return '';
@@ -147,8 +157,8 @@ export class RegisterComponent implements OnInit {
   }
 
   private _filter(value: string): SkillModel[] {
-    if(typeof(value) != "string") return this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill))
-    return this.skillService.allSkills.filter(skill => {
+    if(typeof(value) != "string") return this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill))
+    return this.asArr(this.informations.skills).filter(skill => {
       return skill.name!.toLowerCase().includes(value.toLowerCase()) && !this.selectedSkills.has(skill)
     });
   }
@@ -196,10 +206,10 @@ export class RegisterComponent implements OnInit {
   }
 
   selectSearch(){
-    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())
+    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill)).slice())
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
-      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill)).slice())),
     );
   }
 }

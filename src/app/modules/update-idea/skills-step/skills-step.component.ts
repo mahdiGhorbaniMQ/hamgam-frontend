@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/add-skill-form/add-skill-form.component';
 import { SkillModel } from 'src/app/core/models/skill-model';
+import { InformationService } from 'src/app/core/services/information.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -31,14 +32,21 @@ export class SkillsStepComponent implements OnInit {
   constructor(
     public theme:ThemeService,
     private skillService:SkillService,
+    private informations:InformationService,
     private dialog: MatDialog
   ) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
-      map((skillName: string) => (skillName ? this._filter(skillName) : skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+      map((skillName: string) => (skillName ? this._filter(skillName) : this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill)).slice())),
     )
   }
-
+  asArr(map:Map<any,any>){
+    let arr:any[] = []
+    map.forEach((item:any,key:any)=>{
+      arr.push(item)
+    })
+    return arr
+  }
   ngOnInit(): void {
   }
 
@@ -63,8 +71,8 @@ export class SkillsStepComponent implements OnInit {
   }
 
   private _filter(value: string): SkillModel[] {
-    if(typeof(value) != "string") return this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill))
-    return this.skillService.allSkills.filter(skill => {
+    if(typeof(value) != "string") return this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill))
+    return this.asArr(this.informations.skills).filter(skill => {
       return skill.name!.toLowerCase().includes(value.toLowerCase()) && !this.selectedSkills.has(skill)
     });
   }
@@ -81,10 +89,10 @@ export class SkillsStepComponent implements OnInit {
   }
 
   selectSearch(){
-    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())
+    this.filteredSkills =new BehaviorSubject(this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill)).slice())
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
-      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.skillService.allSkills.filter(skill=>!this.selectedSkills.has(skill)).slice())),
+      map((skillName: string) => (this.skillCtrl.value ? this._filter(this.skillCtrl.value) : this.asArr(this.informations.skills).filter(skill=>!this.selectedSkills.has(skill)).slice())),
     );
   }
 }

@@ -9,14 +9,14 @@
                     </ng-template>
                     <div>
                         <mat-form-field appearance="outline">
-                            <mat-label>نام خود را وارد کنید</mat-label>
+                            <mat-label>نام کوچک خود را وارد کنید</mat-label>
                             <input matInput [formControl]="firstName" required>
                             <mat-error *ngIf="firstName.invalid">{{getNameError()}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field appearance="outline">
-                            <mat-label>فامیلی خود را وارد کنید</mat-label>
+                            <mat-label>نام خانوادگی خود را وارد کنید</mat-label>
                             <input matInput [formControl]="lastName" required>
                             <mat-error *ngIf="lastName.invalid">{{getFamilyError()}}</mat-error>
                         </mat-form-field>

@@ -73,14 +73,17 @@
                     />
                     <mat-error *ngIf="comment.invalid">{{getCommentError()}}</mat-error>
                 </mat-form-field>
-                <button mat-button (click)="send()" class="send">ثبت</button>
+                <button mat-button [disabled]="!comment.valid" (click)="send()" class="send">ثبت</button>
             </div>
-            <div class="comment-item" *ngFor="let comment of idea.comments" [routerLink]="'/profile/'+comment.user!.email">
-                <span class="time">{{comment.date!.getHours()}}:{{comment.date!.getMinutes()}}</span>
-                <p><b>{{comment.user?.firstName + " " + comment.user?.lastName}}</b></p>
-                <p class="email">{{comment.user!.email}}</p>
-                <p>{{comment.content}}</p>
-            </div>
+            <ng-container *ngIf="idea.comments">
+                <div class="comment-item" *ngFor="let comment of idea.comments!.slice().reverse()" [routerLink]="'/profile/'+comment.user!.email">
+                    <span class="time">{{comment.date!.getHours()}}:{{comment.date!.getMinutes()}}</span>
+                    <p><b>{{comment.user?.firstName + " " + comment.user?.lastName}}</b></p>
+                    <p class="email">{{comment.user!.email}}</p>
+                    <p class="comment-body">{{comment.content}}</p>
+                </div>
+            </ng-container>
+            
         </div>
     </div>
 </div>
