@@ -7,7 +7,7 @@
                 <button mat-button (click)="selectTab('your_ideas')" [ngClass]="{'selected':selected=='your_ideas'}">ایده‌های شما</button>
                 <button mat-button (click)="selectTab('your_requests')" [ngClass]="{'selected':selected=='suggestions'}">مرتبط به شما</button>
             </div>
-            <app-idea *ngFor="let idea of ideas|keyvalue" [idea]="idea.value"></app-idea>
+            <app-idea *ngFor="let idea of ideas" [idea]="idea"></app-idea>
            </div>
         </div>
         <div class="suggestions" *ngIf="screen.innerWidth>1000">

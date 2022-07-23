@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommentModel } from '../models/comment-model';
 import { IdeaModel } from '../models/idea-model';
+import { SkillModel } from '../models/skill-model';
+import { UserModel } from '../models/user-model';
 import { InformationService } from './information.service';
 
 @Injectable({
@@ -60,7 +62,10 @@ export class IdeaService {
           });
 
           data.likes.forEach((userItem:any) => {
-            idea.likes?.push(this.parseUser(userItem))
+            if(!this.informations.users.has(userItem)){
+              this.informations.users.set(userItem,{skills:[]})
+            }
+            idea.likes?.push(this.informations.users.get(userItem)!)            
           });
 
           this.http.get("/api/ideas/comments").subscribe((comments:any)=>{
@@ -69,8 +74,9 @@ export class IdeaService {
               if(comment.idea == idea.id)
                 idea.comments?.push(this.parseComment(comment,idea))
             });
-          })
 
+          })
+          resolve(idea)
         }
       )
     })
@@ -156,15 +162,26 @@ export class IdeaService {
   }
 
 
-  async create(idea:IdeaModel):Promise<any>{
+  async create(idea:any):Promise<any>{
     return new Promise<any>((resolve, reject) => {
+      let skills:number[] = []
+      let cats:number[] = []
+      let catSet = new Set<number>()
+
+      idea.skills?.forEach((skill:SkillModel) => {
+        skills.push(skill.id!)
+        skill.categories?.forEach(c=>{catSet.add(c.id!)})
+      });
+      catSet.forEach(c=>{cats.push(c)})
+      
       let data = {
+        creator: idea.creator!.id,
         title: idea.title,
         content: idea.content,
         pub_date: new Date(),
         status: "published",
-        users: idea.subscribers?.map(idea=>idea.id),
-        skills: idea.skills?.map(skill=>skill.id)
+        skills: skills,
+        cat: cats
       }
       let httpOptions = {
         headers: new HttpHeaders({
@@ -172,8 +189,27 @@ export class IdeaService {
         })
       };
       this.http.post("/api/ideas/create/",data,httpOptions).subscribe(
-        (res:any)=>{
-          this.fillById(res.id)
+        async (res:any)=>{
+          this.informations.ideas.set(res.id,{
+            creator:idea.creator,
+            title:res.title,
+            content:res.content,
+            date:new Date(res.pub_date),
+            id:res.id,
+            skills: [],
+            comments: [],
+            likes: [],
+            subscribers: []
+          })
+          
+          let newIdea = this.informations.ideas.get(res.id)!
+          idea.subscribers.forEach((u:UserModel) => {
+            newIdea.subscribers?.push(u)
+          });
+          idea.skills.forEach((s:SkillModel) => {
+            newIdea.skills?.push(s)
+          });
+          await this.update(newIdea)
           resolve(res)
         },err=>{
           reject(err)
@@ -182,22 +218,49 @@ export class IdeaService {
     })
   }
   async update(idea:IdeaModel):Promise<any>{
+    
     return new Promise<any>((resolve, reject) => {
+      let skills:number[] = []
+      let cats:number[] = []
+      let likes:number[] = []
+      let catSet = new Set<number>()
+
+      idea.skills?.forEach((skill:SkillModel) => {
+        skills.push(skill.id!)
+        skill.categories?.forEach(c=>{catSet.add(c.id!)})
+      });
+      idea.likes?.forEach((u:UserModel) => {
+        likes.push(u.id!)
+      });
+      catSet.forEach(c=>{cats.push(c)})
+
+      let users:number[]= []
+
+      idea.subscribers?.forEach((u:UserModel) => {
+        users.push(u.id!)
+      });
       let data = {
         title: idea.title,
         content: idea.content,
-        users: idea.subscribers,
-        skills: idea.skills
+        users: users,
+        skills: skills,
+        cat: cats,
+        status: "published",
+        pub_date: idea.date,
+        likes: likes
       }
       let httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
-        (res:any)=>{
-          resolve(true)
+      
+      this.http.put("/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
+        (res:any)=>{          
+          resolve(res)
         },err=>{
+          console.log(err);
+          
           reject(err)
         }
       )

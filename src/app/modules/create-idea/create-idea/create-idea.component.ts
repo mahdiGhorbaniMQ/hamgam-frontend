@@ -16,6 +16,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class CreateIdeaComponent implements OnInit {
 
+  created = false
 
   contentFormGroup = this._formBuilder.group({
     title: ['', Validators.required],
@@ -49,13 +50,15 @@ export class CreateIdeaComponent implements OnInit {
     if(!this.auth.userInfo.id) this.router.navigate(["/login"])
     try {
       let body = {
+        creator:this.auth.userInfo,
         title:this.contentFormGroup.get("title")!.value,
         content:this.contentFormGroup.get("content")!.value,
-        subscribers:this.subscribersFormGroup.get("subscribers")!.value,
-        skills:this.skillsFormGroup.get("skills")!.value
+        subscribers:this.selectedUsers,
+        skills:this.selectedSkills
       }      
       let data = await this.ideaService.create(body)
       if(data){
+        this.created = true
         this.router.navigate(["/idea/"+data.id])
       }
     } catch (err:any) {
@@ -67,7 +70,8 @@ export class CreateIdeaComponent implements OnInit {
 
   canExit() : boolean {
  
-    if((this.contentFormGroup.touched||this.skillsFormGroup.touched||this.subscribersFormGroup.touched)){
+    if(this.created) return true
+    else if((this.contentFormGroup.touched||this.skillsFormGroup.touched||this.subscribersFormGroup.touched)){
       if (confirm("با خارج شدن از صفحه اطلاعات وارد شده از بین می‌رود، آیا مطمئنید؟")) {
         return true
       } else {

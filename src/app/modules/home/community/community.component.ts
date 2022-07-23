@@ -18,8 +18,20 @@ export class CommunityComponent implements OnInit {
   skills!:SkillModel[]
 
   ngOnInit(): void {
-    this.skills = this.auth.userInfo.skills!   
+    this.fill()
   }
+
+  fill(){
+    this.skills = this.auth.userInfo.skills!   
+
+
+    if(this.skills.length==0){
+      setTimeout(() => {
+        this.fill()
+      }, 1500);
+    }
+  }
+  
 
   reload(el:ElementRef){
     el.nativeElement.classList.add("rotate")

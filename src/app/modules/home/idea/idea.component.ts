@@ -41,7 +41,7 @@ export class IdeaComponent implements OnInit {
     }, 250);
   }
   
-  like(){
+  async like(){
     let index = this.idea.likes!.indexOf(this.userInfo)
     if(index>-1){
       this.idea.likes = [...this.idea.likes!.slice(0,index),...this.idea.likes!.slice((index+1),(this.idea.likes!.length-index))]
@@ -51,7 +51,6 @@ export class IdeaComponent implements OnInit {
       this.idea.likes!.push(this.userInfo)
       this.isLiked = true
     }
-    
-    // this.ideaService.update(this.idea)
+    await this.ideaService.update(this.idea)
   }
 }

@@ -133,7 +133,8 @@ export class SkillService {
         name: name,
         categories: cat,
         owner:owner,
-        users:[]
+        users:[],
+        ideas:[]
       }
       let httpOptions = {
         headers: new HttpHeaders({
@@ -142,7 +143,15 @@ export class SkillService {
       };
       this.http.post("/api/skills/create",data,httpOptions).subscribe(
         (res:any)=>{
+
+          this.informations.skills.set(res.id,{
+            categories:[],
+            users:[],
+            image:"/assets/no-prof.jpg"
+          })          
+          this.fillById(res.id)
           resolve(true)
+          
         },err=>{
           reject(err)
         }

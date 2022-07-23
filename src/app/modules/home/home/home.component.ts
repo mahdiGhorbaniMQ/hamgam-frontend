@@ -16,7 +16,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class HomeComponent implements OnInit {
 
-  ideas:Map<number,IdeaModel> = new Map()
+  ideas:IdeaModel[] = []
   selected="ideas"
 
   constructor(
@@ -30,29 +30,48 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.navInfo.select(0)
-
-    this.ideas = this.informations.ideas
+    this.fill()    
   }
+
+  fill(){
+    this.ideas = []
+    this.informations.ideas.forEach((value,key)=>{
+      this.ideas.push(value)
+    })
+    this.ideas.sort((a,b) => (a.id! <b.id!)?1:-1)
+    if (this.ideas.length == 0)
+    setTimeout(() => {
+        this.fill()
+    }, 1500);
+  }
+
 
   selectTab(tab:string){
     this.selected = tab
-    if (tab=="ideas")
-      this.ideas = this.informations.ideas
+    if (tab=="ideas"){
+      this.ideas = []
+      this.informations.ideas.forEach((value,key)=>{
+        this.ideas.push(value)
+      })
+      this.ideas.sort((a,b) => (a.date! <b.date!)?1:-1)
+    }
     else if(tab=="suggestions"){
-      this.ideas.clear()
+      this.ideas = []
       this.informations.ideas.forEach((idea,id)=>{
         if(this.hasItem(idea.skills||[],this.auth.userInfo.skills||[])){
-          this.ideas.set(id,idea)
+          this.ideas.push(idea)
         }
       })
+      this.ideas.sort((a,b) => (a.date! <b.date!)?1:-1)
     }
     else if(tab=="your_ideas")
-    this.ideas.clear()
+    this.ideas = []
       this.informations.ideas.forEach((idea,id)=>{
         if(idea.creator == this.auth.userInfo){
-          this.ideas.set(id,idea)
+          this.ideas.push(idea)
         }
       })
+      this.ideas.sort((a,b) => (a.date! <b.date!)?1:-1)
   }
 
   hasItem(arr1:any[],arr2:any[]):boolean{

@@ -15,7 +15,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class SuggestionsComponent implements OnInit {
 
   userInfo!:UserModel
-  ideas!:Map<number,IdeaModel>
+  ideas:IdeaModel[] = []
 
   constructor(
     private ideaService:IdeaService,
@@ -26,14 +26,25 @@ export class SuggestionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.auth.userInfo
-    this.informations.ideas.forEach((idea,id) => {
-        if(this.has(idea.skills!,this.userInfo.skills!)){
-        this.ideas.set(id,idea)
-      }
-    });
-    // .filter(idea=>this.has(idea.skills,this.userInfo.skills))
+    this.fill()
   }
 
+  fill(){
+    this.ideas = []
+    this.informations.ideas.forEach((idea,id)=>{
+      if(this.has(idea.skills||[],this.auth.userInfo.skills||[])){
+        this.ideas.push(idea)
+      }
+    })
+    this.ideas.sort((a,b) => (a.id! <b.id!)?1:-1)
+
+    if(this.ideas.length==0){
+      setTimeout(() => {
+        this.fill()
+      }, 1500);
+    }
+  }
+  
   reload(el:ElementRef){
     el.nativeElement.classList.add("rotate")
     setTimeout(() => {

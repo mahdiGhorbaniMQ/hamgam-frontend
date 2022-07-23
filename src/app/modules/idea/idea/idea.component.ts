@@ -45,22 +45,20 @@ export class IdeaComponent implements OnInit {
     }
     this.idea = this.informations.ideas.get(this.id)!
     
-    this.isLiked = false
-    //  this.idea.likes.includes(this.userInfo)
+    this.isLiked = this.idea.likes!.includes(this.userInfo)    
   }
 
-  like(){
-    // let index = this.idea.likes.indexOf(this.userInfo)
-    // if(index>-1){
-    //   this.idea.likes = [...this.idea.likes.slice(0,index),...this.idea.likes.slice((index+1),(this.idea.likes.length-index))]
-    //   this.isLiked = false
-    // }
-    // else{
-    //   this.idea.likes.push(this.userInfo)
-    //   this.isLiked = true
-    // }
-    
-    // this.ideaService.update(this.idea)
+  async like(){
+    let index = this.idea.likes!.indexOf(this.userInfo)
+    if(index>-1){
+      this.idea.likes = [...this.idea.likes!.slice(0,index),...this.idea.likes!.slice((index+1),(this.idea.likes!.length-index))]
+      this.isLiked = false
+    }
+    else{
+      this.idea.likes!.push(this.userInfo)
+      this.isLiked = true
+    }
+    await this.ideaService.update(this.idea)
   }
   
   send(){
