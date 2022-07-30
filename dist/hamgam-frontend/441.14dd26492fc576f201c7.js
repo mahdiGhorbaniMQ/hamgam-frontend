@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhamgam_frontend=self.webpackChunkhamgam_frontend||[]).push([[441],{8441:(m,u,n)=>{n.r(u),n.d(u,{NotFoundModule:()=>a});var t=n(8583),d=n(7716);let a=(()=>{class o{}return o.\u0275fac=function(e){return new(e||o)},o.\u0275mod=d.oAB({type:o}),o.\u0275inj=d.cJS({imports:[[t.ez]]}),o})()}}]);

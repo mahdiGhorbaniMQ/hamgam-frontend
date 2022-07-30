@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhamgam_frontend=self.webpackChunkhamgam_frontend||[]).push([[459],{4459:(E,o,l)=>{l.r(o),l.d(o,{AddSkillFormModule:()=>_});var n=l(8583),m=l(4508),r=l(3679),d=l(7716);let _=(()=>{class a{}return a.\u0275fac=function(t){return new(t||a)},a.\u0275mod=d.oAB({type:a}),a.\u0275inj=d.cJS({imports:[[n.ez,m.h,r.UX]]}),a})()}}]);
