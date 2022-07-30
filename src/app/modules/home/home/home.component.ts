@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.fill()    
   }
 
-  fill(){
+  async fill(){
     this.ideas = []
     this.informations.ideas.forEach((value,key)=>{
       this.ideas.push(value)
