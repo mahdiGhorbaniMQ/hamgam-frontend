@@ -19,7 +19,7 @@ export class UserService {
   }
 
   async fillUsers(){
-    this.http.get("/api/accounts/user/all").subscribe(
+    this.http.get("http://144.76.186.13:7556/api/accounts/user/all").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -48,7 +48,7 @@ export class UserService {
 
   async fillById(id:number):Promise<UserModel>{
     return new Promise<UserModel>((resolve, reject) => {
-      this.http.get("/api/accounts/user/"+id).subscribe(
+      this.http.get("http://144.76.186.13:7556/api/accounts/user/"+id).subscribe(
         (data:any)=>{
           let user = this.informations.users.get(id)!;
           

@@ -15,7 +15,7 @@ export class SkillService {
   }
 
   async fillSkills(){
-    this.http.get("/api/skills").subscribe(
+    this.http.get("http://144.76.186.13:7556/api/skills").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -45,7 +45,7 @@ export class SkillService {
 
   async fillById(id:number):Promise<SkillModel>{
     return new Promise<SkillModel>((resolve, reject) => {
-      this.http.get("/api/skills/"+id).subscribe(
+      this.http.get("http://144.76.186.13:7556/api/skills/"+id).subscribe(
         (data:any)=>{
           let skill = this.informations.skills.get(id)!;
           
@@ -141,7 +141,7 @@ export class SkillService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/skills/create",data,httpOptions).subscribe(
+      this.http.post("http://144.76.186.13:7556/api/skills/create",data,httpOptions).subscribe(
         (res:any)=>{
 
           this.informations.skills.set(res.id,{

@@ -16,7 +16,7 @@ export class IdeaService {
   }
 
   async fillIdeas(){
-    this.http.get("/api/ideas").subscribe(
+    this.http.get("http://144.76.186.13:7556/api/ideas").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -50,7 +50,7 @@ export class IdeaService {
 
   async fillById(id:number):Promise<IdeaModel>{
     return new Promise<IdeaModel>((resolve, reject) => {
-      this.http.get("/api/ideas/"+id).subscribe(
+      this.http.get("http://144.76.186.13:7556/api/ideas/"+id).subscribe(
         (data:any)=>{
           let idea = this.informations.ideas.get(id)!;
           
@@ -68,7 +68,7 @@ export class IdeaService {
             idea.likes?.push(this.informations.users.get(userItem)!)            
           });
 
-          this.http.get("/api/ideas/comments").subscribe((comments:any)=>{
+          this.http.get("http://144.76.186.13:7556/api/ideas/comments").subscribe((comments:any)=>{
 
             comments.forEach((comment:any) => {
               if(comment.idea == idea.id)
@@ -255,7 +255,7 @@ export class IdeaService {
         })
       };
       
-      this.http.put("/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
+      this.http.put("http://144.76.186.13:7556/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
         (res:any)=>{          
           resolve(res)
         },err=>{
