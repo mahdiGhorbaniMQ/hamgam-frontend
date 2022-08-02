@@ -46,7 +46,7 @@ export class AuthService {
       })
     };
   
-    this.http.get(environment.api+"/api/accounts/users/me",httpOptions).subscribe(
+    this.http.get(environment.api+"/accounts/users/me",httpOptions).subscribe(
       (data:any)=>{
         
         if(!this.informations.users.has(data.id))
