@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { CommentModel } from '../models/comment-model';
 import { IdeaModel } from '../models/idea-model';
 import { SkillModel } from '../models/skill-model';
@@ -16,7 +17,7 @@ export class IdeaService {
   }
 
   async fillIdeas(){
-    this.http.get("http://144.76.186.13:7556/api/ideas").subscribe(
+    this.http.get(environment.api+"/ideas").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -50,7 +51,7 @@ export class IdeaService {
 
   async fillById(id:number):Promise<IdeaModel>{
     return new Promise<IdeaModel>((resolve, reject) => {
-      this.http.get("http://144.76.186.13:7556/api/ideas/"+id).subscribe(
+      this.http.get(environment.api+"/ideas/"+id).subscribe(
         (data:any)=>{
           let idea = this.informations.ideas.get(id)!;
           
@@ -68,7 +69,7 @@ export class IdeaService {
             idea.likes?.push(this.informations.users.get(userItem)!)            
           });
 
-          this.http.get("http://144.76.186.13:7556/api/ideas/comments").subscribe((comments:any)=>{
+          this.http.get(environment.api+"/ideas/comments").subscribe((comments:any)=>{
 
             comments.forEach((comment:any) => {
               if(comment.idea == idea.id)
@@ -188,7 +189,7 @@ export class IdeaService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("/api/ideas/create/",data,httpOptions).subscribe(
+      this.http.post(environment.api+"/ideas/create/",data,httpOptions).subscribe(
         async (res:any)=>{
           this.informations.ideas.set(res.id,{
             creator:idea.creator,
@@ -255,7 +256,7 @@ export class IdeaService {
         })
       };
       
-      this.http.put("http://144.76.186.13:7556/api/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
+      this.http.put(environment.api+"/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
         (res:any)=>{          
           resolve(res)
         },err=>{

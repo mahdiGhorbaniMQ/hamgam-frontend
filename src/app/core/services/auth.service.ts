@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user-model';
 import { InformationService } from './information.service';
 import { UserService } from './user.service';
@@ -28,7 +29,7 @@ export class AuthService {
   async login(email:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
 
-      this.http.post("http://144.76.186.13:7556/api/accounts/login/",{email:email,password:password}).subscribe(
+      this.http.post(environment.api+"/accounts/login/",{email:email,password:password}).subscribe(
         (res:any)=>{
           localStorage.setItem("token",res.token)
           this.isAuthenticated.next(true)
@@ -45,7 +46,7 @@ export class AuthService {
       })
     };
   
-    this.http.get("http://144.76.186.13:7556/api/accounts/users/me",httpOptions).subscribe(
+    this.http.get(environment.api+"/api/accounts/users/me",httpOptions).subscribe(
       (data:any)=>{
         
         if(!this.informations.users.has(data.id))
@@ -81,7 +82,7 @@ export class AuthService {
         // avatar:img
         avatar:"/assets/no-prof.jpg"
       }
-      this.http.post("http://144.76.186.13:7556/api/accounts/signup",data).subscribe(
+      this.http.post(environment.api+"/accounts/signup",data).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -107,7 +108,7 @@ export class AuthService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("http://144.76.186.13:7556/api/accounts/update",data,httpOptions).subscribe(
+      this.http.post(environment.api+"/accounts/update",data,httpOptions).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{

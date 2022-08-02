@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { SkillModel } from '../models/skill-model';
 import { InformationService } from './information.service';
 
@@ -15,7 +16,7 @@ export class SkillService {
   }
 
   async fillSkills(){
-    this.http.get("http://144.76.186.13:7556/api/skills").subscribe(
+    this.http.get(environment.api+"/skills").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
           
@@ -45,7 +46,7 @@ export class SkillService {
 
   async fillById(id:number):Promise<SkillModel>{
     return new Promise<SkillModel>((resolve, reject) => {
-      this.http.get("http://144.76.186.13:7556/api/skills/"+id).subscribe(
+      this.http.get(environment.api+"/skills/"+id).subscribe(
         (data:any)=>{
           let skill = this.informations.skills.get(id)!;
           
@@ -141,7 +142,7 @@ export class SkillService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      this.http.post("http://144.76.186.13:7556/api/skills/create",data,httpOptions).subscribe(
+      this.http.post(environment.api+"/skills/create",data,httpOptions).subscribe(
         (res:any)=>{
 
           this.informations.skills.set(res.id,{
