@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: "https://ham-ghadam.ir:7556/api"
+  api: "https://ham-ghadam.ir/api"
 };
 
 /*
