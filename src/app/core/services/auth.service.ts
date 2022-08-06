@@ -39,10 +39,8 @@ export class AuthService {
         (res:any)=>{
           localStorage.setItem("token",res.token)
           this.isAuthenticated.next(true)
-          this.loading.isLoading = false
           resolve(true)
         },err=>{
-          this.loading.isLoading = false
           reject(err.message)
         })      
     })
@@ -81,18 +79,25 @@ export class AuthService {
   async register(user:UserModel,img:any):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       let data = {
+        firstName:user.firstName,
+        lastName:user.lastName,
         email:user.email,
         password:user.password,
-        firstName:user.firstName,
-        bio:user.bio,
-        lastName:user.lastName,
-        skills:user.skills?.map(skill=>skill.id),
-        // avatar:img
-        avatar:"/assets/no-prof.jpg"
+        // bio:user.bio,
+        // skills:user.skills?.map(skill=>skill.id),
+        // avatar:img,
+        // avatar:"/assets/no-prof.jpg"
       }
       this.loading.isLoading = true
       this.http.post(environment.api+"/accounts/signup",data).subscribe(
-        (res:any)=>{
+        async (res:any)=>{
+          try{
+            await this.login(user.email!,user.password!)
+            await this.update(user,img)
+          }
+          catch(err){
+
+          }
           this.loading.isLoading = false
           resolve(true)
         },err=>{
@@ -110,9 +115,8 @@ export class AuthService {
         firstName:user.firstName,
         lastName:user.lastName,
         skills:user.skills?.map(skill=>skill.id),
-        // avatar:img
-        avatar:"/assets/no-prof.jpg"
-
+        avatar:img
+        // avatar:"/assets/no-prof.jpg"
       }
       let httpOptions = {
         headers: new HttpHeaders({

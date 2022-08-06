@@ -109,7 +109,9 @@ export class UpdateIdeaComponent implements OnInit {
       console.log(err);
       
       this.snack.open(err.message,"ok!")
-    }
+      setTimeout(() => {
+        this.snack.dismiss()
+      }, 1500);    }
   }
 
   canExit() : boolean {

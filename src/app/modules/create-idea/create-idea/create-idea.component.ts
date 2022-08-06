@@ -65,6 +65,9 @@ export class CreateIdeaComponent implements OnInit {
       console.log(err);
       
       this.snack.open(err.message,"ok!")
+      setTimeout(() => {
+        this.snack.dismiss()
+      }, 1500);
     }
   }
 

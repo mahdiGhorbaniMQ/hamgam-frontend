@@ -29,7 +29,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.checkScreen()
-    // this.loading.isLoading = true
+    this.loading.isLoading = true
   }
   
   @HostListener('window:resize')

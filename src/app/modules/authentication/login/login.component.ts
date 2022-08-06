@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { ScreenService } from 'src/app/core/services/screen.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
+    private loading:LoadingService,
     private _formBuilder: FormBuilder,
     public theme:ThemeService,
     private authService:AuthService,
@@ -52,9 +54,16 @@ export class LoginComponent implements OnInit {
   async login(){
     try{
       let logedin = await this.authService.login(this.email.value,this.password.value)
-      if(logedin) this.router.navigate(["/"])
+      if(logedin){
+        this.loading.isLoading = false
+        this.router.navigate(["/"])
+      }
     }catch(e){
+      this.loading.isLoading = false
       this.snack.open("ایمیل و پسورد همخوانی ندارند","ok!")
+      setTimeout(() => {
+        this.snack.dismiss()
+      }, 1500);
     }
   }
 }

@@ -67,14 +67,13 @@ export class IdeaService {
           });
 
           data.likes.forEach((userItem:any) => {
-            if(!this.informations.users.has(userItem)){
-              this.informations.users.set(userItem,{skills:[]})
+            if(!this.informations.users.has(userItem.id)){
+              this.informations.users.set(userItem.id,{skills:[]})
             }
-            idea.likes?.push(this.informations.users.get(userItem)!)            
+            idea.likes?.push(this.informations.users.get(userItem.id)!)            
           });
 
           this.http.get(environment.api+"/ideas/comments").subscribe((comments:any)=>{
-
             comments.forEach((comment:any) => {
               if(comment.idea == idea.id)
                 idea.comments?.push(this.parseComment(comment,idea))

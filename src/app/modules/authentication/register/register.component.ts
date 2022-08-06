@@ -132,6 +132,9 @@ export class RegisterComponent implements OnInit {
       } 
     } catch (err:any) {
       this.snack.open(err.message,"ok!")
+      setTimeout(() => {
+        this.snack.dismiss
+      }, 1500);
     }
   }
 

@@ -4,6 +4,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AddSkillFormComponent } from 'src/app/core/components/add-skill-form/add-skill-form/add-skill-form.component';
@@ -60,9 +62,11 @@ export class UpdateProfileComponent implements OnInit {
     public theme:ThemeService,
     private _formBuilder: FormBuilder,
     private navInfo:NavInformationService,
+    private snack:MatSnackBar,
     private informations:InformationService,
     private skillService:SkillService,
     private auth:AuthService,
+    private router:Router,
     private dialog: MatDialog) {
     this.filteredSkills = this.skillCtrl.valueChanges.pipe(
       startWith(null),
@@ -131,7 +135,29 @@ export class UpdateProfileComponent implements OnInit {
     return '';
   }
   
-  register(){}
+  async update(){
+    try {
+      let skills:SkillModel[] = []
+      this.selectedSkills.forEach(skill=>{skills.push(skill)})
+
+      let registerd = await this.auth.update({
+        firstName:this.firstName.value,
+        lastName:this.lastName.value,
+        bio:this.bio.value,
+        email:this.email.value,
+        password:this.password.value,
+        skills:skills
+      },this.image.value)
+      if(registerd){
+        this.router.navigate(["/login"])
+      } 
+    } catch (err:any) {
+      this.snack.open(err.message,"ok!")
+      setTimeout(() => {
+        this.snack.dismiss
+      }, 1500);
+    }
+  }
 
   add(event: MatChipInputEvent): void {
     const value = event.value;

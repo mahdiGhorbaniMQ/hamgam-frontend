@@ -99,16 +99,19 @@ export class AddSkillFormComponent implements OnInit {
       cats.push(""+cat.id!)
     });
     try{
+      this.dialogRef.close();
       let data = await this.skillService.create(
         this.nameFormGroup.get("name")?.value,
         cats,
         this.image.value,
         this.userInfo.id!
       )
-      if(data) this.dialogRef.close();
-    } catch(err){
+    } catch(err:any){
       console.log(err);
-      this.snack.open("An error exists!","ok!")
+      this.snack.open(err.message,"ok!")
+      setTimeout(() => {
+        this.snack.dismiss
+      }, 1500);
     }
 
   }
