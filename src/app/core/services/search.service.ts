@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { UserModel } from '../models/user-model';
+import { InformationService } from './information.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -9,14 +10,16 @@ import { UserService } from './user.service';
 })
 export class SearchService {
 
-  constructor(private userService:UserService) { }
+  constructor(private informations:InformationService) { }
 
   search(value:string):Observable<UserModel[]>{
     let obs = new BehaviorSubject<UserModel[]>([])
+    let allUsers: UserModel[] = [];
+    this.informations.users.forEach((user,id)=>allUsers.push(user))
     obs.next(
-      this.userService.allUsers.filter(user=>{
+      allUsers.filter(user=>{
         
-        if(typeof(value) != "string") return this.userService.allUsers
+        if(typeof(value) != "string") return allUsers
 
         let name = user.firstName!.toLowerCase()+" "+user.lastName!.toLowerCase()
         let email = user.email!.toLowerCase()

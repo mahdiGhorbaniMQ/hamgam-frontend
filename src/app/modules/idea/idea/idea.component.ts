@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
@@ -25,7 +25,8 @@ export class IdeaComponent implements OnInit {
     public theme:ThemeService,
     private route:ActivatedRoute,
     private router:Router,
-    private http:HttpClient
+    private http:HttpClient,
+    private rout:ActivatedRoute
   ) { }
 
   idea!:IdeaModel
@@ -33,6 +34,7 @@ export class IdeaComponent implements OnInit {
   id!:number
   userInfo!:UserModel
 
+  @ViewChild('commentInut') commentInut!:ElementRef
 
   comment = new FormControl('', [Validators.required])
   
@@ -44,11 +46,29 @@ export class IdeaComponent implements OnInit {
       this.informations.ideas.set(this.id,{})!
     }
     this.idea = this.informations.ideas.get(this.id)!
-    
     this.isLiked = this.idea.likes!.includes(this.userInfo)    
+    setTimeout(() => {
+      this.isLiked = this.idea.likes!.includes(this.userInfo)
+    }, 500);
+    setTimeout(() => {
+      this.isLiked = this.idea.likes!.includes(this.userInfo)
+    }, 1500);
+    setTimeout(() => {
+      this.isLiked = this.idea.likes!.includes(this.userInfo)
+    }, 2500);
+  }
+  ngAfterViewInit(){
+    if(this.rout.snapshot.paramMap.has("comments"))
+      this.commentInut.nativeElement.scrollIntoView()
   }
 
   async like(){
+    let isAuthenticated
+    this.auth.isAuthenticated.subscribe(authenticated=>isAuthenticated = authenticated)
+    if(!isAuthenticated){
+      this.router.navigate(['login'])
+      return
+    }
     let index = this.idea.likes!.indexOf(this.userInfo)
     if(index>-1){
       this.idea.likes = [...this.idea.likes!.slice(0,index),...this.idea.likes!.slice((index+1),(this.idea.likes!.length-index))]
@@ -62,9 +82,11 @@ export class IdeaComponent implements OnInit {
   }
   
   send(){
+    let isAuthenticated
+    this.auth.isAuthenticated.subscribe(authenticated=>isAuthenticated = authenticated)
     
-    if(!this.auth.userInfo.id) {
-      this.router.navigate(["/login"])
+    if(!isAuthenticated){
+      this.router.navigate(['login'])
       return
     }
     let body = {

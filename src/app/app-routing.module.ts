@@ -57,6 +57,11 @@ const routes: Routes = [
     loadChildren: ()=> import("src/app/modules/update-idea/update-idea.module").then(m => m.UpdateIdeaModule)
   },
   {
+    path:"idea/:id/:comments",
+    component:IdeaComponent,
+    loadChildren: ()=> import("src/app/modules/idea/idea.module").then(m => m.IdeaModule)
+  },
+  {
     path:"idea/:id",
     component:IdeaComponent,
     loadChildren: ()=> import("src/app/modules/idea/idea.module").then(m => m.IdeaModule)

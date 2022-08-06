@@ -1,6 +1,5 @@
-import { Time } from '@angular/common';
+import { I } from '@angular/cdk/keycodes';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IdeaModel } from 'src/app/core/models/idea-model';
 import { UserModel } from 'src/app/core/models/user-model';
@@ -32,7 +31,17 @@ export class IdeaComponent implements OnInit {
 
   ngOnInit(): void {    
     this.userInfo = this.auth.userInfo
-    this.isLiked = this.idea.likes!.includes(this.userInfo)    
+    this.isLiked = this.idea.likes!.includes(this.userInfo)   
+    
+    setTimeout(() => {
+      this.isLiked = this.idea.likes!.includes(this.userInfo)   
+    }, 500);
+    setTimeout(() => {
+      this.isLiked = this.idea.likes!.includes(this.userInfo)   
+    }, 1500);
+    setTimeout(() => {
+      this.isLiked = this.idea.likes!.includes(this.userInfo)   
+    }, 2500);
   }
 
   showIdea(){
@@ -42,6 +51,12 @@ export class IdeaComponent implements OnInit {
   }
   
   async like(){
+    let isAuthenticated
+    this.auth.isAuthenticated.subscribe(authenticated=>isAuthenticated = authenticated)
+    if(!isAuthenticated){
+      this.router.navigate(['login'])
+      return
+    }
     let index = this.idea.likes!.indexOf(this.userInfo)
     if(index>-1){
       this.idea.likes = [...this.idea.likes!.slice(0,index),...this.idea.likes!.slice((index+1),(this.idea.likes!.length-index))]

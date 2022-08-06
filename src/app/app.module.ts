@@ -8,6 +8,7 @@ import { NavBarModule } from './core/components/nav-bar/nav-bar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularMaterialModule } from './core/share/angular-material/angular-material.module';
+import { LoadingModule } from './core/components/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AngularMaterialModule } from './core/share/angular-material/angular-mat
     HeaderModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    LoadingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

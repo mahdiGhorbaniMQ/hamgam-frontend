@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { IdeaService } from './core/services/idea.service';
 import { InformationService } from './core/services/information.service';
+import { LoadingService } from './core/services/loading.service';
 import { ScreenService } from './core/services/screen.service';
 import { SkillService } from './core/services/skill.service';
 import { ThemeService } from './core/services/theme.service';
@@ -16,6 +16,7 @@ import { UserService } from './core/services/user.service';
 export class AppComponent {
   title = 'twitter';
   constructor(
+    private loading:LoadingService,
     public screen:ScreenService,
     public theme:ThemeService,
     private info:InformationService,
@@ -28,6 +29,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.checkScreen()
+    // this.loading.isLoading = true
   }
   
   @HostListener('window:resize')

@@ -30,7 +30,7 @@
                         </div>
                     </mat-menu>
                 </div>
-                <div>
+                <div (click)="commentInut.scrollIntoView()">
                     <span>{{idea.comments!.length}}</span>
                     <mat-icon matRipple>chat_bubble_outline</mat-icon>
                 </div>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="comments" dir="rtl">
-            <div class="comment-item">
+            <div class="comment-item" #commentInut>
                 <h3><b>نظر خود را ثبت کنید</b></h3>
                 <mat-form-field appearance="outline" >
                     <mat-label>متنی درباره این ایده بنویسید</mat-label>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SkillModel } from '../models/skill-model';
 import { InformationService } from './information.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class SkillService {
 
   allSkills:SkillModel[] = []
 
-  constructor(private http:HttpClient,private informations:InformationService) {
+  constructor(
+    private loading:LoadingService,
+    private http:HttpClient,private informations:InformationService) {
     this.fillSkills()
   }
 
@@ -37,6 +40,7 @@ export class SkillService {
           await this.fillById(skill.id!)
 
         });
+        this.loading.loaded.next('skills')
       },
       err=>{}
     )
@@ -142,6 +146,7 @@ export class SkillService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
+      this.loading.isLoading = true
       this.http.post(environment.api+"/skills/create",data,httpOptions).subscribe(
         (res:any)=>{
 
@@ -149,11 +154,13 @@ export class SkillService {
             categories:[],
             users:[],
             image:"/assets/no-prof.jpg"
-          })          
+          })
+          this.loading.isLoading = false
           this.fillById(res.id)
           resolve(true)
           
         },err=>{
+          this.loading.isLoading = false
           reject(err)
         }
       )

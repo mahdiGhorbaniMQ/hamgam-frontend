@@ -15,6 +15,7 @@ export class UserSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
   }
 
 }

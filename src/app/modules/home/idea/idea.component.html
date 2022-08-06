@@ -22,7 +22,7 @@
                 </div>
             </mat-menu>
         </div>
-        <div [routerLink]="'/idea/'+idea.id">
+        <div [routerLink]="'/idea/'+idea.id+'/comments'">
             <span>{{idea.comments!.length}}</span>
             <mat-icon matRipple>chat_bubble_outline</mat-icon>
         </div>

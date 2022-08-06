@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user-model';
 import { InformationService } from './information.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class UserService {
 
 
   constructor(
+    private loading:LoadingService,
     private http:HttpClient,
     private informations:InformationService
   ) {
@@ -23,8 +25,6 @@ export class UserService {
     this.http.get(environment.api+"/accounts/user/all").subscribe(
       (data:any)=>{
         data.forEach(async (item:any) => {
-          
-
           let user:UserModel = {skills:[]};
 
           if(this.informations.users.has(item.id!)){
@@ -40,6 +40,7 @@ export class UserService {
           await this.fillById(user.id!)
 
         });
+        this.loading.loaded.next('users')
       },
       err=>{}
     )

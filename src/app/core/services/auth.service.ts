@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user-model';
 import { InformationService } from './information.service';
+import { LoadingService } from './loading.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -11,7 +12,12 @@ import { UserService } from './user.service';
 })
 export class AuthService {
 
-  constructor(private users:UserService,private http:HttpClient,private informations:InformationService) {
+  constructor(
+    private loading:LoadingService,
+    private users:UserService,
+    private http:HttpClient,
+    private informations:InformationService
+  ) {
     if(localStorage.getItem("token")){
       this.isAuthenticated.next(true)
     }
@@ -28,13 +34,15 @@ export class AuthService {
 
   async login(email:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
-
+      this.loading.isLoading = true
       this.http.post(environment.api+"/accounts/login/",{email:email,password:password}).subscribe(
         (res:any)=>{
           localStorage.setItem("token",res.token)
           this.isAuthenticated.next(true)
+          this.loading.isLoading = false
           resolve(true)
         },err=>{
+          this.loading.isLoading = false
           reject(err.message)
         })      
     })
@@ -82,10 +90,13 @@ export class AuthService {
         // avatar:img
         avatar:"/assets/no-prof.jpg"
       }
+      this.loading.isLoading = true
       this.http.post(environment.api+"/accounts/signup",data).subscribe(
         (res:any)=>{
+          this.loading.isLoading = false
           resolve(true)
         },err=>{
+          this.loading.isLoading = false
           reject(err)
         }
       )
@@ -108,10 +119,13 @@ export class AuthService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
+      this.loading.isLoading = true
       this.http.post(environment.api+"/accounts/update",data,httpOptions).subscribe(
         (res:any)=>{
+          this.loading.isLoading = false
           resolve(true)
         },err=>{
+          this.loading.isLoading = false
           reject(err)
         }
       )

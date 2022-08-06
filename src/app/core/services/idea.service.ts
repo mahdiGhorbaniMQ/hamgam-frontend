@@ -6,13 +6,16 @@ import { IdeaModel } from '../models/idea-model';
 import { SkillModel } from '../models/skill-model';
 import { UserModel } from '../models/user-model';
 import { InformationService } from './information.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IdeaService {
 
-  constructor(private http:HttpClient,private informations:InformationService) {
+  constructor(
+    private loading:LoadingService,
+    private http:HttpClient,private informations:InformationService) {
     this.fillIdeas()
   }
 
@@ -44,6 +47,7 @@ export class IdeaService {
           await this.fillById(idea.id!)
 
         });
+        this.loading.loaded.next("ideas")
       },
       err=>{}
     )
@@ -88,8 +92,8 @@ export class IdeaService {
       let user = this.informations.users.get(userData.id)!
       user!.id = userData.id
       user!.email = userData.email
-      // user!.img = userData.avatar?userData.avatar:"/assets/no-prof.jpg"
-      user!.img = "/assets/no-prof.jpg"
+      user!.img = userData.avatar?userData.avatar:"/assets/no-prof.jpg"
+      // user!.img = "/assets/no-prof.jpg"
 
       if(!user!.firstName)
         user.firstName = ""
@@ -102,8 +106,8 @@ export class IdeaService {
       let user = {
         id: userData.id,
         email: userData.email,
-        // img: userData.avatar?userData.avatar:"/assets/no-prof.jpg",
-        img: "/assets/no-prof.jpg",
+        img: userData.avatar?userData.avatar:"/assets/no-prof.jpg",
+        // img: "/assets/no-prof.jpg",
         firstName: "",
         lastName: ""
       }
@@ -189,6 +193,7 @@ export class IdeaService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
+      this.loading.isLoading = true
       this.http.post(environment.api+"/ideas/create/",data,httpOptions).subscribe(
         async (res:any)=>{
           this.informations.ideas.set(res.id,{
@@ -211,8 +216,10 @@ export class IdeaService {
             newIdea.skills?.push(s)
           });
           await this.update(newIdea)
+          this.loading.isLoading = false
           resolve(res)
         },err=>{
+          this.loading.isLoading = false
           reject(err)
         }
       )
@@ -255,13 +262,14 @@ export class IdeaService {
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
-      
+      this.loading.isLoading = true
       this.http.put(environment.api+"/ideas/"+idea.id+"/update",data,httpOptions).subscribe(
-        (res:any)=>{          
+        (res:any)=>{ 
+          this.loading.isLoading = false
           resolve(res)
         },err=>{
           console.log(err);
-          
+          this.loading.isLoading = true
           reject(err)
         }
       )
