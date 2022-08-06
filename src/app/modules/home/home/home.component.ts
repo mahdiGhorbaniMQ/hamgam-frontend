@@ -64,14 +64,15 @@ export class HomeComponent implements OnInit {
       })
       this.ideas.sort((a,b) => (a.date! <b.date!)?1:-1)
     }
-    else if(tab=="your_ideas")
-    this.ideas = []
+    else if(tab=="your_ideas"){
+      this.ideas = []
       this.informations.ideas.forEach((idea,id)=>{
         if(idea.creator == this.auth.userInfo){
           this.ideas.push(idea)
         }
       })
       this.ideas.sort((a,b) => (a.date! <b.date!)?1:-1)
+    }
   }
 
   hasItem(arr1:any[],arr2:any[]):boolean{

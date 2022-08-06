@@ -13,6 +13,8 @@ export class LoadingService {
     this.loaded.subscribe(data=>{
       this.loadedData.push(data)
       console.log(this.loadedData);
+      console.log(data.length);
+      console.log(data.length===3);
       
       if(data.length===3){
         this.isLoading = false

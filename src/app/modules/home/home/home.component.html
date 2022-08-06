@@ -5,7 +5,7 @@
             <div class="header" dir="rtl">
                 <button mat-button (click)="selectTab('ideas')" [ngClass]="{'selected':selected=='ideas'}">تمام ایده‌ها</button>
                 <button mat-button (click)="selectTab('your_ideas')" [ngClass]="{'selected':selected=='your_ideas'}">ایده‌های شما</button>
-                <button mat-button (click)="selectTab('your_requests')" [ngClass]="{'selected':selected=='suggestions'}">مرتبط به شما</button>
+                <button mat-button (click)="selectTab('suggestions')" [ngClass]="{'selected':selected=='suggestions'}">مرتبط به شما</button>
             </div>
             <app-idea *ngFor="let idea of ideas" [idea]="idea"></app-idea>
            </div>
