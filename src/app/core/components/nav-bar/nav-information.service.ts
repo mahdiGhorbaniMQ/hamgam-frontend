@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { ScreenService } from '../../services/screen.service';
 
 @Injectable({
@@ -37,11 +38,29 @@ export class NavInformationService {
       {
           "title":"Login",
           "icon":"login",
-          "endponint":"/login",
+          "endponint":"/register",
           "isSelected":false
       }
-    ]
-  constructor(private screen:ScreenService) {}
+  ]
+  constructor(private screen:ScreenService,private auth:AuthService) {
+    auth.isAuthenticated.subscribe(isAuthentucated=>{
+      if(isAuthentucated){
+        this.informations[this.informations.length-1] = {
+          "title":"Logout",
+          "icon":"logout",
+          "endponint":"/login/logedout",
+          "isSelected":false
+        }
+      }else{
+        this.informations[this.informations.length-1] = {
+          "title":"Login",
+          "icon":"login",
+          "endponint":"/register",
+          "isSelected":false
+        }
+      }
+    })
+  }
   select(i:number){
     if(window.innerWidth<=700) this.screen.showMenu = false;
     this.informations.forEach((item,index)=>{

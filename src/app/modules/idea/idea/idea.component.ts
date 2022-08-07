@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { IdeaModel } from 'src/app/core/models/idea-model';
@@ -26,13 +27,15 @@ export class IdeaComponent implements OnInit {
     private route:ActivatedRoute,
     private router:Router,
     private http:HttpClient,
-    private rout:ActivatedRoute
+    private rout:ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) { }
 
   idea!:IdeaModel
   isLiked!:boolean
   id!:number
   userInfo!:UserModel
+  content:any = ""
 
   @ViewChild('commentInut') commentInut!:ElementRef
 
@@ -43,19 +46,43 @@ export class IdeaComponent implements OnInit {
     this.userInfo = this.auth.userInfo
     this.id = Number.parseInt(this.route.snapshot.paramMap.get("id")!)
     if(!this.informations.ideas.has(this.id)){
-      this.informations.ideas.set(this.id,{})!
+      this.informations.ideas.set(this.id,{})
     }
     this.idea = this.informations.ideas.get(this.id)!
-    this.isLiked = this.idea.likes!.includes(this.userInfo)    
-    setTimeout(() => {
-      this.isLiked = this.idea.likes!.includes(this.userInfo)
+    if(this.idea.content)
+    this.content = this.sanitizer.bypassSecurityTrustHtml(this.idea.content)!;
+    if(this.idea.likes)
+    this.isLiked = this.idea.likes.includes(this.userInfo)    
+    setTimeout(() => {      
+      if(this.idea.content)
+      this.content = this.sanitizer.bypassSecurityTrustHtml(this.idea.content!)!;
+      if(this.idea.likes)
+      this.isLiked = this.idea.likes.includes(this.userInfo)
     }, 500);
     setTimeout(() => {
-      this.isLiked = this.idea.likes!.includes(this.userInfo)
+      if(this.idea.content)
+      this.content = this.sanitizer.bypassSecurityTrustHtml(this.idea.content!)!;
+      if(this.idea.likes)
+      this.isLiked = this.idea.likes.includes(this.userInfo)
     }, 1500);
     setTimeout(() => {
-      this.isLiked = this.idea.likes!.includes(this.userInfo)
-    }, 2500);
+      if(this.idea.content)
+      this.content = this.sanitizer.bypassSecurityTrustHtml(this.idea.content!)!;      
+      if(this.idea.likes)
+      this.isLiked = this.idea.likes.includes(this.userInfo)
+    }, 3500);
+    setTimeout(() => {
+      if(this.idea.content)
+      this.content = this.sanitizer.bypassSecurityTrustHtml(this.idea.content)!;
+      if(this.idea.likes)
+      this.isLiked = this.idea.likes.includes(this.userInfo)
+    }, 4500);
+    setTimeout(() => {
+      if(this.idea.content)
+      this.content = this.sanitizer.bypassSecurityTrustHtml(this.idea.content)!;
+      if(this.idea.likes)
+      this.isLiked = this.idea.likes.includes(this.userInfo)
+    }, 6500);
   }
   ngAfterViewInit(){
     if(this.rout.snapshot.paramMap.has("comments"))

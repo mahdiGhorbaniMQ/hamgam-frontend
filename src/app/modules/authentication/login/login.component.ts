@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
@@ -29,11 +29,20 @@ export class LoginComponent implements OnInit {
     public theme:ThemeService,
     private authService:AuthService,
     private router:Router,
+    private rout:ActivatedRoute,
     private snack:MatSnackBar,
-    private navInfo:NavInformationService) { }
+    private navInfo:NavInformationService
+  ) { }
 
   ngOnInit(): void {
     this.navInfo.select(4)
+    if(this.rout.snapshot.paramMap.has("logedout")){
+      if(confirm("آیا از خروج از حسابتان مطمئنید؟")){
+        this.authService.logout()
+      }else{
+        this.router.navigate(['/'])
+      }
+    }
   }
 
 

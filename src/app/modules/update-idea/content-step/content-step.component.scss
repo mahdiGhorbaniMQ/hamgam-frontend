@@ -10,3 +10,6 @@ form, mat-form-field{
 .chips{
     text-align: left !important;
 }
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 300px;
+}

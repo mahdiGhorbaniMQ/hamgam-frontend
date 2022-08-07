@@ -1,4 +1,5 @@
 <form [formGroup]="formGroup" [ngClass]="{'dark':theme.dark}">
+    <h2>افراد فعال در این ایده</h2>
     <mat-form-field (click)="selectSearch()" class="chips" appearance="outline">
       <mat-label>افراد فعال</mat-label>
       <mat-chip-list #userList aria-label="User selection">
@@ -27,7 +28,7 @@
       </mat-autocomplete>
     </mat-form-field>
     <div>
-      <button mat-button matStepperPrevious>قبلی</button>
-      <button mat-button (click)="submit()">ثبت ایده</button>
+      <br><br>
+      <button class="btn-create" [disabled]="!formGroup.valid" mat-button (click)="submit()">ثبت ایده</button>
     </div>
 </form>

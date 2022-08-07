@@ -27,6 +27,7 @@ export class IdeaComponent implements OnInit {
     private ideaService:IdeaService,
     public theme:ThemeService,
     private auth:AuthService,
+    // private clipboard: Clipboard,
     private router:Router) { }
 
   ngOnInit(): void {    

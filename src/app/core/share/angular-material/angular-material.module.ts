@@ -20,6 +20,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatStepperModule} from '@angular/material/stepper'; 
 import {MatChipsModule} from '@angular/material/chips';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 
@@ -47,7 +48,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatAutocompleteModule,
     MatTabsModule,
     MatStepperModule,
-    MatChipsModule
+    MatChipsModule,
+    ClipboardModule
   ],
   exports:[
     MatToolbarModule,
@@ -70,7 +72,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatAutocompleteModule,
     MatTabsModule,
     MatStepperModule,
-    MatChipsModule
+    MatChipsModule,
+    ClipboardModule
   ]
 })
 export class AngularMaterialModule { }

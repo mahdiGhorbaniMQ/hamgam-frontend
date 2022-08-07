@@ -9,14 +9,10 @@ export class LoadingService {
   constructor() {
     setTimeout(() => {
       this.isLoading = false
-    }, 1500);
+    }, 2000);
     this.loaded.subscribe(data=>{
-      this.loadedData.push(data)
-      console.log(this.loadedData);
-      console.log(data.length);
-      console.log(data.length===3);
-      
-      if(data.length===3){
+      this.loadedData.push(data)      
+      if(this.loadedData.length===3){
         this.isLoading = false
       }
     })

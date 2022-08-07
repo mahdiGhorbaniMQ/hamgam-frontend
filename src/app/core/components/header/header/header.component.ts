@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
   }
   navigate(event:MatAutocompleteSelectedEvent){
     this.myControl.setValue('')
-    this.router.navigate(["/profile/"+event.option.value.email])
+    this.router.navigate(["/profile/"+event.option.value.id])
   }
   setTheme(){
     localStorage.setItem("dark",!this.theme.dark?'1':'0')

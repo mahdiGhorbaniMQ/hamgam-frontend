@@ -1,24 +1,27 @@
 <div class="body" [ngClass]="{'dark':theme.dark}">
   <div dir="rtl" class="container">
-    <mat-vertical-stepper #stepper>
+    <!-- <mat-vertical-stepper #stepper>
         <mat-step [stepControl]="contentFormGroup">
           <ng-template matStepLabel>
             <span class="label">محتوای ایده</span>
-          </ng-template>
-          <app-content-step [formGroup]="contentFormGroup"></app-content-step>
-        </mat-step>
+          </ng-template> -->
+          <br><br>
+          <app-content-step [formGroup]="formGroup"></app-content-step>
+        <!-- </mat-step>
         <mat-step [stepControl]="skillsFormGroup">
           <ng-template matStepLabel>
             <span class="label">مهارت های لازم برای ایده</span>
-          </ng-template>
-          <app-skills-step [skills]="selectedSkills" [formGroup]="skillsFormGroup"></app-skills-step>
-        </mat-step>
+          </ng-template> -->
+        <br><br>
+          <app-skills-step [skills]="selectedSkills" [formGroup]="formGroup"></app-skills-step>
+        <!-- </mat-step>
         <mat-step [stepControl]="subscribersFormGroup">
           <ng-template matStepLabel>
             <span class="label">افراد فعال در ایده</span>
-          </ng-template>
-          <app-subscribers-step [users]="selectedUsers" (onSubmit)="submit()" [formGroup]="subscribersFormGroup"></app-subscribers-step>
-        </mat-step>
-    </mat-vertical-stepper>
+          </ng-template> -->
+        <br><br>
+        <app-subscribers-step [users]="selectedUsers" (onSubmit)="submit()" [formGroup]="formGroup"></app-subscribers-step>
+        <!-- </mat-step>
+    </mat-vertical-stepper> -->
   </div>
 </div>

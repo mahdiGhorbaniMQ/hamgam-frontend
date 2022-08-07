@@ -24,6 +24,7 @@
     align-items: center;
     justify-content: center;
     width: 92%; height: fit-content;
+    max-width: 1000px;
     border-radius: 10px;
     form{
         position: relative;
@@ -42,7 +43,8 @@
             margin: 5px;
             background-color: rgb(119, 167, 168);
             &.link{
-                background-color: rgb(168, 119, 119);
+                // background-color: rgb(168, 119, 119);
+                background-color: #fff;
             }
         }
     }

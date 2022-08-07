@@ -35,21 +35,21 @@ export class CommunityComponent implements OnInit {
     this.allSkills = this.informations.skills
     setTimeout(() => {
       this.informations.skills.forEach((skill,id)=>{
-        if(skill.users!.includes(this.userInfo))
+        if(skill.users && skill.users.includes(this.userInfo))
           this.yourSkills.set(id,skill)
       })      
     }, 1000);
 
     setTimeout(() => {
       this.informations.skills.forEach((skill,id)=>{
-        if(skill.users!.includes(this.userInfo))
+        if(skill.users && skill.users.includes(this.userInfo))
           this.yourSkills.set(id,skill)
       })      
     }, 2000);
 
     setTimeout(() => {
       this.informations.skills.forEach((skill,id)=>{
-        if(skill.users!.includes(this.userInfo))
+        if(skill.users && skill.users.includes(this.userInfo))
           this.yourSkills.set(id,skill)
       })      
     }, 3500);

@@ -46,6 +46,7 @@ export class AuthService {
     })
   }
   fillUserInfo(){
+    
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Token '+localStorage.getItem("token")
@@ -76,7 +77,7 @@ export class AuthService {
     this.isAuthenticated.next(false)
   }
 
-  async register(user:UserModel,img:any):Promise<any>{
+  async register(user:UserModel):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       let data = {
         firstName:user.firstName,
@@ -91,13 +92,13 @@ export class AuthService {
       this.loading.isLoading = true
       this.http.post(environment.api+"/accounts/signup",data).subscribe(
         async (res:any)=>{
-          try{
-            await this.login(user.email!,user.password!)
-            await this.update(user,img)
-          }
-          catch(err){
-
-          }
+          // try{
+            // await this.login(user.email!,user.password!)
+            // await this.update(user,img)
+          // }
+          // catch(err){
+            // reject(err)
+          // }
           this.loading.isLoading = false
           resolve(true)
         },err=>{

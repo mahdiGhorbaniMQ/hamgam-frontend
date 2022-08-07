@@ -33,15 +33,15 @@ export class RegisterComponent implements OnInit {
   formGroup = this._formBuilder.group({
     firstName: this.firstName,
     lastName: this.lastName,
-    image: this.image,
-    bio: this.bio,
+    // image: this.image,
+    // bio: this.bio,
     email: this.email,
     password: this.password
   });
 
   canExit() : boolean {
  
-    if((this.formGroup.touched||this.skillCtrl.touched)){
+    if((this.formGroup.touched)){
       if (confirm("با خارج شدن از صفحه اطلاعات وارد شده از بین می‌رود، آیا مطمئنید؟")) {
         return true
       } else {
@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
 
   getNameError(){
     if (this.email.hasError('required')) {
-      return 'فیلد نام کوچک ضروری است';
+      return 'فیلد نام ضروری است';
     }
 
     return '';
@@ -116,17 +116,15 @@ export class RegisterComponent implements OnInit {
   
   async register(){
     try {
-      let skills:SkillModel[] = []
-      this.selectedSkills.forEach(skill=>{skills.push(skill)})
+      // let skills:SkillModel[] = []
+      // this.selectedSkills.forEach(skill=>{skills.push(skill)})
 
       let registerd = await this.authService.register({
         firstName:this.firstName.value,
         lastName:this.lastName.value,
-        bio:this.bio.value,
         email:this.email.value,
         password:this.password.value,
-        skills:skills
-      },this.image.value)
+      })
       if(registerd){
         this.router.navigate(["/login"])
       } 

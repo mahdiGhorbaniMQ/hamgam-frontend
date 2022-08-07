@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { IdeaService } from 'src/app/core/services/idea.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
+
 @Component({
   selector: 'app-create-idea',
   templateUrl: './create-idea.component.html',
@@ -16,19 +17,16 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class CreateIdeaComponent implements OnInit {
 
+
+
   created = false
 
-  contentFormGroup = this._formBuilder.group({
+  formGroup = this._formBuilder.group({
     title: ['', Validators.required],
     content: ['',Validators.required],
+    skills: [[]],
+    subscribers: [[]],
   });
-  skillsFormGroup = this._formBuilder.group({
-    skills: [[], Validators.required],
-  });
-  subscribersFormGroup = this._formBuilder.group({
-    subscribers: [[], Validators.required],
-  });
-
   selectedSkills: Set<SkillModel> = new Set()
   selectedUsers: Set<UserModel> = new Set()
 
@@ -51,8 +49,8 @@ export class CreateIdeaComponent implements OnInit {
     try {
       let body = {
         creator:this.auth.userInfo,
-        title:this.contentFormGroup.get("title")!.value,
-        content:this.contentFormGroup.get("content")!.value,
+        title:this.formGroup.get("title")!.value,
+        content:this.formGroup.get("content")!.value,
         subscribers:this.selectedUsers,
         skills:this.selectedSkills
       }      
@@ -74,7 +72,7 @@ export class CreateIdeaComponent implements OnInit {
   canExit() : boolean {
  
     if(this.created) return true
-    else if((this.contentFormGroup.touched||this.skillsFormGroup.touched||this.subscribersFormGroup.touched)){
+    else if((this.formGroup.touched||this.formGroup.touched||this.formGroup.touched)){
       if (confirm("با خارج شدن از صفحه اطلاعات وارد شده از بین می‌رود، آیا مطمئنید؟")) {
         return true
       } else {

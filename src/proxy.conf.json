@@ -1,6 +1,9 @@
 {
     "/api/*": {
-        "target": "http://178.63.240.70:7556/",
+        "target": {
+            "host": "ham-ghadam.ir",
+            "protocol": "https:"
+        },
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

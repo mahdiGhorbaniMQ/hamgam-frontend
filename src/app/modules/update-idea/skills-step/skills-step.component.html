@@ -1,4 +1,5 @@
 <form [formGroup]="formGroup" [ngClass]="{'dark':theme.dark}">
+    <h2>مهارت های لازم</h2>
     <mat-form-field (click)="selectSearch()" class="chips" appearance="outline">
       <mat-label>مهارت‌ها</mat-label>
       <mat-chip-list #chipList aria-label="Skill selection">
@@ -28,7 +29,7 @@
     </mat-form-field>
     <div>
       <button mat-button class="left" (click)="openDialog()">مهارت یافت نشد؟</button>
-      <button mat-button matStepperPrevious>قبلی</button>
-      <button mat-button matStepperNext>بعدی</button>
+      <!-- <button mat-button matStepperPrevious>قبلی</button>
+      <button mat-button matStepperNext>بعدی</button> -->
     </div>
   </form>

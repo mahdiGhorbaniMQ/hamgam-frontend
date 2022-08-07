@@ -1,5 +1,6 @@
 <form [formGroup]="formGroup" [ngClass]="{'dark':theme.dark}">
-    <div>
+  <h2>عنوان ایده</h2>  
+  <div>
       <mat-form-field appearance="outline" >
         <input
           dir="rtl"
@@ -10,18 +11,18 @@
         />
       </mat-form-field>
     </div>
+    <h2>متن ایده</h2>
     <div>
-        <mat-form-field appearance="outline">
-            <textarea
+        <!-- <mat-form-field appearance="outline"> -->
+          
+            <!-- <textarea
                 placeholder="متن ایده"
                 dir="rtl"
                 rows="10"
                 formControlName="content"
                 required
-                matInput></textarea>
-        </mat-form-field>
-    </div>
-    <div>
-      <button mat-button matStepperNext>بعدی</button>
+                matInput></textarea> -->
+        <!-- </mat-form-field> -->
+      <ckeditor (change)="onChange($event)" [editor]="Editor"></ckeditor>
     </div>
 </form>

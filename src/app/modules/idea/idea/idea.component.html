@@ -2,25 +2,25 @@
     <div class="container">    
         <div class="card" dir="rtl">
             <button [routerLink]="'/idea/'+idea.id+'/update'" *ngIf="idea.creator == userInfo" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
-            <h4 dir="rtl" class="name" [routerLink]="'/profile/'+idea.creator!.email">
-                <span> {{idea.creator?.firstName +" "+ idea.creator?.lastName}} </span><span> {{idea.date!.getHours()}}:{{idea.date!.getMinutes()}} </span>
+            <h4 *ngIf="idea.date && idea.creator" dir="rtl" class="name" [routerLink]="'/profile/'+idea.creator.email">
+                <span> {{idea.creator.firstName +" "+ idea.creator.lastName}} </span><span> {{idea.date.getHours()}}:{{idea.date.getMinutes()}} </span>
             </h4>
             <h1>
                 {{idea.title}}
             </h1>
-            <div class="content">
-              <p>{{idea.content}}</p>
-            </div>
-            <h3 *ngIf="idea.skills!.length>0" class="skills-title"><b>مهارت‌های لازم</b></h3>
+            
+            <div [innerHtml]="content" class="content"></div>
+
+            <!-- <h3 *ngIf="idea.skills!.length>0" class="skills-title"><b>مهارت‌های لازم</b></h3>
             <div *ngIf="idea.skills!.length>0" class="skills">
                 <div class="skill" *ngFor="let skill of idea.skills">
                     <span>{{skill.name}}</span>
                     <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
                 </div>
-            </div>
+            </div> -->
             <div class="actions">
                 <div>
-                    <span [matMenuTriggerFor]="menuLikes">{{idea.likes!.length}}</span>
+                    <span *ngIf="idea.likes" [matMenuTriggerFor]="menuLikes">{{idea.likes.length}}</span>
                     <mat-icon (click)="like()" matRipple style="color: red;" *ngIf="isLiked">favorite</mat-icon>
                     <mat-icon (click)="like()" matRipple *ngIf="!isLiked">favorite_border</mat-icon>
         
@@ -31,11 +31,11 @@
                     </mat-menu>
                 </div>
                 <div (click)="commentInut.scrollIntoView()">
-                    <span>{{idea.comments!.length}}</span>
+                    <span *ngIf="idea.comments">{{idea.comments.length}}</span>
                     <mat-icon matRipple>chat_bubble_outline</mat-icon>
                 </div>
                 <div [matMenuTriggerFor]="menuSubscribers">
-                    <span>{{idea.subscribers!.length}}</span>
+                    <span *ngIf="idea.subscribers">{{idea.subscribers.length}}</span>
                     <mat-icon matRipple>people</mat-icon>
         
                     <mat-menu #menuSubscribers="matMenu" [class]="theme.dark?'dark-menu-list':''">
@@ -46,13 +46,13 @@
                     </mat-menu>
                 </div>
                 <div [matMenuTriggerFor]="menuSkills">
-                    <span>{{idea.skills!.length}}</span>
+                    <span *ngIf="idea.skills">{{idea.skills.length}}</span>
                     <mat-icon matRipple>priority_high</mat-icon>
         
                     <mat-menu #menuSkills="matMenu" [class]="theme.dark?'dark-menu-list':'light-menu-list'">
                         <b mat-menu-item>مهارت های لازم</b>
                         <div dir="ltr" class="skill-container" *ngFor="let skill of idea.skills" style="margin-right: 15px;">
-                            <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
+                            <!-- <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image"> -->
                             {{skill.name}}
                         </div>
                     </mat-menu>
@@ -76,7 +76,7 @@
                 <button mat-button [disabled]="!comment.valid" (click)="send()" class="send">ثبت</button>
             </div>
             <ng-container *ngIf="idea.comments">
-                <div class="comment-item" *ngFor="let comment of idea.comments!.slice().reverse()" [routerLink]="'/profile/'+comment.user!.email">
+                <div class="comment-item" *ngFor="let comment of idea.comments!.slice().reverse()" [routerLink]="'/profile/'+comment.user!.id">
                     <span class="time">{{comment.date!.getHours()}}:{{comment.date!.getMinutes()}}</span>
                     <p><b>{{comment.user?.firstName + " " + comment.user?.lastName}}</b></p>
                     <p class="email">{{comment.user!.email}}</p>

@@ -1,36 +1,36 @@
 <div class="body" [ngClass]="{'dark':theme.dark}">
     <div class="container">
         <form dir="rtl" [formGroup]="formGroup">
-            <h1>ثبت نام</h1>
-            <mat-stepper>
+            <h1><strong>ثبت نام</strong></h1>
+            <!-- <mat-stepper>
                 <mat-step>
                     <ng-template matStepLabel>
                         <span class="label">اطلاعات</span>
-                    </ng-template>
+                    </ng-template> -->
                     <div>
                         <mat-form-field appearance="outline">
-                            <mat-label>نام کوچک خود را وارد کنید</mat-label>
+                            <mat-label>نام</mat-label>
                             <input matInput [formControl]="firstName" required>
                             <mat-error *ngIf="firstName.invalid">{{getNameError()}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field appearance="outline">
-                            <mat-label>نام خانوادگی خود را وارد کنید</mat-label>
+                            <mat-label>نام خانوادگی</mat-label>
                             <input matInput [formControl]="lastName" required>
                             <mat-error *ngIf="lastName.invalid">{{getFamilyError()}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field  appearance="outline">
-                            <mat-label>ایمیل خود را وارد کنید</mat-label>
+                            <mat-label>ایمیل</mat-label>
                             <input matInput placeholder="example@example.com" [formControl]="email" required>
                             <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field appearance="outline">
-                            <mat-label>یک رمز عبور انتخاب نمایید</mat-label>
+                            <mat-label>رمز عبور</mat-label>
                             <input required matInput [formControl]="password" [type]="hidePass ? 'password' : 'text'">
                             <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
                               <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -38,11 +38,11 @@
                             <mat-error *ngIf="password.invalid">{{getPassError()}}</mat-error>
                           </mat-form-field>
                     </div>
-                    <div class="acts">
+                    <!-- <div class="acts">
                         <button mat-button matStepperNext>بعدی</button>
-                    </div>
-                </mat-step>
-                <mat-step [formControl]="bio">
+                    </div> -->
+                <!-- </mat-step> -->
+                <!-- <mat-step [formControl]="bio">
                     <ng-template matStepLabel>
                         <span class="label">درباره</span>
                     </ng-template>
@@ -103,12 +103,13 @@
                     <div class="acts">
                         <button mat-button matStepperPrevious>قبلی</button>
                         <button mat-button [disabled]="!formGroup.valid" (click)="register()">ثبت نام</button>
-                        <!-- <button mat-button (click)="openDialog()" class="left">
+                        <button mat-button (click)="openDialog()" class="left">
                             مهارت یافت نشد؟
-                        </button> -->
+                        </button>
                     </div>
-                </mat-step>
-            </mat-stepper>
+                </mat-step> -->
+            <!-- </mat-stepper> -->
+            <button class="register" mat-button [disabled]="!formGroup.valid" (click)="register()">ثبت نام</button>
             <button class="link" mat-button routerLink="/login">از قبل ثبت نام کرده اید؟</button>
         </form>
     </div>

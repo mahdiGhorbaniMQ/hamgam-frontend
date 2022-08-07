@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
     this.navInfo.select(2)
     this.rout.paramMap.subscribe(data=>{
       let id:any = data.get("id")
+      
       if(!id){
         this.userInfo = this.auth.userInfo
       }
@@ -41,12 +42,11 @@ export class ProfileComponent implements OnInit {
         if(!this.informations.users.has(id))
           this.informations.users.set(id,{skills:[]})!
         this.userInfo = this.informations.users.get(id)!
-        console.log(this.userInfo);
         
-        
-        if(this.userInfo!=this.auth.userInfo)
+        if(this.userInfo != this.auth.userInfo)
           this.isUserProf = false
       }
+
       this.informations.ideas.forEach(idea=>{
         if(idea.creator?.id == this.userInfo.id)
         this.userIdeas.set(idea.id!,idea)
@@ -63,6 +63,30 @@ export class ProfileComponent implements OnInit {
           this.userIdeas.set(idea.id!,idea)
         })
       }, 2000);
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 3000);
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 4000);
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 5000);
+      setTimeout(() => {
+        this.informations.ideas.forEach(idea=>{
+          if(idea.creator?.id == this.userInfo.id)
+          this.userIdeas.set(idea.id!,idea)
+        })
+      }, 6000);
       setTimeout(() => {
         this.informations.ideas.forEach(idea=>{
           if(idea.creator?.id == this.userInfo.id)

@@ -3,10 +3,10 @@ form, mat-form-field{
     width: 100%;
     text-align: right;
     line-height: 25px;
-    button:not(.left){
-        margin: 3px;
-        background-color: rgb(119, 167, 168);
-    }
+    // button:not(.left){
+    //     margin: 3px;
+    //     background-color: rgb(119, 167, 168);
+    // }
 }
 .left{
     position: absolute; left: 0;

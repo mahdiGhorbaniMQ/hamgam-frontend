@@ -19,15 +19,11 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class UpdateIdeaComponent implements OnInit {
 
   updated = false
-  contentFormGroup = this._formBuilder.group({
+  formGroup = this._formBuilder.group({
     title: ['', Validators.required],
     content: ['',Validators.required],
-  });
-  skillsFormGroup = this._formBuilder.group({
-    skills: ['', Validators.required],
-  });
-  subscribersFormGroup = this._formBuilder.group({
-    subscribers: ['', Validators.required],
+    skills: [''],
+    subscribers: [''],
   });
 
   selectedSkills: Set<SkillModel> = new Set()
@@ -56,8 +52,8 @@ export class UpdateIdeaComponent implements OnInit {
     }
     this.idea = this.informations.ideas.get(this.id)!
 
-    this.contentFormGroup.get("title")?.setValue(this.idea.title)
-    this.contentFormGroup.get("content")?.setValue(this.idea.content)
+    this.formGroup.get("title")?.setValue(this.idea.title)
+    this.formGroup.get("content")?.setValue(this.idea.content)
     this.idea.skills?.forEach(skill=>{
       this.selectedSkills.add(skill)
     })
@@ -67,8 +63,8 @@ export class UpdateIdeaComponent implements OnInit {
 
     if(!this.idea.title)
     setTimeout(() => {
-      this.contentFormGroup.get("title")?.setValue(this.idea.title)
-      this.contentFormGroup.get("content")?.setValue(this.idea.content)
+      this.formGroup.get("title")?.setValue(this.idea.title)
+      this.formGroup.get("content")?.setValue(this.idea.content)
       this.idea.skills?.forEach(skill=>{
         this.selectedSkills.add(skill)
       })
@@ -84,14 +80,14 @@ export class UpdateIdeaComponent implements OnInit {
       let body = {
         id:this.idea.id,
         creator:this.idea.creator,
-        title:this.contentFormGroup.get("title")!.value,
-        content:this.contentFormGroup.get("content")!.value,
+        title:this.formGroup.get("title")!.value,
+        content:this.formGroup.get("content")!.value,
         subscribers:this.selectedUsers,
         skills:this.selectedSkills,
 
       }
-      this.idea.title = this.contentFormGroup.get("title")!.value,
-      this.idea.content = this.contentFormGroup.get("content")!.value,
+      this.idea.title = this.formGroup.get("title")!.value,
+      this.idea.content = this.formGroup.get("content")!.value,
       this.idea.skills = []
       this.idea.subscribers = []
       this.selectedUsers.forEach(u=>{
@@ -117,7 +113,7 @@ export class UpdateIdeaComponent implements OnInit {
   canExit() : boolean {
  
     if(this.updated) return true
-    else if((this.contentFormGroup.touched||this.skillsFormGroup.touched||this.subscribersFormGroup.touched)){
+    else if((this.formGroup.touched||this.formGroup.touched||this.formGroup.touched)){
       if (confirm("با خارج شدن از صفحه تغییرات اعمال شده از بین می‌رود، آیا مطمئنید؟")) {
         return true
       } else {

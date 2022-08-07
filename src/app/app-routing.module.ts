@@ -45,7 +45,7 @@ const routes: Routes = [
   {
     path:"idea",
     component:CreateIdeaComponent,
-    canActivate:[AuthGuard],
+    // canActivate:[AuthGuard],
     canDeactivate:[DeactivateGuard],
     loadChildren: ()=> import("src/app/modules/create-idea/create-idea.module").then(m => m.CreateIdeaModule)
   },
@@ -68,6 +68,11 @@ const routes: Routes = [
   },
   {
     path:"login",
+    component:LoginComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
+  },
+  {
+    path:"login/:logedout",
     component:LoginComponent,
     loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
   },
