@@ -2,7 +2,7 @@
     <div class="container">    
         <div class="card" dir="rtl">
             <button [routerLink]="'/idea/'+idea.id+'/update'" *ngIf="idea.creator == userInfo" class="update" mat-mini-fab><mat-icon>edit</mat-icon> </button>
-            <h4 *ngIf="idea.date && idea.creator" dir="rtl" class="name" [routerLink]="'/profile/'+idea.creator.email">
+            <h4 *ngIf="idea.date && idea.creator" dir="rtl" class="name" [routerLink]="'/profile/'+idea.creator.id">
                 <span> {{idea.creator.firstName +" "+ idea.creator.lastName}} </span><span> {{idea.date.getHours()}}:{{idea.date.getMinutes()}} </span>
             </h4>
             <h1>

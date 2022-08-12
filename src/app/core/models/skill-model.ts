@@ -1,4 +1,5 @@
 import { CategoryModel } from "./category-model";
+import { DocModel } from "./doc-model";
 import { UserModel } from "./user-model";
 
 export interface SkillModel {
@@ -7,4 +8,5 @@ export interface SkillModel {
     users?:UserModel[]
     image?:string
     categories?:CategoryModel[]
+    docs?:DocModel[]
 }

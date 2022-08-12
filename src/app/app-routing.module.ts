@@ -12,6 +12,7 @@ import { UpdateProfileComponent } from './modules/update-profile/update-profile/
 import { UpdateIdeaComponent } from './modules/update-idea/update-idea/update-idea.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { DeactivateGuard } from './core/guards/deactivate.guard';
+import { DocComponent } from './modules/doc/doc/doc.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,11 @@ const routes: Routes = [
     path:"community",
     component:CommunityComponent,
     loadChildren: ()=> import("src/app/modules/community/community.module").then(m => m.CommunityModule)
+  },
+  {
+    path:"doc/:id",
+    component:DocComponent,
+    loadChildren: ()=> import("src/app/modules/doc/doc.module").then(m => m.DocModule)
   },
   {
     path:"**",

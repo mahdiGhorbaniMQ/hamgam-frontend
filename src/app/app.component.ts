@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
+import { DocService } from './core/services/doc.service';
 import { IdeaService } from './core/services/idea.service';
 import { InformationService } from './core/services/information.service';
 import { LoadingService } from './core/services/loading.service';
@@ -24,10 +25,11 @@ export class AppComponent {
     private authService:AuthService,
     private ideaService:IdeaService,
     private skillService:SkillService,
+    private docService:DocService
   ){
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.checkScreen()
     this.loading.isLoading = true
   }

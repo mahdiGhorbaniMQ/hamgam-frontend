@@ -1,3 +1,4 @@
+import { DocModel } from "./doc-model";
 import { SkillModel } from "./skill-model";
 
 export interface UserModel {
@@ -9,4 +10,5 @@ export interface UserModel {
     img?:string
     bio?:string
     password?:string
+    // docs?:DocModel[]
 }
