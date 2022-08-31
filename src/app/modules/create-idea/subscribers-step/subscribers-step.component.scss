@@ -7,11 +7,16 @@ form, mat-form-field{
         margin: 3px;
         background-color: rgb(119, 167, 168);
     }
+    button.btn-create.enable{
+        color: #000;
+    }
 }
 form.dark{
     mat-label,mat-option{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
         color: #fff;
+        // color: #837D71;
+        background-color: #1E292F;
     }
     mat-chip{
         background-color: rgb(95, 95, 95);
@@ -20,10 +25,14 @@ form.dark{
 }
 
 mat-option.dark{
-    background-color: rgb(61, 61, 61);
+    // background-color: rgb(61, 61, 61);
     color: #fff;
+    // color: #837D71;
+    background-color: #1E292F;
 }
 mat-option.dark:hover{
-    background-color: rgb(46, 46, 46);
+    // background-color: rgb(46, 46, 46);
     color: #fff;
+    // color: #837D71;
+    background-color: #182125;
 }

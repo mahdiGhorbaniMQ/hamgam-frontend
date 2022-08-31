@@ -1,17 +1,17 @@
 <form [formGroup]="formGroup" [ngClass]="{'dark':theme.dark}">
-  <h2>عنوان ایده</h2>  
+  <h1>عنوانی برای ایده بنویسید</h1>  
   <div>
       <mat-form-field appearance="outline" >
+        <mat-label>عنوان</mat-label>
         <input
           dir="rtl"
           matInput
-          placeholder="عنوان ایده"
           formControlName="title"
-          required
         />
       </mat-form-field>
     </div>
-    <h2>متن ایده</h2>
+    <br>
+    <h1>متن ایده</h1>
     <div>
         <!-- <mat-form-field appearance="outline"> -->
           
@@ -23,6 +23,9 @@
                 required
                 matInput></textarea> -->
         <!-- </mat-form-field> -->
-      <ckeditor (change)="onChange($event)" [editor]="Editor"></ckeditor>
+      <ckeditor
+        (change)="onChange($event)" 
+        [editor]="Editor"></ckeditor>
+
     </div>
 </form>

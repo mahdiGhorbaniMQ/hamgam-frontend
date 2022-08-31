@@ -109,7 +109,7 @@
                     </div>
                 </mat-step> -->
             <!-- </mat-stepper> -->
-            <button class="register" mat-button [disabled]="!formGroup.valid" (click)="register()">ثبت نام</button>
+            <button class="register" [ngClass]="{'enable':formGroup.valid}" mat-button [disabled]="!formGroup.valid" (click)="register()">ثبت نام</button>
             <button class="link" mat-button routerLink="/login">از قبل ثبت نام کرده اید؟</button>
         </form>
     </div>

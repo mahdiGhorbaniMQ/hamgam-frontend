@@ -5,22 +5,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
-import { ScreenService } from 'src/app/core/services/screen.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-resend-verify',
+  templateUrl: './resend-verify.component.html',
+  styleUrls: ['./resend-verify.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ResendVerifyComponent implements OnInit {
+
 
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required])
-  hidePass = true;
   formGroup = this._formBuilder.group({
     email: this.email,
-    password: this.password
   });
 
   constructor(
@@ -36,13 +33,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.navInfo.select(4)
-    if(this.rout.snapshot.paramMap.has("logedout")){
-      if(confirm("آیا از خروج از حسابتان مطمئنید؟")){
-        this.authService.logout()
-      }else{
-        this.router.navigate(['/'])
-      }
-    }
   }
 
 
@@ -52,27 +42,24 @@ export class LoginComponent implements OnInit {
     }
 
     return this.email.hasError('email') ? 'ایمیل معتبر نیست' : '';
-  }
-  getPassError() {
-    if (this.password.hasError('required')) {
-      return 'فیلد رمز عبور ضروری است';
-    }
-    return '';
-  }
-  
-  async login(){
+  }  
+  async send(){
     try{
-      let logedin = await this.authService.login(this.email.value,this.password.value)
+      let logedin = await this.authService.resendVerify(this.email.value)
       if(logedin){
         this.loading.isLoading = false
-        this.router.navigate(["/"])
+        this.snack.open("تاییدیه به ایمیل شما ارسال شد","ok!")
+        setTimeout(() => {
+          this.snack.dismiss()
+        }, 2500);
+        this.router.navigate(["/login"])
       }
     }catch(e){
       this.loading.isLoading = false
-      this.snack.open("ایمیل و پسورد همخوانی ندارند","ok!")
+      this.snack.open("خطایی رخ داده است","ok!")
       setTimeout(() => {
         this.snack.dismiss()
-      }, 1500);
+      }, 2500);
     }
   }
 }

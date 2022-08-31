@@ -15,8 +15,16 @@
 }
 
 .container{
-    .notfound{margin-top: 25px;}
-
+    .not-found{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 30px;
+        width: 150px;
+        height: 500px;
+        width: 100%;
+    }
     box-shadow: 2px 0px 8px rgb(139, 139, 139), -2px 0px 8px rgb(139, 139, 139);
     height: fit-content; width: 92%;
     max-width: 1000px;
@@ -76,6 +84,9 @@
             column-gap: 10px;
             display: flex;
             align-items: center;
+            &:hover{
+                background-color: rgb(126, 126, 126);
+            }
             img{
                 width: 30px;
                 height: 30px;
@@ -117,6 +128,9 @@
         .skill{
             color: #fff;
             background-color: rgb(37, 37, 37);
+            &:hover{
+                background-color: rgb(27, 27, 27);
+            }
         }
         h1{
             color: #fff;

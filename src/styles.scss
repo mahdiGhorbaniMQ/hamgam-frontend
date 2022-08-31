@@ -96,10 +96,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .dialog-dark mat-dialog-container,.dark-menu-list{
   b,span,mat-icon{color: #fff!important;}
-  background: rgb(61, 61, 61)!important;
+  // background: rgb(61, 61, 61)!important;
+  background-color: #1E292F;
   color: #fff!important;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
-
+.dialog-dark mat-dialog-container::-webkit-scrollbar,.dark-menu-list::-webkit-scrollbar {
+  display: none;
+}
 .dark-menu-list,.light-menu-list{
   .skill-container{
     margin: 10px;

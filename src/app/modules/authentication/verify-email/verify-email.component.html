@@ -1,0 +1,25 @@
+<div class="body" [ngClass]="{'dark':theme.dark}">
+    <div class="container">
+      <form dir="rtl" [formGroup]="formGroup">
+          <h1><strong>آیا ثبت نام با ایمیلتان را تایید میکنید؟</strong></h1>
+          <br><br>
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>رمز عبور خود را وارد کنید</mat-label>
+                  <input required matInput [formControl]="password" [type]="hidePass ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+                    <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="password.invalid">{{getPassError()}}</mat-error>
+                </mat-form-field>
+          </div>
+          <div class="acts">
+            <button class="login" [ngClass]="{'enable':formGroup.valid}" mat-button [disabled]="!formGroup.valid" (click)="verify()">تایید</button>
+          </div>
+          <br><br>
+          <div>
+            <button mat-button routerLink="/reset-password" class="help">رمز عبور خود را فراموش کرده‌اید؟</button>
+          </div>
+      </form>
+    </div>
+  </div>

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocComponent } from './doc/doc.component';
+import { RouterModule } from '@angular/router';
+import { AngularMaterialModule } from 'src/app/core/share/angular-material/angular-material.module';
 
 
 
@@ -9,7 +11,9 @@ import { DocComponent } from './doc/doc.component';
     DocComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    AngularMaterialModule
   ],
   exports:[
     DocComponent

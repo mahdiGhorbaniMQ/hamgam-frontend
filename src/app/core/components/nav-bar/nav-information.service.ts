@@ -18,9 +18,9 @@ export class NavInformationService {
           "isSelected":false
       },
       {
-        "title":"Comunnity",
-        "icon":"group",
-        "endponint":"/community",
+        "title":"Skills",
+        "icon":"priority_high",
+        "endponint":"/skills",
         "isSelected":false
       },
       {
@@ -55,7 +55,7 @@ export class NavInformationService {
         this.informations[this.informations.length-1] = {
           "title":"Login",
           "icon":"login",
-          "endponint":"/register",
+          "endponint":"/login",
           "isSelected":false
         }
       }

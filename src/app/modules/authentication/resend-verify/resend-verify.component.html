@@ -1,0 +1,18 @@
+<div class="body" [ngClass]="{'dark':theme.dark}">
+    <div class="container">
+      <form dir="rtl" [formGroup]="formGroup">
+          <h1><strong>ارسال دوباره تاییدیه</strong></h1>
+          <br><br>
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>ایمیل خود را وارد کنید</mat-label>
+                  <input matInput placeholder="example@example.com" [formControl]="email" required>
+                  <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
+              </mat-form-field>
+          </div>
+          <div class="acts">
+            <button class="login" [ngClass]="{'enable':formGroup.valid}" mat-button [disabled]="!formGroup.valid" (click)="send()">ارسال</button>
+          </div>
+      </form>
+    </div>
+</div>

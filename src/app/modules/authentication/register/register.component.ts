@@ -126,6 +126,10 @@ export class RegisterComponent implements OnInit {
         password:this.password.value,
       })
       if(registerd){
+        this.snack.open("تاییدیه به ایمیل شما ارسال شد","ok!")
+        setTimeout(() => {
+          this.snack.dismiss()
+        }, 2500);
         this.router.navigate(["/login"])
       } 
     } catch (err:any) {

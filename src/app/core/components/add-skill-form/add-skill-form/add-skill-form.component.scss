@@ -20,7 +20,9 @@ form, mat-form-field{
     border-radius: 10px;padding: 10px;border: 1px solid rgb(29, 29, 29);
 
     position: relative;
-    width: calc(100% - 20px); height: 260px;
+    width: calc(100% - 20px); 
+    height: fit-content;
+    // height: 260px;
     gap: 10px;
     display: flex; align-items: center; justify-content: center;
     flex-wrap: wrap;
@@ -35,7 +37,7 @@ form, mat-form-field{
     .selected{
         background-color: rgb(116, 160, 116);
     }
-    overflow: auto;
+    // overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
@@ -44,7 +46,8 @@ form, mat-form-field{
 }
 
 .dark mat-stepper, .dark{
-    background-color: rgb(61, 61, 61);
+    // background-color: rgb(61, 61, 61);
+    background-color: #1E292F;
     color: #fff;
     .categories{
         div{
@@ -56,5 +59,18 @@ form, mat-form-field{
     }
     .label{
         color: #fff;
+    }
+    mat-label{
+        color: #fff;
+    }
+    input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #837D71;
+        opacity: 1; /* Firefox */
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #837D71;
+    }
+    input::-ms-input-placeholder { /* Microsoft Edge */
+        color: #837D71;
     }
 }

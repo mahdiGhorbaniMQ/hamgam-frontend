@@ -15,6 +15,13 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class CommunityComponent implements OnInit {
 
+  filteredSkills:SkillModel[] = []
+  filteredUsers:UserModel[] = []
+  userInfo!:UserModel
+
+  searchInSkills = true
+  searchInUsers = false
+
   constructor(
     private navInfo:NavInformationService,
     private userService:UserService,
@@ -24,35 +31,8 @@ export class CommunityComponent implements OnInit {
     private auth:AuthService
   ) { }
 
-  userInfo!:UserModel
-  users!:Map<number,UserModel>
-  allSkills!:Map<number,SkillModel>
-  yourSkills:Map<number,SkillModel> = new Map()
-
   ngOnInit(): void {
     this.userInfo = this.auth.userInfo
-    this.users = this.informations.users
-    this.allSkills = this.informations.skills
-    setTimeout(() => {
-      this.informations.skills.forEach((skill,id)=>{
-        if(skill.users && skill.users.includes(this.userInfo))
-          this.yourSkills.set(id,skill)
-      })      
-    }, 1000);
-
-    setTimeout(() => {
-      this.informations.skills.forEach((skill,id)=>{
-        if(skill.users && skill.users.includes(this.userInfo))
-          this.yourSkills.set(id,skill)
-      })      
-    }, 2000);
-
-    setTimeout(() => {
-      this.informations.skills.forEach((skill,id)=>{
-        if(skill.users && skill.users.includes(this.userInfo))
-          this.yourSkills.set(id,skill)
-      })      
-    }, 3500);
     this.navInfo.select(1)
   }
 }

@@ -1,1 +1,11 @@
-<div *ngIf="doc" [innerHTML]="doc.content"></div>
+<div class="body" [ngClass]="{'dark':theme.dark}">
+    <div class="container">
+        <div dir="rtl" class="not-found" *ngIf="!content">
+            محتوایی یافت نشد! :(
+        </div>
+        <div class="content" dir="rtl" *ngIf="content" [innerHTML]="content"></div>
+        <div class="pages">
+            <button [color]="number==page.number?'primary':''" mat-button *ngFor="let page of docs" [routerLink]="'/doc/'+skill.name+'/'+page.number">{{page.number}}</button>
+        </div>
+    </div>
+</div>

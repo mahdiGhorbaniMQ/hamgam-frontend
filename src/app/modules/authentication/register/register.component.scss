@@ -52,6 +52,7 @@
     .acts{
         button:not(.left){
             margin: 3px;
+            color: #000;
             background-color: rgb(119, 167, 168);
         }
         .left{
@@ -72,11 +73,14 @@
 .body.dark{
     background-color: rgb(112, 112, 112);
     .container{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
+        background-color: #1E292F;
+
         color: #fff;
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
         mat-stepper, mat-step, mat-form-field, input,mat-label,mat-option{
-            background-color: rgb(61, 61, 61);
+            // background-color: rgb(61, 61, 61);
+            background-color: #1E292F;
             color: #fff;
         }
         .label{
@@ -86,11 +90,28 @@
             background-color: rgb(95, 95, 95);
             color: #fff;
         }
+        input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #837D71;
+            opacity: 1; /* Firefox */
+        }
+        input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #837D71;
+        }
+        input::-ms-input-placeholder { /* Microsoft Edge */
+            color: #837D71;
+        }
+    }
+    button.link{
+        background-color: unset;
+    }
+    .register.enable{
+        color: #000; 
     }
 }
 
 mat-option.dark{
-    background-color: rgb(61, 61, 61);
+    // background-color: rgb(61, 61, 61);
+    background-color: #1E292F;
     color: #fff;
 }
 mat-option.dark:hover{

@@ -13,6 +13,10 @@ import { UpdateIdeaComponent } from './modules/update-idea/update-idea/update-id
 import { AuthGuard } from './core/guards/auth.guard';
 import { DeactivateGuard } from './core/guards/deactivate.guard';
 import { DocComponent } from './modules/doc/doc/doc.component';
+import { ChangePassVerifyComponent } from './modules/authentication/change-pass-verify/change-pass-verify.component';
+import { VerifyEmailComponent } from './modules/authentication/verify-email/verify-email.component';
+import { ChangePassReqComponent } from './modules/authentication/change-pass-req/change-pass-req.component';
+import { ResendVerifyComponent } from './modules/authentication/resend-verify/resend-verify.component';
 
 const routes: Routes = [
   {
@@ -84,12 +88,37 @@ const routes: Routes = [
     loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
   },
   {
-    path:"community",
+    path:"reset-password/:token",
+    component:ChangePassVerifyComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
+  },
+  {
+    path:"verify/:token",
+    component:VerifyEmailComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
+  },
+  {
+    path:"reset-password",
+    component:ChangePassReqComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
+  },
+  {
+    path:"verify",
+    component:ResendVerifyComponent,
+    loadChildren: ()=> import("src/app/modules/authentication/authentication.module").then(m => m.AuthenticationModule)
+  },
+  {
+    path:"skills",
     component:CommunityComponent,
     loadChildren: ()=> import("src/app/modules/community/community.module").then(m => m.CommunityModule)
   },
   {
-    path:"doc/:id",
+    path:"doc/:skill",
+    component:DocComponent,
+    loadChildren: ()=> import("src/app/modules/doc/doc.module").then(m => m.DocModule)
+  },
+  {
+    path:"doc/:skill/:number",
     component:DocComponent,
     loadChildren: ()=> import("src/app/modules/doc/doc.module").then(m => m.DocModule)
   },

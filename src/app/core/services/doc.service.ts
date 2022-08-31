@@ -32,7 +32,7 @@ export class DocService {
           doc.id = item.id,
           doc.number = item.number,
           doc.creator = item.developed_by,
-          doc.skill = this.getSkillRef(item.skill),
+          doc.skill = this.getSkillRef(item.skill,doc),
           doc.date = new Date(item.publish),
           doc.summery = item.summary,
           doc.slug = item.slug
@@ -77,14 +77,18 @@ export class DocService {
     }
   }
 
-  getSkillRef(skillId:any){
+  getSkillRef(skillId:any,doc:DocModel){
 
     if(this.informations.skills.has(skillId)){
-      return this.informations.skills.get(skillId)! 
+      let skill = this.informations.skills.get(skillId)!
+      if(skill.docs) skill.docs.push(doc)
+      else{skill.docs = [doc]}
+      return doc
     }
     else{
       let skill = {
-        id: skillId
+        id: skillId,
+        docs: [doc]
       }
       this.informations.skills.set(skillId,skill)
       return this.informations.skills.get(skillId)!

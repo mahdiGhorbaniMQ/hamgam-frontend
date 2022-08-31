@@ -12,7 +12,7 @@
                 {{option.firstName + " " + option.lastName}}
             </mat-option>
         </mat-autocomplete>
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon [ngClass]="{'dark':theme.dark}" matSuffix>search</mat-icon>
         <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
 </div>
@@ -27,6 +27,6 @@
 </div>
 
 <div class="panel">
-    <button (click)="screen.showMenu = !screen.showMenu" mat-button *ngIf="screenWidth<=700"><mat-icon>menu</mat-icon></button>
-    <mat-slide-toggle class="dark-mode" (click)="setTheme()" [(ngModel)]="theme.dark" color="primary"><mat-icon>brightness_3</mat-icon><span *ngIf="screen.innerWidth>420">Dark Mode</span></mat-slide-toggle>
+    <button (click)="screen.showMenu = !screen.showMenu" mat-button *ngIf="screenWidth<=700"><mat-icon [ngClass]="{'dark':theme.dark}">menu</mat-icon></button>
+    <!-- <mat-slide-toggle class="dark-mode" (click)="setTheme()" (change)="setSkin($event)" [(ngModel)]="theme.dark" color="primary"><mat-icon [ngClass]="{'dark':theme.dark}">brightness_3</mat-icon><span *ngIf="screen.innerWidth>420">Dark Mode</span></mat-slide-toggle> -->
 </div>

@@ -51,6 +51,9 @@ export class HeaderComponent implements OnInit {
   setTheme(){
     localStorage.setItem("dark",!this.theme.dark?'1':'0')
   }
+  setSkin(e:any){
+    this.theme.skin = e.checked?'moono-lisa':'kama'
+  }
   selectSearch(){
     this.filteredOptions = this.search.search(this.myControl.value)
   }

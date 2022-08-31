@@ -3,16 +3,15 @@
     <mat-stepper>
         <mat-step [stepControl]="nameFormGroup">
             <ng-template matStepLabel>
-                <span class="label">اطلاعات</span>
+                <span class="label">نام</span>
             </ng-template>
             <form [formGroup]="nameFormGroup">
                 <div class="field">
-                    <h3><b>نام مهارت</b></h3>
+                    <h3><b>نام مهارت را وارد کنید</b></h3>
                     <mat-form-field appearance="outline">
-                        <mat-label>نام مهارت</mat-label>
+                        <mat-label>نام</mat-label>
                         <input
                         matInput
-                        placeholder="نام مهارت"
                         formControlName="name">
                     </mat-form-field>
                 </div>
@@ -38,6 +37,7 @@
             <ng-template matStepLabel>
                 <span class="label">دسته‌بندی</span>
             </ng-template>
+            <h3><b>دسته‌بندی ها را انتخاب کنید</b></h3>
             <div class="categories">
                 <div *ngFor="let category of categories" (click)="selectCategory(category)"
                     [ngClass]="{'selected':selectedCategories.has(category)}">{{category.name}}</div>

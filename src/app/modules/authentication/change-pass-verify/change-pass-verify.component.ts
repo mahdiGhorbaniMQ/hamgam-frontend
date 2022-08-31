@@ -5,21 +5,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavInformationService } from 'src/app/core/components/nav-bar/nav-information.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
-import { ScreenService } from 'src/app/core/services/screen.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-change-pass-verify',
+  templateUrl: './change-pass-verify.component.html',
+  styleUrls: ['./change-pass-verify.component.scss']
 })
-export class LoginComponent implements OnInit {
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required])
+export class ChangePassVerifyComponent implements OnInit {
   hidePass = true;
+  password = new FormControl('', [Validators.required])
+  key = new FormControl('', [Validators.required])
   formGroup = this._formBuilder.group({
-    email: this.email,
+    key: this.key,
     password: this.password
   });
 
@@ -32,27 +30,14 @@ export class LoginComponent implements OnInit {
     private rout:ActivatedRoute,
     private snack:MatSnackBar,
     private navInfo:NavInformationService
-  ) { }
+  ) {
+    this.key.setValue(rout.snapshot.paramMap.get("token"))
+  }
 
   ngOnInit(): void {
     this.navInfo.select(4)
-    if(this.rout.snapshot.paramMap.has("logedout")){
-      if(confirm("آیا از خروج از حسابتان مطمئنید؟")){
-        this.authService.logout()
-      }else{
-        this.router.navigate(['/'])
-      }
-    }
   }
 
-
-  getEmailError() {
-    if (this.email.hasError('required')) {
-      return 'فیلد ایمیل ضروری است';
-    }
-
-    return this.email.hasError('email') ? 'ایمیل معتبر نیست' : '';
-  }
   getPassError() {
     if (this.password.hasError('required')) {
       return 'فیلد رمز عبور ضروری است';
@@ -60,19 +45,21 @@ export class LoginComponent implements OnInit {
     return '';
   }
   
-  async login(){
+  async verify(){
     try{
-      let logedin = await this.authService.login(this.email.value,this.password.value)
+      let logedin = await this.authService.changePass(this.key.value,this.password.value)
       if(logedin){
         this.loading.isLoading = false
-        this.router.navigate(["/"])
+        this.router.navigate(["/login"])
       }
-    }catch(e){
-      this.loading.isLoading = false
-      this.snack.open("ایمیل و پسورد همخوانی ندارند","ok!")
+    }catch(e:any){
+      this.loading.isLoading = false  
+      console.log(e);
+          
+      this.snack.open(e.error.password[2],"ok!")
       setTimeout(() => {
         this.snack.dismiss()
-      }, 1500);
+      }, 2500);
     }
   }
 }

@@ -6,7 +6,7 @@ app-nav-bar{
     justify-content: center;
     align-items: center;
     transition: left .4s;
-    box-shadow: 2px 7px 10px rgb(172, 172, 172);
+    box-shadow: 2px 7px 10px -2px rgb(172, 172, 172);
     z-index: 2;
 }
 app-header{
@@ -45,13 +45,28 @@ app-header{
 
 .dark{
     app-nav-bar{
-        box-shadow: 2px 7px 10px  rgb(92, 92, 92);
-        background-color: rgb(61, 61, 61);
+        box-shadow: 2px 7px 10px -2px rgb(92, 92, 92);
+        // background-color: rgb(61, 61, 61);
         color: #fff;
+        // color: #837D71;
+        background-color: #1E292F;
     }
-    app-header{
-        background-color: rgb(61, 61, 61);
+    app-header::ng-deep{
+        // background-color: rgb(61, 61, 61);
         color: #fff;
+        // color: #837D71;
+        background-color: #1E292F;
+
+        input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #837D71;
+            opacity: 1; /* Firefox */
+        }
+        input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #837D71;
+        }
+        input::-ms-input-placeholder { /* Microsoft Edge */
+            color: #837D71;
+        }
     }
     .body{
         background-color: rgb(112, 112, 112);

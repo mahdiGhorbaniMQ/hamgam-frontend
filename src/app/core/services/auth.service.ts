@@ -45,6 +45,50 @@ export class AuthService {
         })      
     })
   }
+  async verify(key:string,password:string):Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+      this.loading.isLoading = true
+      this.http.post(environment.api+"/acc/verify-email/",{kay:key,password:password}).subscribe(
+        (res:any)=>{
+          resolve(true)
+        },err=>{
+          reject(err)
+        })      
+    })
+  }
+  async changePass(key:string,password:string):Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+      this.loading.isLoading = true
+      this.http.post(environment.api+"/acc/reset-password/",{key:key,password:password}).subscribe(
+        (res:any)=>{
+          resolve(true)
+        },err=>{
+          reject(err)
+        })      
+    })
+  }
+  async resendVerify(email:string):Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+      this.loading.isLoading = true
+      this.http.post(environment.api+"/acc/resend-verification/",{email:email}).subscribe(
+        (res:any)=>{
+          resolve(true)
+        },err=>{
+          reject(err)
+        })      
+    })
+  }
+  async changePassReq(email:string):Promise<any>{
+    return new Promise<any>((resolve, reject) => {
+      this.loading.isLoading = true
+      this.http.post(environment.api+"/acc/request-password-reset/",{email:email}).subscribe(
+        (res:any)=>{
+          resolve(true)
+        },err=>{
+          reject(err)
+        })      
+    })
+  }
   fillUserInfo(){
     
     let httpOptions = {

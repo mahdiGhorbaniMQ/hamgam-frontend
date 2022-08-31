@@ -20,8 +20,15 @@
               </mat-form-field>
         </div>
         <div class="acts">
-          <button mat-button [disabled]="!formGroup.valid" (click)="login()">ورود</button>
+          <button class="login" [ngClass]="{'enable':formGroup.valid}" mat-button [disabled]="!formGroup.valid" (click)="login()">ورود</button>
           <button mat-button routerLink="/register" class="link">ساختن اکانت</button>
+        </div>
+        <br><br>
+        <div>
+          <button mat-button routerLink="/reset-password" class="help">رمز عبور خود را فراموش کرده‌اید؟</button>
+        </div>
+        <div>
+          <button mat-button routerLink="/verify" class="help">تاییدیه‌ی ایمیل را دریافت نکردید؟</button>
         </div>
     </form>
   </div>

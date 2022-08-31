@@ -1,56 +1,18 @@
 <div class="body" [ngClass]="{'dark':theme.dark}">
     <div class="container">
-        <mat-tab-group [color]="'accent'">
-            <mat-tab>
-                <ng-template mat-tab-label>
-                    <span class="label">All skills</span>
-                </ng-template>
-                <mat-accordion>
-                    <mat-expansion-panel *ngFor="let skill of informations.skills|keyvalue">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title class="skill-container">
-                                <!-- <img [src]="skill.value.image || '/assets/logo.jpg'" alt="img" class="skill-image"> -->
-                                {{skill.value.name}}
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <app-user-suggestion *ngFor="let user of skill.value.users" [user]="user"></app-user-suggestion>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-tab>
-            <mat-tab>
-                <ng-template mat-tab-label>
-                    <span class="label">Your skills</span>
-                </ng-template>
-                <mat-accordion>
-                    <mat-expansion-panel *ngFor="let skill of yourSkills|keyvalue">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title class="skill-container">
-                                <!-- <img [src]="skill.value.image || '/assets/logo.jpg'" alt="img" class="skill-image"> -->
-                                {{skill.value.name}}
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <app-user-suggestion *ngFor="let user of skill.value.users" [user]="user"></app-user-suggestion>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-tab>
-            <mat-tab>
-                <ng-template mat-tab-label>
-                    <span class="label">All users</span>
-                </ng-template>
-                <mat-accordion  class="allUsers">
-                    <mat-expansion-panel *ngFor="let user of informations.users|keyvalue">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <app-user-suggestion [user]="user.value"></app-user-suggestion>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p *ngFor="let skill of user.value.skills" mat-ripple class="skill-container">
-                            <!-- <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image"> -->
-                            {{skill.name}}
-                        </p>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-tab>
-        </mat-tab-group>
+        <div class="header">
+
+        </div>
+        <div class="list">
+            <ng-container *ngIf="searchInUsers">
+                <app-user-suggestion *ngFor="let user of filteredUsers" [user]="user"></app-user-suggestion>
+            </ng-container>
+            <ng-container *ngIf="searchInSkills">
+                <p *ngFor="let skill of filteredSkills" mat-ripple class="skill-container">
+                    <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
+                    {{skill.name}}
+                </p>
+            </ng-container>
+        </div>
     </div>
 </div>

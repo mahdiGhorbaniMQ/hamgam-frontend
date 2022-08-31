@@ -29,6 +29,6 @@
     </mat-form-field>
     <div>
       <br><br>
-      <button class="btn-create" [disabled]="!formGroup.valid" mat-button (click)="submit()">ثبت ایده</button>
+      <button [ngClass]="{'enable':formGroup.valid}" class="btn-create" [disabled]="!formGroup.valid" mat-button (click)="submit()">ثبت ایده</button>
     </div>
 </form>
