@@ -78,7 +78,7 @@
         }
         .skill{
             border-radius: 25px;
-            background-color: rgb(153, 153, 153);
+            // background-color: rgb(153, 153, 153);
             margin: 5px;
             padding: 15px;
             column-gap: 10px;
@@ -107,7 +107,7 @@
         .idea{
             border-radius: 10px;
             width: fit-content;
-            padding: 5px;
+            padding: 10px;
             margin: 10px;
         }
         .idea:hover{
@@ -119,15 +119,17 @@
 .body.dark{
     background-color: rgb(112, 112, 112);
     .container{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
+        background-color: #1E292F;
         color: #fff;
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
         .ideas .idea:hover{
-            background-color: rgb(73, 73, 73);
+            // background-color: rgb(73, 73, 73);
+            background-color: rgb(27, 27, 27);
         }
         .skill{
             color: #fff;
-            background-color: rgb(37, 37, 37);
+            // background-color: rgb(27, 27, 27);
             &:hover{
                 background-color: rgb(27, 27, 27);
             }

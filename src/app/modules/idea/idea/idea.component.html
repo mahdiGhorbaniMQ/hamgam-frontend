@@ -77,7 +77,7 @@
                         />
                         <mat-error *ngIf="comment.invalid">{{getCommentError()}}</mat-error>
                     </mat-form-field>
-                    <button mat-button [disabled]="!comment.valid" (click)="send()" class="send">ثبت</button>
+                    <button [ngClass]="{'enable':comment.valid}" mat-button [disabled]="!comment.valid" (click)="send()" class="send">ثبت</button>
                 </div>
                 <ng-container *ngIf="idea.comments">
                     <div class="comment-item" *ngFor="let comment of idea.comments!.slice().reverse()" [routerLink]="'/profile/'+comment.user!.id">

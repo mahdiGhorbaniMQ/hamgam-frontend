@@ -41,6 +41,8 @@ export class AuthService {
           this.isAuthenticated.next(true)
           resolve(true)
         },err=>{
+          console.log(err);
+          
           reject(err.message)
         })      
     })

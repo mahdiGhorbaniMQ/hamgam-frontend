@@ -155,7 +155,8 @@
 .body.dark{
     background-color: rgb(112, 112, 112);
     .card{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
+        background-color: #1E292F;
         color: #fff;
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
         .skills .skill{
@@ -163,9 +164,13 @@
             background-color: rgb(37, 37, 37);
         }
     }
+    button.send.enable{
+        color: #000;
+    }
     .comments{
         .comment-item{
-            background-color: rgb(61, 61, 61);
+            // background-color: rgb(61, 61, 61);
+            background-color: #1E292F;
             color: #fff;
             box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
             .comment-body{
@@ -178,7 +183,8 @@
         }
     }
     .not-found-container{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
+        background-color: #1E292F;
         color: #fff;
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
     }
