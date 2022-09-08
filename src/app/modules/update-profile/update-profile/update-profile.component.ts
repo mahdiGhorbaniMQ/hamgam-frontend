@@ -45,7 +45,8 @@ export class UpdateProfileComponent implements OnInit {
 
   canExit() : boolean {
  
-    if(this.formGroup.touched||this.skillCtrl.touched||this.updated){
+    if(this.updated) return true
+    if(this.formGroup.touched||this.skillCtrl.touched){
       if (confirm("با خارج شدن از صفحه تغییرات اعمال شده از بین می‌رود، آیا مطمئنید؟")) {
         return true
       } else {
@@ -77,10 +78,11 @@ export class UpdateProfileComponent implements OnInit {
 
       if(auth.userInfo.img)
       http.get(auth.userInfo.img, { responseType: 'blob' }).subscribe(img=>{
-        var file = new File([img], "file_name", {lastModified: 1534584790000});
+
+      
+        var file = new File([img], "file."+img.type.split('/')[1], {lastModified: 1534584790000});
         this.image.setValue(file)
         this.imgChecked = true
-        console.log(this.image.value);
         
       })
       else this.imgChecked = true
@@ -154,49 +156,49 @@ export class UpdateProfileComponent implements OnInit {
   }
   
   async update(){
-    
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Token '+localStorage.getItem("token")
-      })
-    };
-
-    let removedSkills:SkillModel[] = []
-    this.auth.userInfo.skills?.forEach(skill=>{
-      if(!this.selectedSkills.has(skill))
-        removedSkills.push(skill)
-      // else
-        // this.selectedSkills.delete(skill)
-    })
-
-    this.selectedSkills.forEach(skill=>{
-      let skillUsers = new Set(skill.users?.map(u=>u.id))
-      skillUsers?.add(this.auth.userInfo.id)
-      let users:any = []
-      skillUsers.forEach(u=>{users.push(u)})
-      this.http.put(environment.api+"/skills/"+skill.id+"/update",{
-        name:skill.name,
-        categories:skill.categories?.map(c=>c.id),
-        users:users,
-        ideas:[]
-      },httpOptions).subscribe()
-    })
-    removedSkills.forEach(skill=>{
-      let skillUsers = new Set(skill.users?.map(u=>u.id))
-      skillUsers?.delete(this.auth.userInfo.id)
-      let users:any = []
-      skillUsers.forEach(user=>{users.push(user)})
-      this.http.put(environment.api+"/skills/"+skill.id+"/update",{
-        name:skill.name,
-        categories:skill.categories?.map(c=>c.id),
-        users:users,
-        idea:[]
-      },httpOptions).subscribe()
-    })
-
-
 
     try {
+      let httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Token '+localStorage.getItem("token")
+        })
+      };
+  
+      let removedSkills:SkillModel[] = []
+      this.auth.userInfo.skills?.forEach(skill=>{
+        if(!this.selectedSkills.has(skill))
+          removedSkills.push(skill)
+        // else
+          // this.selectedSkills.delete(skill)
+      })
+  
+      this.selectedSkills.forEach(skill=>{
+        let skillUsers = new Set(skill.users?.map(u=>u.id))
+        skillUsers?.add(this.auth.userInfo.id)
+        let users:any = []
+        skillUsers.forEach(u=>{users.push(u)})
+        this.http.put(environment.api+"/skills/"+skill.id+"/update",{
+          name:skill.name,
+          categories:skill.categories?.map(c=>c.id),
+          users:users,
+          ideas:[]
+        },httpOptions).subscribe()
+      })
+      removedSkills.forEach(skill=>{
+        let skillUsers = new Set(skill.users?.map(u=>u.id))
+        skillUsers?.delete(this.auth.userInfo.id)
+        let users:any = []
+        skillUsers.forEach(user=>{users.push(user)})
+        this.http.put(environment.api+"/skills/"+skill.id+"/update",{
+          name:skill.name,
+          categories:skill.categories?.map(c=>c.id),
+          users:users,
+          idea:[]
+        },httpOptions).subscribe()
+      })
+
+
+
       let formData = new FormData()
 
       for (let i in this.formGroup.value) {
