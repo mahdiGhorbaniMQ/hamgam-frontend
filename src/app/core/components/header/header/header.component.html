@@ -28,5 +28,6 @@
 
 <div class="panel">
     <button (click)="screen.showMenu = !screen.showMenu" mat-button *ngIf="screenWidth<=700"><mat-icon [ngClass]="{'dark':theme.dark}">menu</mat-icon></button>
+    <img width="100px" [src]="theme.dark?'/assets/Artboard 6@2x-8@0.5x.png':'/assets/Artboard 12@2x-8@0.5x-light.png'" alt="logo">
     <!-- <mat-slide-toggle class="dark-mode" (click)="setTheme()" (change)="setSkin($event)" [(ngModel)]="theme.dark" color="primary"><mat-icon [ngClass]="{'dark':theme.dark}">brightness_3</mat-icon><span *ngIf="screen.innerWidth>420">Dark Mode</span></mat-slide-toggle> -->
 </div>

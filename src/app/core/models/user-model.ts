@@ -6,6 +6,7 @@ export interface UserModel {
     firstName?:string
     lastName?:string
     email?:string
+    username?:string
     skills?:SkillModel[]
     img?:string
     bio?:string

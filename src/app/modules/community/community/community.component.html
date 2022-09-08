@@ -1,17 +1,26 @@
 <div class="body" [ngClass]="{'dark':theme.dark}">
     <div class="container">
         <div class="header">
-
-        </div>
+            <mat-form-field appearance="outline">
+                <mat-label [ngClass]="{'dark':theme.dark}">Search on skills</mat-label>
+                <input
+                       [formControl]="myControl"
+                       matInput
+                       placeholder="Search">
+                <mat-icon [ngClass]="{'dark':theme.dark}" matSuffix>search</mat-icon>
+                <!-- <mat-hint>Hint</mat-hint> -->
+              </mat-form-field>        </div>
         <div class="list">
             <ng-container *ngIf="searchInUsers">
                 <app-user-suggestion *ngFor="let user of filteredUsers" [user]="user"></app-user-suggestion>
             </ng-container>
             <ng-container *ngIf="searchInSkills">
-                <p *ngFor="let skill of filteredSkills" mat-ripple class="skill-container">
-                    <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image">
-                    {{skill.name}}
-                </p>
+                <div [routerLink]="'/doc/'+skill.name" *ngFor="let skill of filteredSkills" mat-ripple class="skill-item">
+                    <p >
+                        <!-- <img [src]="skill.image || '/assets/logo.jpg'" alt="img" class="skill-image"> -->
+                        {{skill.name}} ({{skill.users!.length}} نفر)
+                    </p>
+                </div>
             </ng-container>
         </div>
     </div>

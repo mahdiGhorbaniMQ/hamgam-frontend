@@ -21,5 +21,7 @@
     </mat-menu>
 </div>
 <div class="idea">
-    <button mat-button routerLink="/idea">Create Idea</button>
+    <!-- <button mat-button routerLink="/idea">Create Idea</button> -->
+    <mat-slide-toggle class="dark-mode" (click)="setTheme()" (change)="setSkin($event)" [(ngModel)]="theme.dark" color="primary"><mat-icon [ngClass]="{'dark':theme.dark}">brightness_3</mat-icon><span>Dark Mode</span></mat-slide-toggle>
+
 </div>

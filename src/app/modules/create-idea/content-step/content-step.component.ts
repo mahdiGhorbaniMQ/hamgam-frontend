@@ -19,7 +19,7 @@ export class ContentStepComponent implements OnInit {
 
   constructor(
     public theme:ThemeService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
   }

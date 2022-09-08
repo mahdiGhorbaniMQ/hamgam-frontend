@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user-model';
@@ -16,7 +17,8 @@ export class AuthService {
     private loading:LoadingService,
     private users:UserService,
     private http:HttpClient,
-    private informations:InformationService
+    private informations:InformationService,
+    private router:Router
   ) {
     if(localStorage.getItem("token")){
       this.isAuthenticated.next(true)
@@ -32,12 +34,12 @@ export class AuthService {
 
   userInfo:UserModel={skills:[]}
 
-  async login(email:string,password:string):Promise<any>{
+  async login(username:string,email:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       this.loading.isLoading = true
-      this.http.post(environment.api+"/accounts/login/",{email:email,password:password}).subscribe(
+      this.http.post(environment.api+"/accounts/login/",{username:username,email:email,password:password}).subscribe(
         (res:any)=>{
-          localStorage.setItem("token",res.token)
+          localStorage.setItem("token",res.key)
           this.isAuthenticated.next(true)
           resolve(true)
         },err=>{
@@ -50,7 +52,7 @@ export class AuthService {
   async verify(key:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       this.loading.isLoading = true
-      this.http.post(environment.api+"/acc/verify-email/",{kay:key,password:password}).subscribe(
+      this.http.post(environment.api+"/accounts/verify-email/",{kay:key,password:password}).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -61,7 +63,7 @@ export class AuthService {
   async changePass(key:string,password:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       this.loading.isLoading = true
-      this.http.post(environment.api+"/acc/reset-password/",{key:key,password:password}).subscribe(
+      this.http.post(environment.api+"/accounts/reset-password/",{key:key,password:password}).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -72,7 +74,7 @@ export class AuthService {
   async resendVerify(email:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       this.loading.isLoading = true
-      this.http.post(environment.api+"/acc/resend-verification/",{email:email}).subscribe(
+      this.http.post(environment.api+"/accounts/resend-verification/",{email:email}).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -83,7 +85,7 @@ export class AuthService {
   async changePassReq(email:string):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       this.loading.isLoading = true
-      this.http.post(environment.api+"/acc/request-password-reset/",{email:email}).subscribe(
+      this.http.post(environment.api+"/accounts/request-password-reset/",{email:email}).subscribe(
         (res:any)=>{
           resolve(true)
         },err=>{
@@ -99,17 +101,25 @@ export class AuthService {
       })
     };
   
-    this.http.get(environment.api+"/accounts/users/me",httpOptions).subscribe(
+    this.http.get(environment.api+"/accounts/user/",httpOptions).subscribe(
       (data:any)=>{
         
-        if(!this.informations.users.has(data.id))
-          this.informations.users.set(data.id,this.userInfo)
+        if(!this.informations.users.has(data.pk))
+          this.informations.users.set(data.pk,this.userInfo)
 
-        this.userInfo = this.informations.users.get(data.id)!
-        this.userInfo.id = data.id
+        this.userInfo = this.informations.users.get(data.pk)!
+        this.userInfo.id = data.pk
         this.userInfo.email = data.email
+        this.userInfo.username = data.username
         this.userInfo.firstName = data.first_name
         this.userInfo.lastName = data.last_name
+
+        if(this.userInfo.firstName){
+          // this.router.navigate(['/'])
+        }
+        else{
+          this.router.navigate(['/profile/update'])
+        }
       },
       err=>{
         localStorage.removeItem("token")
@@ -125,18 +135,13 @@ export class AuthService {
 
   async register(user:UserModel):Promise<any>{
     return new Promise<any>((resolve, reject) => {
-      let data = {
-        firstName:user.firstName,
-        lastName:user.lastName,
-        email:user.email,
-        password:user.password,
-        // bio:user.bio,
-        // skills:user.skills?.map(skill=>skill.id),
-        // avatar:img,
-        // avatar:"/assets/no-prof.jpg"
-      }
+      let data =new FormData() 
+        data.set("username",user.username!)
+        data.set("password",user.password!)
+        data.set("email",user.email!)
+
       this.loading.isLoading = true
-      this.http.post(environment.api+"/accounts/signup",data).subscribe(
+      this.http.post(environment.api+"/accounts/register",data).subscribe(
         async (res:any)=>{
           // try{
             // await this.login(user.email!,user.password!)
@@ -148,30 +153,24 @@ export class AuthService {
           this.loading.isLoading = false
           resolve(true)
         },err=>{
+          console.log(err);
+          
           this.loading.isLoading = false
           reject(err)
         }
       )
     })
   }
-  async update(user:UserModel,img:any):Promise<any>{
+  async update(data:any,id:any):Promise<any>{
     return new Promise<any>((resolve, reject) => {
-      let data = {
-        email:user.email,
-        password:user.password,
-        firstName:user.firstName,
-        lastName:user.lastName,
-        skills:user.skills?.map(skill=>skill.id),
-        avatar:img
-        // avatar:"/assets/no-prof.jpg"
-      }
+
       let httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Token '+localStorage.getItem("token")
         })
       };
       this.loading.isLoading = true
-      this.http.post(environment.api+"/accounts/update",data,httpOptions).subscribe(
+      this.http.put(environment.api+"/accounts/user/"+id+"/update",data,httpOptions).subscribe(
         (res:any)=>{
           this.loading.isLoading = false
           resolve(true)

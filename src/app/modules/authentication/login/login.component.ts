@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
   
   async login(){
     try{
-      let logedin = await this.authService.login(this.email.value,this.password.value)
+      let logedin = await this.authService.login(this.email.value,this.email.value,this.password.value)
       if(logedin){
         this.loading.isLoading = false
         this.router.navigate(["/"])

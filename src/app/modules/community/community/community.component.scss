@@ -37,7 +37,7 @@
         mat-accordion{
             width: 100%;
             mat-expansion-panel-header{padding-top: 5px; padding-bottom: 5px;}
-            .skill-container{
+            .skills-container{
                 display: flex;
                 align-items: center;
                 column-gap: 10px;
@@ -48,6 +48,7 @@
                 }
             }
         }
+
         .allUsers{
             mat-expansion-panel{
                 padding: 10px;
@@ -62,6 +63,46 @@
     }
 }
 
+.list{
+    width: 100%;
+    .skill-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+    }
+}
+
+.header{
+    input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #837D71;
+        opacity: 1; /* Firefox */
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #837D71;
+    }
+    input::-ms-input-placeholder { /* Microsoft Edge */
+        color: #837D71;
+    }
+    display: flex;
+    justify-content: center;
+    mat-form-field{
+        // background-color: rgb(194, 188, 188);
+        width: 100%;
+        input{
+            height: 16px;
+        }
+    }
+    mat-label{
+        position: relative;
+        top: 2px;
+    }
+    top: 9px;
+    position: relative;
+    width: 85%;
+}
+
 .body.dark{
     background-color: rgb(112, 112, 112);
     .container{
@@ -70,7 +111,7 @@
         color: #fff;
         box-shadow: 2px 0px 8px rgb(92, 92, 92), -2px 0px 8px rgb(92, 92, 92);
     }
-    mat-tab,mat-expansion-panel-header,mat-expansion-panel,mat-panel-title{
+    mat-tab,mat-expansion-panel-header,mat-expansion-panel,mat-panel-title,mat-label{
         // background-color: rgb(61, 61, 61);
         background-color: #1E292F;
         color: #fff;

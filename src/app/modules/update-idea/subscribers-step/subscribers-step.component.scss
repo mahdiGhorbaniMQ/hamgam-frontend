@@ -9,8 +9,19 @@ form, mat-form-field{
     }
 }
 form.dark{
+    input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #837D71;
+        opacity: 1; /* Firefox */
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #837D71;
+    }
+    input::-ms-input-placeholder { /* Microsoft Edge */
+        color: #837D71;
+    }
     mat-label,mat-option{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
+        background-color: #1E292F;
         color: #fff;
     }
     mat-chip{
@@ -20,7 +31,8 @@ form.dark{
 }
 
 mat-option.dark{
-    background-color: rgb(61, 61, 61);
+    // background-color: rgb(61, 61, 61);
+    background-color: #1E292F;
     color: #fff;
 }
 mat-option.dark:hover{

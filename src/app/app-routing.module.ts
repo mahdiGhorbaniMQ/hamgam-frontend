@@ -50,7 +50,7 @@ const routes: Routes = [
   {
     path:"idea",
     component:CreateIdeaComponent,
-    // canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     canDeactivate:[DeactivateGuard],
     loadChildren: ()=> import("src/app/modules/create-idea/create-idea.module").then(m => m.CreateIdeaModule)
   },

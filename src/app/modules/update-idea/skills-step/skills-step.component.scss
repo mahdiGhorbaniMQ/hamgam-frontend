@@ -14,7 +14,9 @@ form, mat-form-field{
 
 form.dark{
     mat-label,mat-option{
-        background-color: rgb(61, 61, 61);
+        // background-color: rgb(61, 61, 61);
+        background-color: #1E292F;
+
         color: #fff;
     }
     mat-chip{
@@ -24,7 +26,8 @@ form.dark{
 }
 
 mat-option.dark{
-    background-color: rgb(61, 61, 61);
+    // background-color: rgb(61, 61, 61);
+    background-color: #1E292F;
     color: #fff;
 }
 mat-option.dark:hover{

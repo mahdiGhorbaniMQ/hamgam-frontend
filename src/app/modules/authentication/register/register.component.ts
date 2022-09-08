@@ -22,6 +22,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class RegisterComponent implements OnInit {
 
+  username = new FormControl('', [Validators.required]);
   firstName = new FormControl('', [Validators.required]);
   lastName = new FormControl('',[]);
   image = new FormControl(null, []);
@@ -31,8 +32,9 @@ export class RegisterComponent implements OnInit {
   hidePass = true;
 
   formGroup = this._formBuilder.group({
-    firstName: this.firstName,
-    lastName: this.lastName,
+    // username: this.username,
+    // firstName: this.firstName,
+    // lastName: this.lastName,
     // image: this.image,
     // bio: this.bio,
     email: this.email,
@@ -85,9 +87,9 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  getNameError(){
+  getUsernameError(){
     if (this.email.hasError('required')) {
-      return 'فیلد نام ضروری است';
+      return 'فیلد نام کاربری ضروری است';
     }
 
     return '';
@@ -122,6 +124,7 @@ export class RegisterComponent implements OnInit {
       let registerd = await this.authService.register({
         firstName:this.firstName.value,
         lastName:this.lastName.value,
+        username:this.email.value,
         email:this.email.value,
         password:this.password.value,
       })
