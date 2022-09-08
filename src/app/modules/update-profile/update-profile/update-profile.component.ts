@@ -59,7 +59,7 @@ export class UpdateProfileComponent implements OnInit {
   skillCtrl = new FormControl('');
   filteredSkills!: Observable<SkillModel[]>;  
   selectedSkills: Set<SkillModel> = new Set()
-  imgChecked = false
+  imgChecked = true
 
 
   @ViewChild('skillInput') skillInput!: ElementRef<HTMLInputElement>;
@@ -173,7 +173,7 @@ export class UpdateProfileComponent implements OnInit {
       let skillUsers = new Set(skill.users?.map(u=>u.id))
       skillUsers?.add(this.auth.userInfo.id)
       let users:any = []
-      skillUsers.forEach(u=>users.push(u))
+      skillUsers.forEach(u=>{users.push(u)})
       this.http.put(environment.api+"/skills/"+skill.id+"/update",{
         name:skill.name,
         categories:skill.categories?.map(c=>c.id),
@@ -185,7 +185,7 @@ export class UpdateProfileComponent implements OnInit {
       let skillUsers = new Set(skill.users?.map(u=>u.id))
       skillUsers?.delete(this.auth.userInfo.id)
       let users:any = []
-      skillUsers.forEach(users.push)
+      skillUsers.forEach(user=>{users.push(user)})
       this.http.put(environment.api+"/skills/"+skill.id+"/update",{
         name:skill.name,
         categories:skill.categories?.map(c=>c.id),
