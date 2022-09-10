@@ -141,7 +141,7 @@ export class AuthService {
         data.set("email",user.email!)
 
       this.loading.isLoading = true
-      this.http.post(environment.api+"/accounts/register",data).subscribe(
+      this.http.post(environment.api+"/accounts/register/",data).subscribe(
         async (res:any)=>{
           // try{
             // await this.login(user.email!,user.password!)
@@ -170,7 +170,7 @@ export class AuthService {
         })
       };
       this.loading.isLoading = true
-      this.http.put(environment.api+"/accounts/user/"+id+"/update",data,httpOptions).subscribe(
+      this.http.put(environment.api+"/accounts/user/"+id+"/update/",data,httpOptions).subscribe(
         (res:any)=>{
           this.loading.isLoading = false
           resolve(true)
