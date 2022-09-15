@@ -1,7 +1,7 @@
 {
     "/api/*": {
         "target": {
-            "host": "ham-ghadam.ir",
+            "host": "hamqadam.ir",
             "protocol": "https:"
         },
         "secure": false,
